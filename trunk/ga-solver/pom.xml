@@ -46,7 +46,7 @@
                        <manifest>
 			  <addClasspath>true</addClasspath>
 		 	  <classpathPrefix>lib/</classpathPrefix>
-                          <mainClass>iapractica.IAPracticaApp.java</mainClass>
+                          <mainClass>iapractica.IAPracticaApp</mainClass>
                         </manifest>
                      </archive>
 		     <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-distribution</outputDirectory>
@@ -84,11 +84,26 @@
       <artifactId>appframework</artifactId>
       <version>1.03</version>
     </dependency>
+<dependency>
+    <groupId>com.thoughtworks.xstream</groupId>
+    <artifactId>xstream</artifactId>
+    <version>1.4.3</version>
+</dependency>
+<dependency>
+    <groupId>org.jfree</groupId>
+    <artifactId>jfreechart</artifactId>
+    <version>1.0.14</version>
+</dependency>
     <dependency>
       <groupId>org.swinglabs</groupId>
       <artifactId>swing-worker</artifactId>
       <version>1.1</version>
     </dependency>
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
     <dependency>
       <groupId>org.swinglabs</groupId>
       <artifactId>swing-layout</artifactId>
@@ -99,8 +114,8 @@
       <artifactId>AbsoluteLayout</artifactId>
       <version>RELEASE701</version>
     </dependency>
-    <dependency>
   </dependencies>
+<repositories>
  <!--These are needed for Swing/Netbeans -->
     <repository>
       <id>maven2-repository.netbeans.maven2</id>
