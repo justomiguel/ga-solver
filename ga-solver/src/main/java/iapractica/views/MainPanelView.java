@@ -36,13 +36,19 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public class MainPanelView extends GenericView {
 
-    private XYSeriesCollection xySeriesCollection;
-    private ChartPanel myChartPanel;
+    private XYSeriesCollection xySeriesCollectionScatterPlot;
+    private ChartPanel myChartPanelScatterPlot;
+    private JFreeChart jfreeChartScatterPlot;
+    
+    private JFreeChart jfreeChartXYLinePLot;
+    private XYSeriesCollection xySeriesCollectionLineXYPlot;
+    private ChartPanel myChartPanelLinePlot;
     private LinkedList<JSpinner> spinnersCargaDatos = new LinkedList<JSpinner>();
-    private XYPlot xyPlot;
-    private JFreeChart jfreechart;
     int iteracionesMaxima;
     double worstAptitudNumber = 0;
+    private XYSeries series1;
+    private XYSeries series2;
+    private XYSeries series3;
 
     /** Creates new form MainPanel */
     public MainPanelView() {
@@ -716,36 +722,21 @@ public class MainPanelView extends GenericView {
         // TODO add your handling code here:
         boolean value = useChart.isSelected();
         chartPanel.setEnabled(value);
-        jfreechart.setNotify(value);
+        jfreeChartScatterPlot.setNotify(value);
         this.chartPanel.setEnabled(value);
     }//GEN-LAST:event_useChartItemStateChanged
 
     private void velocidadPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_velocidadPropertyChange
         // TODO add your handling code here:
-     
-       
-
     }//GEN-LAST:event_velocidadPropertyChange
 
     private void velocidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_velocidadStateChanged
         // TODO add your handling code here:
-         MainPanelController main = (MainPanelController) this.getController();
-        if (main != null){
+        MainPanelController main = (MainPanelController) this.getController();
+        if (main != null) {
             main.setSimulationVelocity(this.velocidad.getValue());
         }
     }//GEN-LAST:event_velocidadStateChanged
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new MainPanelView().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Metodos;
     private javax.swing.JPanel Metodos1;
@@ -840,61 +831,117 @@ public class MainPanelView extends GenericView {
     }
 
     private void makeJFreChartPanel() {
-        myChartPanel = createChartPanel();
-        this.chartPanel.add(myChartPanel);
+        myChartPanelScatterPlot = createChartPanel();
+        myChartPanelLinePlot = createLineChartPanel();
+        this.chartPanel.add(myChartPanelScatterPlot);
+        this.chartPanel.add(myChartPanelLinePlot);
     }
 
     private ChartPanel createChartPanel() {
-        jfreechart = ChartFactory.createScatterPlot(
+        jfreeChartScatterPlot = ChartFactory.createScatterPlot(
                 "Poblacion", "Individuos", "Fitness Value", createSampleData(),
                 PlotOrientation.VERTICAL, true, true, false);
-        xyPlot = (XYPlot) jfreechart.getPlot();
-        xyPlot.setDomainCrosshairVisible(true);
-        xyPlot.setRangeCrosshairVisible(true);
-        NumberAxis domain = (NumberAxis) xyPlot.getDomainAxis();
+        XYPlot xyScatterPlot = (XYPlot) jfreeChartScatterPlot.getPlot();
+        xyScatterPlot.setDomainCrosshairVisible(true);
+        xyScatterPlot.setRangeCrosshairVisible(true);
+        NumberAxis domain = (NumberAxis) xyScatterPlot.getDomainAxis();
         domain.setVerticalTickLabels(true);
-        return new ChartPanel(jfreechart);
+        return new ChartPanel(jfreeChartScatterPlot);
+    }
+
+    private ChartPanel createLineChartPanel() {
+        /// create the chart...
+        jfreeChartXYLinePLot = ChartFactory.createXYLineChart(
+                "Aptitud", // chart title
+                "X", // x axis label
+                "Y", // y axis label
+                createLineXYSampleData(), // data
+                PlotOrientation.VERTICAL,
+                true, // include legend
+                true, // tooltips
+                false // urls
+                );
+
+        XYPlot xyScatterPlot = (XYPlot) jfreeChartXYLinePLot.getPlot();
+        xyScatterPlot.setDomainCrosshairVisible(true);
+        xyScatterPlot.setRangeCrosshairVisible(true);
+        NumberAxis domain = (NumberAxis) xyScatterPlot.getDomainAxis();
+        domain.setVerticalTickLabels(true);
+        return new ChartPanel(jfreeChartXYLinePLot);
     }
 
     private XYDataset createSampleData() {
-        xySeriesCollection = new XYSeriesCollection();
-        return xySeriesCollection;
+        xySeriesCollectionScatterPlot = new XYSeriesCollection();
+        return xySeriesCollectionScatterPlot;
     }
 
-    public void updateChart(Double average, int age, LinkedList<Double> data) {
-        try {
-            if (statics.isSelected()) {
-                this.bestAptitud.setText(data.get(0).toString());
-                Double localWorst = data.get(data.size() - 1);
-                if (localWorst > worstAptitudNumber) {
-                    this.worstAptitud.setText(localWorst.toString());
-                    worstAptitudNumber = localWorst;
+    private XYDataset createLineXYSampleData() {
+        xySeriesCollectionLineXYPlot = new XYSeriesCollection();
+        series1 = new XYSeries("Best Fitness");
+        series2 = new XYSeries("Worst Fitness");
+        series3 = new XYSeries("Average Fitness");
+        xySeriesCollectionLineXYPlot.addSeries(series1);
+        xySeriesCollectionLineXYPlot.addSeries(series2);
+        xySeriesCollectionLineXYPlot.addSeries(series3);
+        return xySeriesCollectionLineXYPlot;
+    }
+
+    public void updateChart(final Double average, final int theAge, final LinkedList<Double> data) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                try {
+                    
+                    Double best = data.get(0);
+                    Double localWorst = data.get(data.size() - 1);
+                    
+                    if (statics.isSelected()) {
+                        bestAptitud.setText(best.toString());
+                        if (localWorst > worstAptitudNumber) {
+                            worstAptitud.setText(localWorst.toString());
+                            worstAptitudNumber = localWorst;
+                        }
+                        String promedio = average.toString();
+                        int hasDot = promedio.indexOf(".");
+                        if ((hasDot > 0) && (promedio.length() > hasDot + 3)) {
+                            promedio = promedio.substring(0, hasDot + 3);
+                        }
+                        averageAptitud.setText(promedio);
+                        population.setText(String.valueOf(data.size()));
+                        age.setText(theAge + "/" + iteracionesMaxima);
+                    }
+                    
+                    if (useChart.isSelected()) {
+                        series1.add(theAge, best);
+                        series2.add(theAge, localWorst);
+                        series3.add(theAge, average);
+                    }
+                    
+                    updateScatterPlot();
+                } catch (Exception e) {
+                    logguer.logError(e.getClass(), e.getMessage());
                 }
-                String promedio = average.toString();
-                int hasDot = promedio.indexOf(".");
-                if ((hasDot > 0) && (promedio.length() > hasDot + 3)) {
-                    promedio = promedio.substring(0, hasDot + 3);
-                }
-                this.averageAptitud.setText(promedio);
-                this.population.setText(String.valueOf(data.size()));
-                this.age.setText(age + "/" + iteracionesMaxima);
             }
-            if (useChart.isSelected()) {
-                if (xySeriesCollection.getSeriesCount() > 3) {
-                    xySeriesCollection.removeSeries(0);
+
+            private void updateScatterPlot() {
+                if (useChart.isSelected()) {
+                    if (xySeriesCollectionScatterPlot.getSeriesCount() > 3) {
+                        xySeriesCollectionScatterPlot.removeSeries(0);
+                    }
+                    XYSeries series = new XYSeries("Age " + theAge);
+                    for (int i = 0; i < data.size(); i++) {
+                        Double myData = data.get(i);
+                        double x = i;
+                        double y = myData;
+                        series.add(x, y);
+                    }
+                    xySeriesCollectionScatterPlot.addSeries(series);
                 }
-                XYSeries series = new XYSeries("Age " + age);
-                for (int i = 0; i < data.size(); i++) {
-                    Double myData = data.get(i);
-                    double x = i;
-                    double y = myData;
-                    series.add(x, y);
-                }
-                xySeriesCollection.addSeries(series);
             }
-        } catch (Exception e) {
-            logguer.logError(e.getClass(), e.getMessage());
-        }
+
+        });
+
+
     }
 
     private void init() {
