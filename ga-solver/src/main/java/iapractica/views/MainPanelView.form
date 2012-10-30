@@ -731,13 +731,14 @@
                                 <Property name="name" type="java.lang.String" value="jButton6" noResource="true"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JButton" name="jButton5">
+                            <Component class="javax.swing.JButton" name="playBtn">
                               <Properties>
-                                <Property name="text" type="java.lang.String" resourceKey="jButton5.text"/>
-                                <Property name="name" type="java.lang.String" value="jButton5" noResource="true"/>
+                                <Property name="text" type="java.lang.String" resourceKey="playBtn.text"/>
+                                <Property name="name" type="java.lang.String" value="playBtn" noResource="true"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="playBtnMouseClicked"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playBtnActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="jButton4">
@@ -751,6 +752,9 @@
                                 <Property name="text" type="java.lang.String" resourceKey="jButton3.text"/>
                                 <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
