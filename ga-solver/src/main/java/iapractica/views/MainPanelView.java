@@ -16,8 +16,6 @@ import iapractica.controllers.MainPanelController;
 import iapractica.views.popups.PopUpFactory;
 import java.awt.Component;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import org.jfree.chart.ChartFactory;
@@ -66,10 +64,11 @@ public class MainPanelView extends GenericView {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        mainContainer = new javax.swing.JPanel();
+        simlationContainer = new javax.swing.JPanel();
+        propertiesManager = new javax.swing.JPanel();
         tabPanel = new javax.swing.JTabbedPane();
         cargaDatos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -96,7 +95,7 @@ public class MainPanelView extends GenericView {
         indivMax1 = new javax.swing.JSpinner();
         iteracionesMax1 = new javax.swing.JSpinner();
         operadoresGeneticos = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
+        seleccionPanel = new javax.swing.JPanel();
         Metodos = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
@@ -104,21 +103,21 @@ public class MainPanelView extends GenericView {
         jCheckBox8 = new javax.swing.JCheckBox();
         jLabel12 = new javax.swing.JLabel();
         jSpinner13 = new javax.swing.JSpinner();
-        jPanel12 = new javax.swing.JPanel();
-        Metodos1 = new javax.swing.JPanel();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jLabel13 = new javax.swing.JLabel();
-        jSpinner12 = new javax.swing.JSpinner();
-        jPanel13 = new javax.swing.JPanel();
-        Metodos2 = new javax.swing.JPanel();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jLabel14 = new javax.swing.JLabel();
-        jSpinner11 = new javax.swing.JSpinner();
-        jPanel6 = new javax.swing.JPanel();
+        seleccionPanel1 = new javax.swing.JPanel();
+        Metodos3 = new javax.swing.JPanel();
+        jCheckBox11 = new javax.swing.JCheckBox();
+        jCheckBox12 = new javax.swing.JCheckBox();
+        jCheckBox14 = new javax.swing.JCheckBox();
+        jLabel15 = new javax.swing.JLabel();
+        jSpinner14 = new javax.swing.JSpinner();
+        seleccionPanel2 = new javax.swing.JPanel();
+        Metodos4 = new javax.swing.JPanel();
+        jCheckBox15 = new javax.swing.JCheckBox();
+        jCheckBox16 = new javax.swing.JCheckBox();
+        jCheckBox18 = new javax.swing.JCheckBox();
+        jLabel16 = new javax.swing.JLabel();
+        jSpinner15 = new javax.swing.JSpinner();
+        simlationProperties = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         velocidad = new javax.swing.JSlider();
         jLabel19 = new javax.swing.JLabel();
@@ -149,87 +148,213 @@ public class MainPanelView extends GenericView {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(MainPanelView.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
-        setResizable(false);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        mainContainer.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        mainContainer.setName("mainContainer"); // NOI18N
+        mainContainer.setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("jPanel2.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP)); // NOI18N
-        jPanel2.setAutoscrolls(true);
-        jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        simlationContainer.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("simlationContainer.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP)); // NOI18N
+        simlationContainer.setAutoscrolls(true);
+        simlationContainer.setName("simlationContainer"); // NOI18N
+        simlationContainer.setLayout(new java.awt.GridLayout(2, 0));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel3.border.title"))); // NOI18N
-        jPanel3.setName("jPanel3"); // NOI18N
+        propertiesManager.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("propertiesManager.border.title"))); // NOI18N
+        propertiesManager.setName("propertiesManager"); // NOI18N
+        propertiesManager.setLayout(new java.awt.GridLayout(1, 0));
 
         tabPanel.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         tabPanel.setAutoscrolls(true);
         tabPanel.setName("tabPanel"); // NOI18N
 
         cargaDatos.setName("cargaDatos"); // NOI18N
-        cargaDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        cargaDatos.setLayout(new java.awt.GridBagLayout());
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
-        cargaDatos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 10, 0, 0);
+        cargaDatos.add(jLabel3, gridBagConstraints);
 
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
-        cargaDatos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 20, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 20, 0, 0);
+        cargaDatos.add(jLabel4, gridBagConstraints);
 
         jSpinner1.setName("jSpinner1"); // NOI18N
-        cargaDatos.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 0, 0, 0);
+        cargaDatos.add(jSpinner1, gridBagConstraints);
 
         jSpinner2.setName("jSpinner2"); // NOI18N
-        cargaDatos.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        cargaDatos.add(jSpinner2, gridBagConstraints);
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
         jLabel5.setName("jLabel5"); // NOI18N
-        cargaDatos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 20, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 20, 0, 0);
+        cargaDatos.add(jLabel5, gridBagConstraints);
 
         jSpinner3.setName("jSpinner3"); // NOI18N
-        cargaDatos.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        cargaDatos.add(jSpinner3, gridBagConstraints);
 
         jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
         jLabel6.setName("jLabel6"); // NOI18N
-        cargaDatos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 20, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 20, 0, 0);
+        cargaDatos.add(jLabel6, gridBagConstraints);
 
         jSpinner4.setName("jSpinner4"); // NOI18N
-        cargaDatos.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        cargaDatos.add(jSpinner4, gridBagConstraints);
 
         jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
         jLabel7.setName("jLabel7"); // NOI18N
-        cargaDatos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 20, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 20, 0, 0);
+        cargaDatos.add(jLabel7, gridBagConstraints);
 
         jSpinner5.setName("jSpinner5"); // NOI18N
-        cargaDatos.add(jSpinner5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 0, 0, 0);
+        cargaDatos.add(jSpinner5, gridBagConstraints);
 
         jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
         jLabel8.setName("jLabel8"); // NOI18N
-        cargaDatos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 20, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 20, 0, 0);
+        cargaDatos.add(jLabel8, gridBagConstraints);
 
         jSpinner6.setName("jSpinner6"); // NOI18N
-        cargaDatos.add(jSpinner6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        cargaDatos.add(jSpinner6, gridBagConstraints);
 
         jLabel9.setText(resourceMap.getString("jLabel9.text")); // NOI18N
         jLabel9.setName("jLabel9"); // NOI18N
-        cargaDatos.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 20, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 20, 0, 0);
+        cargaDatos.add(jLabel9, gridBagConstraints);
 
         jSpinner7.setName("jSpinner7"); // NOI18N
-        cargaDatos.add(jSpinner7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        cargaDatos.add(jSpinner7, gridBagConstraints);
 
         jLabel10.setText(resourceMap.getString("jLabel10.text")); // NOI18N
         jLabel10.setName("jLabel10"); // NOI18N
-        cargaDatos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 20, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 20, 0, 0);
+        cargaDatos.add(jLabel10, gridBagConstraints);
 
         jSpinner8.setName("jSpinner8"); // NOI18N
-        cargaDatos.add(jSpinner8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        cargaDatos.add(jSpinner8, gridBagConstraints);
 
         jLabel11.setText(resourceMap.getString("jLabel11.text")); // NOI18N
         jLabel11.setName("jLabel11"); // NOI18N
-        cargaDatos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 20, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 20, 0, 0);
+        cargaDatos.add(jLabel11, gridBagConstraints);
 
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
@@ -238,7 +363,14 @@ public class MainPanelView extends GenericView {
                 jButton1ActionPerformed(evt);
             }
         });
-        cargaDatos.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 170, 116, 0);
+        cargaDatos.add(jButton1, gridBagConstraints);
 
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
@@ -247,252 +379,242 @@ public class MainPanelView extends GenericView {
                 jButton2ActionPerformed(evt);
             }
         });
-        cargaDatos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 160, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 23, 116, 26);
+        cargaDatos.add(jButton2, gridBagConstraints);
 
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
-        cargaDatos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 20, 0, 0);
+        cargaDatos.add(jLabel2, gridBagConstraints);
 
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
-        cargaDatos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 20, 0, 0);
+        cargaDatos.add(jLabel1, gridBagConstraints);
 
         indivMax1.setName("indivMax1"); // NOI18N
-        cargaDatos.add(indivMax1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 100, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 7, 0, 0);
+        cargaDatos.add(indivMax1, gridBagConstraints);
 
         iteracionesMax1.setName("iteracionesMax1"); // NOI18N
-        cargaDatos.add(iteracionesMax1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 100, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 7, 0, 0);
+        cargaDatos.add(iteracionesMax1, gridBagConstraints);
 
         tabPanel.addTab("Carga de Datos", cargaDatos);
 
         operadoresGeneticos.setName("operadoresGeneticos"); // NOI18N
-        operadoresGeneticos.setLayout(new javax.swing.BoxLayout(operadoresGeneticos, javax.swing.BoxLayout.LINE_AXIS));
+        operadoresGeneticos.setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel11.border.title"))); // NOI18N
-        jPanel11.setName("jPanel11"); // NOI18N
+        seleccionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("seleccionPanel.border.title"))); // NOI18N
+        seleccionPanel.setName("seleccionPanel"); // NOI18N
+        seleccionPanel.setLayout(new java.awt.GridBagLayout());
 
         Metodos.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Metodos.border.title"))); // NOI18N
         Metodos.setName("Metodos"); // NOI18N
+        Metodos.setLayout(new java.awt.GridLayout(3, 0));
 
         jCheckBox1.setText(resourceMap.getString("jCheckBox1.text")); // NOI18N
         jCheckBox1.setName("jCheckBox1"); // NOI18N
+        Metodos.add(jCheckBox1);
 
         jCheckBox2.setText(resourceMap.getString("jCheckBox2.text")); // NOI18N
         jCheckBox2.setName("jCheckBox2"); // NOI18N
+        Metodos.add(jCheckBox2);
 
         jCheckBox6.setText(resourceMap.getString("jCheckBox6.text")); // NOI18N
         jCheckBox6.setName("jCheckBox6"); // NOI18N
+        Metodos.add(jCheckBox6);
 
-        javax.swing.GroupLayout MetodosLayout = new javax.swing.GroupLayout(Metodos);
-        Metodos.setLayout(MetodosLayout);
-        MetodosLayout.setHorizontalGroup(
-            MetodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MetodosLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(MetodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jCheckBox6)
-                    .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
-        MetodosLayout.setVerticalGroup(
-            MetodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MetodosLayout.createSequentialGroup()
-                .addComponent(jCheckBox1)
-                .addGap(3, 3, 3)
-                .addComponent(jCheckBox2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox6)
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = -5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        seleccionPanel.add(Metodos, gridBagConstraints);
 
         jCheckBox8.setText(resourceMap.getString("jCheckBox8.text")); // NOI18N
         jCheckBox8.setName("jCheckBox8"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 68, 0, 2);
+        seleccionPanel.add(jCheckBox8, gridBagConstraints);
 
         jLabel12.setText(resourceMap.getString("jLabel12.text")); // NOI18N
         jLabel12.setName("jLabel12"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
+        seleccionPanel.add(jLabel12, gridBagConstraints);
 
         jSpinner13.setName("jSpinner13"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 159;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        seleccionPanel.add(jSpinner13, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Metodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12)
-                    .addComponent(jSpinner13, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addComponent(jCheckBox8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(Metodos, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        operadoresGeneticos.add(seleccionPanel);
 
-        operadoresGeneticos.add(jPanel11);
+        seleccionPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("seleccionPanel1.border.title"))); // NOI18N
+        seleccionPanel1.setName("seleccionPanel1"); // NOI18N
+        seleccionPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel12.border.title"))); // NOI18N
-        jPanel12.setName("jPanel12"); // NOI18N
+        Metodos3.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Metodos3.border.title"))); // NOI18N
+        Metodos3.setName("Metodos3"); // NOI18N
+        Metodos3.setLayout(new java.awt.GridLayout(3, 0));
 
-        Metodos1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Metodos1.border.title"))); // NOI18N
-        Metodos1.setName("Metodos1"); // NOI18N
+        jCheckBox11.setText(resourceMap.getString("jCheckBox11.text")); // NOI18N
+        jCheckBox11.setName("jCheckBox11"); // NOI18N
+        Metodos3.add(jCheckBox11);
 
-        jCheckBox3.setText(resourceMap.getString("jCheckBox3.text")); // NOI18N
-        jCheckBox3.setName("jCheckBox3"); // NOI18N
+        jCheckBox12.setText(resourceMap.getString("jCheckBox12.text")); // NOI18N
+        jCheckBox12.setName("jCheckBox12"); // NOI18N
+        Metodos3.add(jCheckBox12);
 
-        jCheckBox4.setText(resourceMap.getString("jCheckBox4.text")); // NOI18N
-        jCheckBox4.setName("jCheckBox4"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = -5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        seleccionPanel1.add(Metodos3, gridBagConstraints);
 
-        javax.swing.GroupLayout Metodos1Layout = new javax.swing.GroupLayout(Metodos1);
-        Metodos1.setLayout(Metodos1Layout);
-        Metodos1Layout.setHorizontalGroup(
-            Metodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Metodos1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(Metodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCheckBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(81, Short.MAX_VALUE))
-        );
-        Metodos1Layout.setVerticalGroup(
-            Metodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Metodos1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox4)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        jCheckBox14.setText(resourceMap.getString("jCheckBox14.text")); // NOI18N
+        jCheckBox14.setName("jCheckBox14"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 68, 0, 2);
+        seleccionPanel1.add(jCheckBox14, gridBagConstraints);
 
-        jCheckBox9.setText(resourceMap.getString("jCheckBox9.text")); // NOI18N
-        jCheckBox9.setName("jCheckBox9"); // NOI18N
+        jLabel15.setText(resourceMap.getString("jLabel15.text")); // NOI18N
+        jLabel15.setName("jLabel15"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
+        seleccionPanel1.add(jLabel15, gridBagConstraints);
 
-        jLabel13.setText(resourceMap.getString("jLabel13.text")); // NOI18N
-        jLabel13.setName("jLabel13"); // NOI18N
+        jSpinner14.setName("jSpinner14"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 159;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        seleccionPanel1.add(jSpinner14, gridBagConstraints);
 
-        jSpinner12.setName("jSpinner12"); // NOI18N
+        operadoresGeneticos.add(seleccionPanel1);
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(Metodos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addComponent(jCheckBox9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addContainerGap(134, Short.MAX_VALUE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(jSpinner12, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                        .addGap(9, 9, 9))))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addComponent(jCheckBox9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSpinner12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Metodos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        seleccionPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("seleccionPanel2.border.title"))); // NOI18N
+        seleccionPanel2.setName("seleccionPanel2"); // NOI18N
+        seleccionPanel2.setLayout(new java.awt.GridBagLayout());
 
-        operadoresGeneticos.add(jPanel12);
+        Metodos4.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Metodos4.border.title"))); // NOI18N
+        Metodos4.setName("Metodos4"); // NOI18N
+        Metodos4.setLayout(new java.awt.GridLayout(3, 0));
 
-        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel13.border.title"))); // NOI18N
-        jPanel13.setName("jPanel13"); // NOI18N
+        jCheckBox15.setText(resourceMap.getString("jCheckBox15.text")); // NOI18N
+        jCheckBox15.setName("jCheckBox15"); // NOI18N
+        Metodos4.add(jCheckBox15);
 
-        Metodos2.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Metodos2.border.title"))); // NOI18N
-        Metodos2.setName("Metodos2"); // NOI18N
+        jCheckBox16.setText(resourceMap.getString("jCheckBox16.text")); // NOI18N
+        jCheckBox16.setName("jCheckBox16"); // NOI18N
+        Metodos4.add(jCheckBox16);
 
-        jCheckBox5.setText(resourceMap.getString("jCheckBox5.text")); // NOI18N
-        jCheckBox5.setName("jCheckBox5"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = -5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        seleccionPanel2.add(Metodos4, gridBagConstraints);
 
-        jCheckBox7.setText(resourceMap.getString("jCheckBox7.text")); // NOI18N
-        jCheckBox7.setName("jCheckBox7"); // NOI18N
+        jCheckBox18.setText(resourceMap.getString("jCheckBox18.text")); // NOI18N
+        jCheckBox18.setName("jCheckBox18"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 68, 0, 2);
+        seleccionPanel2.add(jCheckBox18, gridBagConstraints);
 
-        javax.swing.GroupLayout Metodos2Layout = new javax.swing.GroupLayout(Metodos2);
-        Metodos2.setLayout(Metodos2Layout);
-        Metodos2Layout.setHorizontalGroup(
-            Metodos2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Metodos2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(Metodos2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox5))
-                .addContainerGap(81, Short.MAX_VALUE))
-        );
-        Metodos2Layout.setVerticalGroup(
-            Metodos2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Metodos2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox7)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
+        jLabel16.setText(resourceMap.getString("jLabel16.text")); // NOI18N
+        jLabel16.setName("jLabel16"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
+        seleccionPanel2.add(jLabel16, gridBagConstraints);
 
-        jCheckBox10.setText(resourceMap.getString("jCheckBox10.text")); // NOI18N
-        jCheckBox10.setName("jCheckBox10"); // NOI18N
+        jSpinner15.setName("jSpinner15"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 159;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        seleccionPanel2.add(jSpinner15, gridBagConstraints);
 
-        jLabel14.setText(resourceMap.getString("jLabel14.text")); // NOI18N
-        jLabel14.setName("jLabel14"); // NOI18N
-
-        jSpinner11.setName("jSpinner11"); // NOI18N
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Metodos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox10, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel14)
-                    .addComponent(jSpinner11, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addComponent(jCheckBox10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Metodos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        operadoresGeneticos.add(jPanel13);
+        operadoresGeneticos.add(seleccionPanel2);
 
         tabPanel.addTab("Ajuste de Operadores Geneticos", operadoresGeneticos);
 
-        jPanel6.setName("jPanel6"); // NOI18N
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        simlationProperties.setName("simlationProperties"); // NOI18N
+        simlationProperties.setLayout(new java.awt.GridBagLayout());
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel5.border.title"))); // NOI18N
         jPanel5.setName("jPanel5"); // NOI18N
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel5.setLayout(new java.awt.GridBagLayout());
 
         velocidad.setPaintLabels(true);
         velocidad.setPaintTicks(true);
@@ -509,20 +631,47 @@ public class MainPanelView extends GenericView {
                 velocidadPropertyChange(evt);
             }
         });
-        jPanel5.add(velocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 16, 558, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 522;
+        gridBagConstraints.ipady = -7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 2);
+        jPanel5.add(velocidad, gridBagConstraints);
 
         jLabel19.setForeground(resourceMap.getColor("jLabel19.foreground")); // NOI18N
         jLabel19.setText(resourceMap.getString("jLabel19.text")); // NOI18N
         jLabel19.setName("jLabel19"); // NOI18N
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        jPanel5.add(jLabel19, gridBagConstraints);
 
         jLabel20.setForeground(resourceMap.getColor("jLabel20.foreground")); // NOI18N
         jLabel20.setText(resourceMap.getString("jLabel20.text")); // NOI18N
         jLabel20.setName("jLabel20"); // NOI18N
-        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 45, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 466, 0, 0);
+        jPanel5.add(jLabel20, gridBagConstraints);
 
-        jPanel6.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 570, 70));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
+        simlationProperties.add(jPanel5, gridBagConstraints);
 
+        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.setName("jPanel4"); // NOI18N
         jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -547,7 +696,15 @@ public class MainPanelView extends GenericView {
         jButton3.setName("jButton3"); // NOI18N
         jPanel4.add(jButton3);
 
-        jPanel6.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 10, 560, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 308;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 0, 0);
+        simlationProperties.add(jPanel4, gridBagConstraints);
 
         useChart.setText(resourceMap.getString("useChart.text")); // NOI18N
         useChart.setName("useChart"); // NOI18N
@@ -561,19 +718,37 @@ public class MainPanelView extends GenericView {
                 useChartActionPerformed(evt);
             }
         });
-        jPanel6.add(useChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 240, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 12, 0);
+        simlationProperties.add(useChart, gridBagConstraints);
 
         stadistic.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("stadistic.border.title"))); // NOI18N
         stadistic.setName("stadistic"); // NOI18N
-        stadistic.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        stadistic.setLayout(new java.awt.GridBagLayout());
 
         jLabel17.setText(resourceMap.getString("jLabel17.text")); // NOI18N
         jLabel17.setName("jLabel17"); // NOI18N
-        stadistic.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
+        stadistic.add(jLabel17, gridBagConstraints);
 
         jLabel18.setText(resourceMap.getString("jLabel18.text")); // NOI18N
         jLabel18.setName("jLabel18"); // NOI18N
-        stadistic.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 66, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(8, 10, 0, 0);
+        stadistic.add(jLabel18, gridBagConstraints);
 
         statics.setText(resourceMap.getString("statics.text")); // NOI18N
         statics.setName("statics"); // NOI18N
@@ -587,77 +762,147 @@ public class MainPanelView extends GenericView {
                 staticsActionPerformed(evt);
             }
         });
-        stadistic.add(statics, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 1, 0, 6);
+        stadistic.add(statics, gridBagConstraints);
 
+        bestAptitud.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         bestAptitud.setText(resourceMap.getString("bestAptitud.text")); // NOI18N
         bestAptitud.setName("bestAptitud"); // NOI18N
-        stadistic.add(bestAptitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 19;
+        gridBagConstraints.ipadx = 58;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 7, 0, 0);
+        stadistic.add(bestAptitud, gridBagConstraints);
 
+        worstAptitud.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         worstAptitud.setText(resourceMap.getString("worstAptitud.text")); // NOI18N
         worstAptitud.setName("worstAptitud"); // NOI18N
-        stadistic.add(worstAptitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 66, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 19;
+        gridBagConstraints.ipadx = 58;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 7, 0, 0);
+        stadistic.add(worstAptitud, gridBagConstraints);
 
         jLabel21.setText(resourceMap.getString("jLabel21.text")); // NOI18N
         jLabel21.setName("jLabel21"); // NOI18N
-        stadistic.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
+        stadistic.add(jLabel21, gridBagConstraints);
 
+        averageAptitud.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         averageAptitud.setText(resourceMap.getString("averageAptitud.text")); // NOI18N
         averageAptitud.setName("averageAptitud"); // NOI18N
-        stadistic.add(averageAptitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.ipadx = 38;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        stadistic.add(averageAptitud, gridBagConstraints);
 
         jLabel23.setText(resourceMap.getString("jLabel23.text")); // NOI18N
         jLabel23.setName("jLabel23"); // NOI18N
-        stadistic.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 115, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 10, 0, 0);
+        stadistic.add(jLabel23, gridBagConstraints);
 
+        population.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         population.setText(resourceMap.getString("population.text")); // NOI18N
         population.setName("population"); // NOI18N
-        stadistic.add(population, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 115, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.ipadx = 38;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 0, 0);
+        stadistic.add(population, gridBagConstraints);
 
         jLabel25.setText(resourceMap.getString("jLabel25.text")); // NOI18N
         jLabel25.setName("jLabel25"); // NOI18N
-        stadistic.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 10, 22, 0);
+        stadistic.add(jLabel25, gridBagConstraints);
 
+        age.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         age.setText(resourceMap.getString("age.text")); // NOI18N
         age.setName("age"); // NOI18N
-        stadistic.add(age, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.ipadx = 48;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 2, 22, 0);
+        stadistic.add(age, gridBagConstraints);
 
-        jPanel6.add(stadistic, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 212, 180));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = -12;
+        gridBagConstraints.ipady = -27;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 2, 0, 4);
+        simlationProperties.add(stadistic, gridBagConstraints);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel7.border.title"))); // NOI18N
         jPanel7.setName("jPanel7"); // NOI18N
-        jPanel7.setLayout(new java.awt.GridLayout());
+        jPanel7.setLayout(new java.awt.GridLayout(1, 0));
 
         jProgressBar1.setName("jProgressBar1"); // NOI18N
         jPanel7.add(jProgressBar1);
 
-        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 570, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 768;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        simlationProperties.add(jPanel7, gridBagConstraints);
 
-        tabPanel.addTab("Propiedades Simulacion", jPanel6);
+        tabPanel.addTab("Propiedades Simulacion", simlationProperties);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        propertiesManager.add(tabPanel);
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 16, 830, 270));
+        simlationContainer.add(propertiesManager);
 
         chartPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("chartPanel.border.title"))); // NOI18N
         chartPanel.setAutoscrolls(true);
         chartPanel.setName("chartPanel"); // NOI18N
-        chartPanel.setLayout(new javax.swing.BoxLayout(chartPanel, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel2.add(chartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 288, 824, 280));
+        chartPanel.setLayout(new java.awt.GridLayout(1, 0));
+        simlationContainer.add(chartPanel);
 
-        jPanel1.add(jPanel2);
+        mainContainer.add(simlationContainer);
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(mainContainer);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -739,8 +984,8 @@ public class MainPanelView extends GenericView {
     }//GEN-LAST:event_velocidadStateChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Metodos;
-    private javax.swing.JPanel Metodos1;
-    private javax.swing.JPanel Metodos2;
+    private javax.swing.JPanel Metodos3;
+    private javax.swing.JPanel Metodos4;
     private javax.swing.JLabel age;
     private javax.swing.JLabel averageAptitud;
     private javax.swing.JLabel bestAptitud;
@@ -755,21 +1000,21 @@ public class MainPanelView extends GenericView {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox11;
+    private javax.swing.JCheckBox jCheckBox12;
+    private javax.swing.JCheckBox jCheckBox14;
+    private javax.swing.JCheckBox jCheckBox15;
+    private javax.swing.JCheckBox jCheckBox16;
+    private javax.swing.JCheckBox jCheckBox18;
     private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -785,21 +1030,14 @@ public class MainPanelView extends GenericView {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner11;
-    private javax.swing.JSpinner jSpinner12;
     private javax.swing.JSpinner jSpinner13;
+    private javax.swing.JSpinner jSpinner14;
+    private javax.swing.JSpinner jSpinner15;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JSpinner jSpinner4;
@@ -807,8 +1045,15 @@ public class MainPanelView extends GenericView {
     private javax.swing.JSpinner jSpinner6;
     private javax.swing.JSpinner jSpinner7;
     private javax.swing.JSpinner jSpinner8;
+    private javax.swing.JPanel mainContainer;
     private javax.swing.JPanel operadoresGeneticos;
     private javax.swing.JLabel population;
+    private javax.swing.JPanel propertiesManager;
+    private javax.swing.JPanel seleccionPanel;
+    private javax.swing.JPanel seleccionPanel1;
+    private javax.swing.JPanel seleccionPanel2;
+    private javax.swing.JPanel simlationContainer;
+    private javax.swing.JPanel simlationProperties;
     private javax.swing.JPanel stadistic;
     private javax.swing.JCheckBox statics;
     private javax.swing.JTabbedPane tabPanel;
