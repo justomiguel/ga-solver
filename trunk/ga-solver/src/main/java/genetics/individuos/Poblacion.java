@@ -31,6 +31,8 @@ public class Poblacion extends Thread {
     private int age;
     //says if the thread is running
     private boolean running;
+    //says if the thread is running
+    private boolean inPause;
     //Selector manager
     private SelectionManager selectionManager;
     //Cruzas manager
@@ -44,7 +46,6 @@ public class Poblacion extends Thread {
     //external data hanlder
     private ExternalDataHandler dataManager;
     private MainPanelController controller;
-
     //materias primas
     private LinkedList<Integer> materiasPrimas;
     private int sleepTime = 100;
@@ -84,7 +85,7 @@ public class Poblacion extends Thread {
         //set initial values
         selectionCoverageMethods.put(Selectors.RANKING_SELECTOR, 50);
         selectionCoverageMethods.put(Selectors.COPY_CONTROL_SELECTOR, 0);
-         selectionCoverageMethods.put(Selectors.BEST_SELECTOR, 50);
+        selectionCoverageMethods.put(Selectors.BEST_SELECTOR, 50);
 
         cruzaCoverageMethods.put(Cruzators.BINOMIAL, 50);
         cruzaCoverageMethods.put(Cruzators.MULTIPUNTO, 50);
@@ -115,7 +116,7 @@ public class Poblacion extends Thread {
         try {
             currentPopulation = PoblacionFactory.getInstance().createInitialRandomPopulation(this, maximumPopulation, materiasPrimas);
         } catch (NoMateriaPrimaAddedException ex) {
-           logguer.logError(this, ex.getMessage(), ex);
+            logguer.logError(this, ex.getMessage(), ex);
         }
 
         setRunning(true);
@@ -128,34 +129,36 @@ public class Poblacion extends Thread {
 
         this.updateUIProgress(50);
 
-        while (age < maximumAge) {
-            if (isRunning()) {
+        while (running && age < maximumAge) {
+            if (!inPause) {
                 dataManager.saveToExternalFile(age, currentPopulation);
                 evolve();
                 updateUIChart(age, currentPopulation);
 
                 //update The progress bar
-                int percetageOfSucces = age*100/maximumAge;
-                this.updateUIProgress(50+percetageOfSucces*50/100);
+                int percetageOfSucces = age * 100 / maximumAge;
+                this.updateUIProgress(50 + percetageOfSucces * 50 / 100);
 
                 try {
                     Thread.sleep(sleepTime);
                 } catch (InterruptedException ex) {
                     logguer.logError(this, ex.getMessage(), ex);
-               }
+                }
             }
         }
 
         //first 5
         int five = 5;
         for (Individuo individuo : currentPopulation) {
-            if (five != 0){
+            if (five != 0) {
                 logguer.logInfo(individuo.toString());
                 five--;
             }
         }
 
-         this.updateUIProgress(100);
+        running = false;
+        
+        this.updateUIProgress(100);
     }
 
     public int getAge() {
@@ -180,6 +183,14 @@ public class Poblacion extends Thread {
 
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    public boolean isInPause() {
+        return inPause;
+    }
+
+    public void setInPause(boolean inPause) {
+        this.inPause = inPause;
     }
 
     public void setCoverageMethod() {
@@ -216,8 +227,8 @@ public class Poblacion extends Thread {
         this.materiasPrimas = materiasPrimas;
     }
 
-    public void pause() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public void pause(boolean value) {
+       this.setInPause(value);
     }
 
     public void rewind(int i) {
@@ -233,14 +244,10 @@ public class Poblacion extends Thread {
     }
 
     public void setSimulationVelocity(int value) {
-        try {
-            this.sleep(100);
-            this.sleepTime = value*10;
-        } catch (InterruptedException ex) {
-            logguer.logError(this, "can not set velocity", ex);
-        }
+        this.sleepTime = value * 10;
     }
 
-
-
+    public void forward(int i) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

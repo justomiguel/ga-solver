@@ -49,13 +49,21 @@ public class MainPanelController extends GenericController{
     }
     
 
-    public void pauseSimulation(){
-        population.pause();
+    public void pauseSimulation(boolean  value) throws InterruptedException{
+        //population.pause(value);
+        if (value){
+            population.wait();
+        }
     }
 
     public void getBackOneAge(){
         population.rewind(1);
     }
+    
+    public void forwardOneAge(){
+        population.forward(1);
+    }
+
 
     public void stopSimulation(){
         population.rewind(-1);
@@ -63,6 +71,7 @@ public class MainPanelController extends GenericController{
 
     public void destroyCurrentSimulation(){
         if (population!= null){
+            this.population.setRunning(false);
             this.population.interrupt();
         }
         population = null;
@@ -93,12 +102,20 @@ public class MainPanelController extends GenericController{
         population.setMaximumPopulation(maximumPopulation);
     }
 
-    public void setSimulationVelocity(int value) {
-        population.setSimulationVelocity(value);
+    public void setSimulationVelocity(final int value) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                population.setSimulationVelocity(value);
+            }
+        });
     }
 
     public void updateProgress(int progress) {
         ((MainPanelView) view).updateProgress(progress);
+    }
+
+    public boolean threadIsRunning() {
+        return population != null && population.isRunning();
     }
 
    
