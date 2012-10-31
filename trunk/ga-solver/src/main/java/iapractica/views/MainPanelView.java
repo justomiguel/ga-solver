@@ -34,7 +34,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @author Justo Vargas
  */
 public class MainPanelView extends GenericView {
-    
+
     private XYSeriesCollection xySeriesCollectionScatterPlot;
     private ChartPanel myChartPanelScatterPlot;
     private JFreeChart jfreeChartScatterPlot;
@@ -928,7 +928,7 @@ public class MainPanelView extends GenericView {
             jSpinner.setValue(number);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int[] valores = new int[8];
@@ -947,31 +947,30 @@ public class MainPanelView extends GenericView {
         }
         MainPanelController main = (MainPanelController) this.getController();
         main.addMateriaPrima(valores);
-        
+
         main.setMaximumPopulation(Integer.parseInt(indivMax1.getValue().toString()));
         iteracionesMaxima = Integer.parseInt(iteracionesMax1.getValue().toString());
         main.setMaximumAge(iteracionesMaxima);
         PopUpFactory.showConfirmPopUP(this, "Valores Agregados con exito");
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
     private void playBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBtnActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_playBtnActionPerformed
-    
+
     private void useChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useChartActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_useChartActionPerformed
-    
+
     private void staticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staticsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_staticsActionPerformed
-    
+
     private void staticsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_staticsItemStateChanged
         // TODO add your handling code here:
         enableStadistics();
     }//GEN-LAST:event_staticsItemStateChanged
-    
+
     private void useChartItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_useChartItemStateChanged
         // TODO add your handling code here:
         boolean value = useChart.isSelected();
@@ -979,11 +978,11 @@ public class MainPanelView extends GenericView {
         jfreeChartScatterPlot.setNotify(value);
         this.chartPanel.setEnabled(value);
     }//GEN-LAST:event_useChartItemStateChanged
-    
+
     private void velocidadPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_velocidadPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_velocidadPropertyChange
-    
+
     private void velocidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_velocidadStateChanged
         // TODO add your handling code here:
         MainPanelController main = (MainPanelController) this.getController();
@@ -991,7 +990,7 @@ public class MainPanelView extends GenericView {
             main.setSimulationVelocity(this.velocidad.getValue());
         }
     }//GEN-LAST:event_velocidadStateChanged
-    
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         MainPanelController main = (MainPanelController) this.getController();
@@ -1001,26 +1000,26 @@ public class MainPanelView extends GenericView {
     private void playBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playBtnMouseClicked
         // TODO add your handling code here:
         MainPanelController main = (MainPanelController) this.getController();
-        
- 
-            if (!main.threadIsRunning()) {
-                try {
-                    main.startSimulation();
-                } catch (NoMateriaPrimaAddedException ex) {
-                    PopUpFactory.showErrorPopUP(this, "No agresgaste materia prima para comenzar con la simulacion");
-                }
-            } else {
-                inPause = !inPause;
-                if (inPause){
-                    this.playBtn.setText("Pause");
-                } else {
-                    this.playBtn.setText("Play");
-                }
-                main.pauseSimulation(inPause);
-            }
-        
-    }//GEN-LAST:event_playBtnMouseClicked
 
+
+        if (!main.threadIsRunning()) {
+            try {
+                resetCharts();
+                main.startSimulation();
+            } catch (NoMateriaPrimaAddedException ex) {
+                PopUpFactory.showErrorPopUP(this, "No agresgaste materia prima para comenzar con la simulacion");
+            }
+        } else {
+            inPause = !inPause;
+            if (inPause) {
+                this.playBtn.setText("Pause");
+            } else {
+                this.playBtn.setText("Play");
+            }
+            main.pauseSimulation(inPause);
+        }
+
+    }//GEN-LAST:event_playBtnMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Metodos;
     private javax.swing.JPanel Metodos3;
@@ -1104,23 +1103,23 @@ public class MainPanelView extends GenericView {
     public JPanel getChartPanel() {
         return chartPanel;
     }
-    
+
     public void addPanel(JPanel panel) {
         this.chartPanel.add(panel);
         this.pack();
     }
-    
+
     @Override
     public void reset() {
     }
-    
+
     private void makeJFreChartPanel() {
         myChartPanelScatterPlot = createChartPanel();
         myChartPanelLinePlot = createLineChartPanel();
         this.chartPanel.add(myChartPanelScatterPlot);
         this.chartPanel.add(myChartPanelLinePlot);
     }
-    
+
     private ChartPanel createChartPanel() {
         jfreeChartScatterPlot = ChartFactory.createScatterPlot(
                 "Poblacion", "Individuos", "Fitness Value", createSampleData(),
@@ -1132,7 +1131,7 @@ public class MainPanelView extends GenericView {
         domain.setVerticalTickLabels(true);
         return new ChartPanel(jfreeChartScatterPlot);
     }
-    
+
     private ChartPanel createLineChartPanel() {
         /// create the chart...
         jfreeChartXYLinePLot = ChartFactory.createXYLineChart(
@@ -1145,7 +1144,7 @@ public class MainPanelView extends GenericView {
                 true, // tooltips
                 false // urls
                 );
-        
+
         XYPlot xyScatterPlot = (XYPlot) jfreeChartXYLinePLot.getPlot();
         xyScatterPlot.setDomainCrosshairVisible(true);
         xyScatterPlot.setRangeCrosshairVisible(true);
@@ -1156,31 +1155,29 @@ public class MainPanelView extends GenericView {
         xyScatterPlot.getRenderer().setSeriesPaint(2, Color.BLUE);
         return new ChartPanel(jfreeChartXYLinePLot);
     }
-    
+
     private XYDataset createSampleData() {
         xySeriesCollectionScatterPlot = new XYSeriesCollection();
         return xySeriesCollectionScatterPlot;
     }
-    
+
     private XYDataset createLineXYSampleData() {
         xySeriesCollectionLineXYPlot = new XYSeriesCollection();
         series1 = new XYSeries("Best Fitness");
         series2 = new XYSeries("Worst Fitness");
         series3 = new XYSeries("Average Fitness");
-        xySeriesCollectionLineXYPlot.addSeries(series1);
-        xySeriesCollectionLineXYPlot.addSeries(series2);
-        xySeriesCollectionLineXYPlot.addSeries(series3);
+        addSeries();
         return xySeriesCollectionLineXYPlot;
     }
-    
+
     public void updateChart(final Double average, final int theAge, final LinkedList<Double> data) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    
+
                     Double best = data.get(0);
                     Double localWorst = data.get(data.size() - 1);
-                    
+
                     if (statics.isSelected()) {
                         bestAptitud.setText(best.toString());
                         if (localWorst > worstAptitudNumber) {
@@ -1196,19 +1193,19 @@ public class MainPanelView extends GenericView {
                         population.setText(String.valueOf(data.size()));
                         age.setText(theAge + "/" + iteracionesMaxima);
                     }
-                    
+
                     if (useChart.isSelected()) {
                         series1.add(theAge, best);
                         series2.add(theAge, localWorst);
                         series3.add(theAge, average);
                     }
-                    
+
                     updateScatterPlot();
                 } catch (Exception e) {
                     logguer.logError(e.getClass(), e.getMessage());
                 }
             }
-            
+
             private void updateScatterPlot() {
                 if (useChart.isSelected()) {
                     if (xySeriesCollectionScatterPlot.getSeriesCount() > 3) {
@@ -1225,10 +1222,10 @@ public class MainPanelView extends GenericView {
                 }
             }
         });
-        
-        
+
+
     }
-    
+
     private void init() {
         //set tab titles
         this.tabPanel.setTitleAt(0, "Carga de Datos");
@@ -1246,9 +1243,9 @@ public class MainPanelView extends GenericView {
             }
         }
         this.velocidad.setValue(10);
-        
+
     }
-    
+
     private void enableStadistics() {
         boolean value = statics.isSelected();
         Component[] comps = stadistic.getComponents();
@@ -1259,8 +1256,32 @@ public class MainPanelView extends GenericView {
             }
         }
     }
-    
-    public void updateProgress(int progress) {
-        this.jProgressBar1.setValue(progress);
+
+    public void updateProgress(final int progress) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                jProgressBar1.setValue(progress);
+            }
+        });
+    }
+
+    public void resetCharts() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                xySeriesCollectionLineXYPlot.removeAllSeries();
+                xySeriesCollectionScatterPlot.removeAllSeries();
+                addSeries();
+            }
+        });
+    }
+
+    private void addSeries() {
+        //delete previous data if needed it
+        series1.clear();
+        series2.clear();
+        series3.clear();
+        xySeriesCollectionLineXYPlot.addSeries(series1);
+        xySeriesCollectionLineXYPlot.addSeries(series2);
+        xySeriesCollectionLineXYPlot.addSeries(series3);
     }
 }
