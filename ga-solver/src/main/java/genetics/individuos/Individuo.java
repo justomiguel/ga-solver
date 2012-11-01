@@ -124,6 +124,6 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
 
     @Override
     public String toString() {
-        return "Individuo{" + "fitnessValue=" + fitnessValue + " productos= 1 --> [" + productos.get(0).size() + "] 2 --> [" + productos.get(1).size() + "] 3 --> [" + productos.get(2).size() + "] 4 --> [" + productos.get(3).size() + "] " + '}';
+        return "Individuo{" + "Profit=" + getProfit() + " fitnessValue=" + fitnessValue + " productos= 1 --> [" + productos.get(0).size() + "] 2 --> [" + productos.get(1).size() + "] 3 --> [" + productos.get(2).size() + "] 4 --> [" + productos.get(3).size() + "] " + '}';
     }
 }
