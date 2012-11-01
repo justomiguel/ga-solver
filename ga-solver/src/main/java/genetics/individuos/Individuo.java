@@ -81,7 +81,6 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
                 return false;
             }
         }
-        DefaultLogguer.getLogger().logInfo("MISMO BOLASTRACA");
         return true;
     }
 
