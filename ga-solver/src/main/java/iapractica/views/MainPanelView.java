@@ -133,7 +133,6 @@ public class MainPanelView extends GenericView {
         playBtn = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        useChart = new javax.swing.JCheckBox();
         stadistic = new javax.swing.JPanel();
         statics = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
@@ -153,6 +152,8 @@ public class MainPanelView extends GenericView {
         age = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        selectChartsPanel = new javax.swing.JPanel();
+        useChart = new javax.swing.JCheckBox();
         chartPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -726,26 +727,6 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(10, 15, 0, 0);
         simlationProperties.add(jPanel4, gridBagConstraints);
 
-        useChart.setText(resourceMap.getString("useChart.text")); // NOI18N
-        useChart.setName("useChart"); // NOI18N
-        useChart.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                useChartItemStateChanged(evt);
-            }
-        });
-        useChart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                useChartActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 12, 0);
-        simlationProperties.add(useChart, gridBagConstraints);
-
         stadistic.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("stadistic.border.title"))); // NOI18N
         stadistic.setName("stadistic"); // NOI18N
         stadistic.setLayout(new java.awt.GridLayout(6, 0));
@@ -853,12 +834,41 @@ public class MainPanelView extends GenericView {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 8;
         gridBagConstraints.ipadx = 768;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         simlationProperties.add(jPanel7, gridBagConstraints);
+
+        selectChartsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("selectChartsPanel.border.title"))); // NOI18N
+        selectChartsPanel.setName("selectChartsPanel"); // NOI18N
+        selectChartsPanel.setLayout(new java.awt.GridLayout());
+
+        useChart.setText(resourceMap.getString("useChart.text")); // NOI18N
+        useChart.setName("useChart"); // NOI18N
+        useChart.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                useChartItemStateChanged(evt);
+            }
+        });
+        useChart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                useChartActionPerformed(evt);
+            }
+        });
+        selectChartsPanel.add(useChart);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.ipadx = 571;
+        gridBagConstraints.ipady = 21;
+        gridBagConstraints.weightx = 2.2;
+        gridBagConstraints.weighty = 1.6;
+        gridBagConstraints.insets = new java.awt.Insets(0, 13, 0, 8);
+        simlationProperties.add(selectChartsPanel, gridBagConstraints);
 
         tabPanel.addTab("Propiedades Simulacion", simlationProperties);
 
@@ -869,7 +879,7 @@ public class MainPanelView extends GenericView {
         chartPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("chartPanel.border.title"))); // NOI18N
         chartPanel.setAutoscrolls(true);
         chartPanel.setName("chartPanel"); // NOI18N
-        chartPanel.setLayout(new java.awt.GridLayout(1, 0));
+        chartPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         simlationContainer.add(chartPanel);
 
         mainContainer.add(simlationContainer);
@@ -1053,6 +1063,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JPanel seleccionPanel;
     private javax.swing.JPanel seleccionPanel1;
     private javax.swing.JPanel seleccionPanel2;
+    private javax.swing.JPanel selectChartsPanel;
     private javax.swing.JPanel simlationContainer;
     private javax.swing.JPanel simlationProperties;
     private javax.swing.JPanel stadistic;
