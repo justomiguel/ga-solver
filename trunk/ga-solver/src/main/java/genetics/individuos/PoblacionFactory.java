@@ -2,14 +2,9 @@ package genetics.individuos;
 
 import com.frre.cemami.utils.DefaultLogguer;
 import com.frre.cemami.utils.MathUtils;
-import genetics.cromosomas.fitnessfunctions.FitnessFunction;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import genetics.productos.exceptions.ProductCreationException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PoblacionFactory {
 

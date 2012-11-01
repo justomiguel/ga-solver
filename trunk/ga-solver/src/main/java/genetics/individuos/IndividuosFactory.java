@@ -62,6 +62,9 @@ public class IndividuosFactory {
         }
         double fitnessValue = FitnessFunction.getFitnessValue(individuo);
         individuo.setFitnessValue(fitnessValue);
+        if (individuo.getProfit() == 0){
+             throw new ProductCreationException("No permito insectos");
+        }
         return individuo;
     }
 
