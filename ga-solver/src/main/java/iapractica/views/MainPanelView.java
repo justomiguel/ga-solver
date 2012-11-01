@@ -1042,22 +1042,34 @@ public class MainPanelView extends GenericView {
 
     private void scatterPlotComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_scatterPlotComboItemStateChanged
         // TODO add your handling code here:
-        
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                chart1.removeAll();
+                String key = scatterPlotCombo.getSelectedItem().toString();
+                chart1.add(myChartPanelS.get(key));
+            }
+         });
     }//GEN-LAST:event_scatterPlotComboItemStateChanged
 
     private void linePlotterComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_linePlotterComboItemStateChanged
         // TODO add your handling code here:
-       
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                chart2.removeAll();
+                String key = linePlotterCombo.getSelectedItem().toString();
+                chart2.add(myChartPanelS.get(key));
+            }
+         });
     }//GEN-LAST:event_linePlotterComboItemStateChanged
 
     private void scatterPlotComboPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_scatterPlotComboPropertyChange
         // TODO add your handling code here:
-        System.out.println(this.scatterPlotCombo.getSelectedItem());
+       // System.out.println(this.scatterPlotCombo.getSelectedItem());
     }//GEN-LAST:event_scatterPlotComboPropertyChange
 
     private void linePlotterComboPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_linePlotterComboPropertyChange
         // TODO add your handling code here:
-         System.out.println(this.linePlotterCombo.getSelectedItem());
+       //  System.out.println(this.linePlotterCombo.getSelectedItem());
     }//GEN-LAST:event_linePlotterComboPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1313,10 +1325,7 @@ public class MainPanelView extends GenericView {
                 try {
 
                     //sort the data
-                    Collections.sort(data);
-
-                    Individuo bestLocal = data.get(0);
-                    Individuo localWorst = data.get(data.size() - 1);
+                    //Collections.sort(data);
 
                     //get the serie for the scatter plot
                     XYSeries currentAgeSerieFitness = new XYSeries("Age " + theAge);
@@ -1324,6 +1333,13 @@ public class MainPanelView extends GenericView {
 
                     Double averageFitness = 0.0;
                     Double averageProfit = 0.0;
+                    
+                    Double bestProfit = 0.0;
+                    Double bestFitness = 0.0;
+                    
+                    Double worstProfit = Double.MAX_VALUE;
+                    Double worstFitnes = Double.MAX_VALUE;
+                    
                     for (int i = 0; i < data.size(); i++) {
                         double myFitnessData = data.get(i).getFitnessValue();
                         double myProfitData = data.get(i).getProfit();
@@ -1333,6 +1349,22 @@ public class MainPanelView extends GenericView {
 
                         averageFitness += myFitnessData;
                         averageProfit += myProfitData;
+                        
+                        if (myFitnessData > bestFitness) {
+                            bestFitness = myFitnessData;
+                        }
+                        
+                        if (myProfitData > bestProfit) {
+                            bestProfit = myProfitData;
+                        }
+                        
+                        if (myFitnessData < worstFitnes) {
+                            worstFitnes = myFitnessData;
+                        }
+                        
+                        if (myProfitData < worstProfit) {
+                            worstProfit = myProfitData;
+                        }
                     }
 
                     averageFitness = averageFitness / data.size();
@@ -1340,11 +1372,10 @@ public class MainPanelView extends GenericView {
 
                     //update labels
                     if (statics.isSelected()) {
-                        bestAptitud.setText(bestLocal.getFitnessValue().toString());
-                        Double mylocalWorst = localWorst.getFitnessValue();
-                        if (mylocalWorst > worstAptitudNumber) {
-                            worstAptitud.setText(mylocalWorst.toString());
-                            worstAptitudNumber = mylocalWorst;
+                        bestAptitud.setText(bestFitness.toString());
+                        if (worstFitnes > worstAptitudNumber) {
+                            worstAptitud.setText(worstFitnes.toString());
+                            worstAptitudNumber = worstFitnes;
                         }
 
                         population.setText(String.valueOf(data.size()));
@@ -1363,12 +1394,12 @@ public class MainPanelView extends GenericView {
                     //ypdate chart
                     if (useChart.isSelected()) {
 
-                        seriesFitness.get(0).add(theAge, bestLocal.getFitnessValue());
-                        seriesFitness.get(1).add(theAge, localWorst.getFitnessValue());
+                        seriesFitness.get(0).add(theAge, bestFitness);
+                        seriesFitness.get(1).add(theAge, worstFitnes);
                         seriesFitness.get(2).add(theAge, averageFitness);
 
-                        seriesProfit.get(0).add(theAge, bestLocal.getProfit());
-                        seriesProfit.get(1).add(theAge, localWorst.getProfit());
+                        seriesProfit.get(0).add(theAge, bestProfit);
+                        seriesProfit.get(1).add(theAge, worstProfit);
                         seriesProfit.get(2).add(theAge, averageProfit);
 
                         updateScatterPlot(xySeriesCollectionScatterFitnessPlot, currentAgeSerieFitness);
