@@ -10,14 +10,12 @@ import genetics.functions.cruzas.CruzaBinomial;
 import genetics.functions.cruzas.CruzaMultipunto;
 import genetics.functions.cruzas.ICruzator;
 import genetics.individuos.Individuo;
-import genetics.individuos.PoblacionFactory;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import genetics.productos.exceptions.ProductCreationException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -29,7 +27,9 @@ public class CruzaManager {
 
         BINOMIAL, MULTIPUNTO
     };
-    public static int DEFAULT_SURVIVORS_BY_CRUZATOR_METHODS = 40;
+    
+    public int DEFAULT_SURVIVORS_BY_CRUZATOR_METHODS = 40;
+    
     private HashMap<Cruzators, ICruzator> cruzaClasses;
     static DefaultLogguer logguer = DefaultLogguer.getLogger();
 
@@ -68,8 +68,17 @@ public class CruzaManager {
                     mother = MathUtils.getRandomNumberExcludeOne(0, numberOfPopulation-1, father);
                     try {
                         Individuo son = cruzator.makeCruza(poblacionOriginal.get(father), poblacionOriginal.get(mother));
-                        numberOfCopiesForThisMethod--;
-                        newPopulation.add(son);
+                        boolean alreadyThere = false;
+                        for (Individuo individuo : poblacionOriginal) {
+                            if (individuo.equalsTo(son)){
+                                alreadyThere = true;
+                                break;
+                            }
+                        }
+                        if (!alreadyThere){
+                            numberOfCopiesForThisMethod--;
+                            newPopulation.add(son);
+                        }
                     } catch (NoMateriaPrimaAddedException ex) {
                        logguer.logError(this, ex.getMessage(), ex);
                     } catch (ProductCreationException ex) {
@@ -80,5 +89,9 @@ public class CruzaManager {
         }
 
         return newPopulation;
+    }
+    
+    public void setPercentage(int percentage){
+        this.DEFAULT_SURVIVORS_BY_CRUZATOR_METHODS = percentage;
     }
 }

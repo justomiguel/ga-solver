@@ -4,11 +4,15 @@
  */
 package iapractica.controllers;
 
+import genetics.functions.managers.CruzaManager.Cruzators;
+import genetics.functions.managers.MutatorManager.Mutators;
+import genetics.functions.managers.SelectionManager.Selectors;
 import genetics.individuos.Individuo;
 import genetics.individuos.Poblacion;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.drawers.DataDrawer;
 import iapractica.views.MainPanelView;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -22,6 +26,12 @@ public class MainPanelController extends GenericController {
     private LinkedList<Integer> materiasPrimas = new LinkedList<Integer>();
     private int maximumPopulation;
     private int maximumAge;
+    private HashMap<Cruzators, Integer> cruzaCoverageMethods;
+    private HashMap<Selectors, Integer> selectionCoverageMethods;
+    private HashMap<Mutators, Integer> mutationsCoverageMethods;
+    private int selectionManagerPercentage;
+    private int cruzaManagerPercentage;
+    private int mutatorManagerPercentage;
     
     public MainPanelController() {
         super(new MainPanelView());
@@ -47,6 +57,7 @@ public class MainPanelController extends GenericController {
             throw new NoMateriaPrimaAddedException("No Materia was added");
         }
         population = new Poblacion(this, materiasPrimas, maximumAge,maximumPopulation);
+        population.setGAOperators(selectionManagerPercentage, mutatorManagerPercentage, cruzaManagerPercentage, mutationsCoverageMethods, selectionCoverageMethods, cruzaCoverageMethods);
         population.start();
     }
     
@@ -112,6 +123,16 @@ public class MainPanelController extends GenericController {
     public void updateChart(int age, LinkedList<Individuo> currentPopulation) {
         MainPanelView panel = (MainPanelView) this.view;
         panel.updateChart(age, currentPopulation);
+    }
+
+    public void setGAOperators(int selectionPercentage, int mutatorPercentage, int cruzaPercentage, HashMap<Mutators, Integer> mutationsCoverageMethods, HashMap<Selectors, Integer> selectionCoverageMethods, HashMap<Cruzators, Integer> cruzaCoverageMethods) {
+        this.mutatorManagerPercentage=mutatorPercentage;
+        this.selectionManagerPercentage=selectionPercentage;
+        this.cruzaManagerPercentage=cruzaPercentage;
+        
+        this.cruzaCoverageMethods = cruzaCoverageMethods;
+        this.selectionCoverageMethods = selectionCoverageMethods;
+        this.mutationsCoverageMethods = mutationsCoverageMethods;
     }
 
 }

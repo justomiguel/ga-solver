@@ -16,13 +16,13 @@ import java.util.LinkedList;
  */
 public class BestSelector implements ISelector {
 
-    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, int selectionMethodCoverage) {
+    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, int selectionMethodCoverage, int survivors) {
         LinkedList<Individuo> newPopulation = new LinkedList<Individuo>();
         int size = poblacion.size();
 
         Collections.sort(poblacion);
 
-        int numberOfCopies = (selectionMethodCoverage*SelectionManager.DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS/100) * size / 100;
+        int numberOfCopies = (selectionMethodCoverage*survivors/100) * size / 100;
         for (int i = 0; i < numberOfCopies; i++) {
             newPopulation.add(poblacion.get(i));
         }

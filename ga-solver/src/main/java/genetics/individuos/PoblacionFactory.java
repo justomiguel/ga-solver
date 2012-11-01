@@ -37,6 +37,7 @@ public class PoblacionFactory {
 
         int[] productos = new int[4];
         int currentSize = 0;
+        
         while (currentSize < initialPopulation) {
             productos[0] = MathUtils.getRandomNumber(0, maxQuantities.get(0));
             productos[1] = MathUtils.getRandomNumber(0, maxQuantities.get(1));

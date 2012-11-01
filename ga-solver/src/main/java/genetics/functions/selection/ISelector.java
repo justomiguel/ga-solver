@@ -5,5 +5,5 @@ import java.util.LinkedList;
 
 public interface ISelector {
 
-    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, int selectionMethodCoverage);
+    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, int selectionMethodCoverage, int survivors);
 }

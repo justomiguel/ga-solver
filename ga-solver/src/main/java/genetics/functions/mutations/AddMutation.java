@@ -14,7 +14,7 @@ import genetics.productos.exceptions.ProductCreationException;
  *
  * @author Justo Vargas
  */
-public class AdJoinMutation implements IMutator {
+public class AddMutation implements IMutator {
 
     public Individuo doMutation(Individuo individuo) throws ProductCreationException, NoMateriaPrimaAddedException {
         Individuo mutatedInd = null;
@@ -23,21 +23,17 @@ public class AdJoinMutation implements IMutator {
 
         int totalProducts = productos.length;
 
-        int genNumber1 = MathUtils.getRandomNumber(1, totalProducts - 1);
-        int genNumber2 = genNumber1 + 1;
+        int genNumber1 = MathUtils.getRandomNumber(0, totalProducts-1);
 
-        for (int i = 0; i < totalProducts; i++) {
+         for (int i = 0; i < totalProducts; i++) {
             int productsSize = 0;
-            if ((i + 1) == genNumber1) {
-                productsSize = individuo.getProductsSize(genNumber2);
-            } else if ((i + 1) == genNumber2) {
-                productsSize = individuo.getProductsSize(genNumber1);
+            if (genNumber1==(i)){
+                productsSize = individuo.getProductsSize(i+1)+1;
             } else {
-                productsSize = individuo.getProductsSize(i + 1);
+                productsSize = individuo.getProductsSize(i+1);
             }
-            productos[i] = productsSize;
+           productos[i] = productsSize;
         }
-
         mutatedInd = IndividuosFactory.getInstance().createIndividuo(productos);
         return mutatedInd;
     }
