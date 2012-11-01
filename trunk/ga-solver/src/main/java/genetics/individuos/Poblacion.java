@@ -90,8 +90,8 @@ public class Poblacion extends Thread {
 
         mutationsCoverageMethods.put(Mutators.RANDOM, 75);
         mutationsCoverageMethods.put(Mutators.ZERO, 25);
-        mutationsCoverageMethods.put(Mutators.ADJOIN, 10);
-        mutationsCoverageMethods.put(Mutators.SWAP, 10);
+        //mutationsCoverageMethods.put(Mutators.ADJOIN, 10);
+        //mutationsCoverageMethods.put(Mutators.SWAP, 10);
 
         dataManager = new ExternalDataHandler();
     }
