@@ -8,7 +8,9 @@ import com.frre.cemami.utils.DefaultLogguer;
 import com.frre.cemami.utils.MathUtils;
 import genetics.functions.mutations.AdJoinMutation;
 import genetics.functions.mutations.IMutator;
+import genetics.functions.mutations.RandomMutation;
 import genetics.functions.mutations.SwapMutation;
+import genetics.functions.mutations.ZeroMutation;
 import genetics.individuos.Individuo;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import genetics.productos.exceptions.ProductCreationException;
@@ -25,10 +27,12 @@ public class MutatorManager {
     public static enum Mutators {
 
         SWAP,
-        ADJOIN
+        ADJOIN,
+        ZERO, 
+        RANDOM
     };
 
-    public static int DEFAULT_SURVIVORS_BY_MUTATORS_METHODS = 20;
+    public static int DEFAULT_SURVIVORS_BY_MUTATORS_METHODS = 40;
     
     private HashMap<Mutators, IMutator> mutatorClasses;
     static DefaultLogguer logguer = DefaultLogguer.getLogger();
@@ -37,6 +41,8 @@ public class MutatorManager {
         mutatorClasses = new HashMap<Mutators, IMutator>();
         mutatorClasses.put(Mutators.SWAP, new SwapMutation());
         mutatorClasses.put(Mutators.ADJOIN, new AdJoinMutation());
+        mutatorClasses.put(Mutators.ZERO, new ZeroMutation());
+        mutatorClasses.put(Mutators.RANDOM, new RandomMutation());
     }
 
     public LinkedList<Individuo> doMutation(LinkedList<Individuo> poblacionOriginal, HashMap<Mutators, Integer> coverageMethods) {

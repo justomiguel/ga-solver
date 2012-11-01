@@ -1,9 +1,9 @@
 package genetics.individuos;
 
-import java.util.LinkedList;
 import genetics.cromosomas.ICromosoma;
 import genetics.productos.Producto;
 import genetics.productos.exceptions.GeneticException;
+import java.util.LinkedList;
 
 public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
 
@@ -20,6 +20,22 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
         for (int i = 0; i < productSize; i++) {
             productos.add(i, new LinkedList<Producto>());
         }
+    }
+    
+    public double getProfit(){
+        double profit = 0;
+        int products = this.getTotalDiferrentProducts()+1;
+        for (int i = 1; i < products; i++) {
+            int productsSize = this.getProductsSize(i);
+            double productValue = 0;
+            try {
+                productValue = this.getProductAt(i).getProfitValue();
+            } catch (GeneticException ex) {
+               
+            }
+            profit += productsSize*productValue ;
+        }
+        return profit;
     }
 
     public void add(int index, Producto element) {
