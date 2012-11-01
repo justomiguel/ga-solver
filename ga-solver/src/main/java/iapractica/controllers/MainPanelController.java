@@ -4,6 +4,7 @@
  */
 package iapractica.controllers;
 
+import genetics.individuos.Individuo;
 import genetics.individuos.Poblacion;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.drawers.DataDrawer;
@@ -77,11 +78,6 @@ public class MainPanelController extends GenericController {
         destroyCurrentSimulation();
     }
     
-    public void updateChart(LinkedList<Double> newElements, int age, double average) {
-        MainPanelView panel = (MainPanelView) this.view;
-        panel.updateChart(average, age, newElements);
-    }
-    
     public void addMateriaPrima(int[] materiasPrimas) {
         int size = materiasPrimas.length;
         for (int i = 0; i < size; i++) {
@@ -111,6 +107,11 @@ public class MainPanelController extends GenericController {
     
     public boolean threadIsRunning() {
         return population != null && population.isRunning();
+    }
+
+    public void updateChart(int age, LinkedList<Individuo> currentPopulation) {
+        MainPanelView panel = (MainPanelView) this.view;
+        panel.updateChart(age, currentPopulation);
     }
 
 }

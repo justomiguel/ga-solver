@@ -11,11 +11,13 @@
 package iapractica.views;
 
 import com.frre.cemami.utils.MathUtils;
+import genetics.individuos.Individuo;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.controllers.MainPanelController;
 import iapractica.views.popups.PopUpFactory;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.Collections;
 import java.util.LinkedList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -133,15 +135,20 @@ public class MainPanelView extends GenericView {
         jButton3 = new javax.swing.JButton();
         useChart = new javax.swing.JCheckBox();
         stadistic = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         statics = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
         bestAptitud = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
         worstAptitud = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         averageAptitud = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         population = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         age = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -683,7 +690,6 @@ public class MainPanelView extends GenericView {
         jButton6.setName("jButton6"); // NOI18N
         jPanel4.add(jButton6);
 
-        playBtn.setText(resourceMap.getString("playBtn.text")); // NOI18N
         playBtn.setName("playBtn"); // NOI18N
         playBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -742,27 +748,7 @@ public class MainPanelView extends GenericView {
 
         stadistic.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("stadistic.border.title"))); // NOI18N
         stadistic.setName("stadistic"); // NOI18N
-        stadistic.setLayout(new java.awt.GridBagLayout());
-
-        jLabel17.setText(resourceMap.getString("jLabel17.text")); // NOI18N
-        jLabel17.setName("jLabel17"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
-        stadistic.add(jLabel17, gridBagConstraints);
-
-        jLabel18.setText(resourceMap.getString("jLabel18.text")); // NOI18N
-        jLabel18.setName("jLabel18"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 10, 0, 0);
-        stadistic.add(jLabel18, gridBagConstraints);
+        stadistic.setLayout(new java.awt.GridLayout(6, 0));
 
         statics.setText(resourceMap.getString("statics.text")); // NOI18N
         statics.setName("statics"); // NOI18N
@@ -776,113 +762,85 @@ public class MainPanelView extends GenericView {
                 staticsActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 1, 0, 6);
-        stadistic.add(statics, gridBagConstraints);
+        stadistic.add(statics);
+
+        jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel17.setText(resourceMap.getString("jLabel17.text")); // NOI18N
+        jLabel17.setName("jLabel17"); // NOI18N
+        jPanel1.add(jLabel17);
 
         bestAptitud.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         bestAptitud.setText(resourceMap.getString("bestAptitud.text")); // NOI18N
         bestAptitud.setName("bestAptitud"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 19;
-        gridBagConstraints.ipadx = 58;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 7, 0, 0);
-        stadistic.add(bestAptitud, gridBagConstraints);
+        jPanel1.add(bestAptitud);
+
+        stadistic.add(jPanel1);
+
+        jPanel2.setName("jPanel2"); // NOI18N
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel18.setText(resourceMap.getString("jLabel18.text")); // NOI18N
+        jLabel18.setName("jLabel18"); // NOI18N
+        jPanel2.add(jLabel18);
 
         worstAptitud.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         worstAptitud.setText(resourceMap.getString("worstAptitud.text")); // NOI18N
         worstAptitud.setName("worstAptitud"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 19;
-        gridBagConstraints.ipadx = 58;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 7, 0, 0);
-        stadistic.add(worstAptitud, gridBagConstraints);
+        jPanel2.add(worstAptitud);
+
+        stadistic.add(jPanel2);
+
+        jPanel3.setName("jPanel3"); // NOI18N
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel21.setText(resourceMap.getString("jLabel21.text")); // NOI18N
         jLabel21.setName("jLabel21"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
-        stadistic.add(jLabel21, gridBagConstraints);
+        jPanel3.add(jLabel21);
 
         averageAptitud.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         averageAptitud.setText(resourceMap.getString("averageAptitud.text")); // NOI18N
         averageAptitud.setName("averageAptitud"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 38;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
-        stadistic.add(averageAptitud, gridBagConstraints);
+        jPanel3.add(averageAptitud);
+
+        stadistic.add(jPanel3);
+
+        jPanel6.setName("jPanel6"); // NOI18N
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel23.setText(resourceMap.getString("jLabel23.text")); // NOI18N
         jLabel23.setName("jLabel23"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 10, 0, 0);
-        stadistic.add(jLabel23, gridBagConstraints);
+        jPanel6.add(jLabel23);
 
         population.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         population.setText(resourceMap.getString("population.text")); // NOI18N
         population.setName("population"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 38;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 0, 0, 0);
-        stadistic.add(population, gridBagConstraints);
+        jPanel6.add(population);
+
+        stadistic.add(jPanel6);
+
+        jPanel8.setName("jPanel8"); // NOI18N
+        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel25.setText(resourceMap.getString("jLabel25.text")); // NOI18N
         jLabel25.setName("jLabel25"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 10, 22, 0);
-        stadistic.add(jLabel25, gridBagConstraints);
+        jPanel8.add(jLabel25);
 
         age.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         age.setText(resourceMap.getString("age.text")); // NOI18N
         age.setName("age"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 9;
-        gridBagConstraints.ipadx = 48;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 2, 22, 0);
-        stadistic.add(age, gridBagConstraints);
+        jPanel8.add(age);
+
+        stadistic.add(jPanel8);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = -12;
-        gridBagConstraints.ipady = -27;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 2, 0, 4);
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 4, 16);
         simlationProperties.add(stadistic, gridBagConstraints);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel7.border.title"))); // NOI18N
@@ -925,7 +883,7 @@ public class MainPanelView extends GenericView {
         // TODO add your handling code here:
         for (JSpinner jSpinner : spinnersCargaDatos) {
             Integer number = (int) MathUtils.getRandomNumber(0, 1000);
-            jSpinner.setValue(number);
+            jSpinner.setValue(1000);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1067,9 +1025,14 @@ public class MainPanelView extends GenericView {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner13;
@@ -1122,7 +1085,7 @@ public class MainPanelView extends GenericView {
 
     private ChartPanel createChartPanel() {
         jfreeChartScatterPlot = ChartFactory.createScatterPlot(
-                "Poblacion", "Individuos", "Fitness Value", createSampleData(),
+                "Poblacion", "Individuos", "Ganancias", createSampleData(),
                 PlotOrientation.VERTICAL, true, true, false);
         XYPlot xyScatterPlot = (XYPlot) jfreeChartScatterPlot.getPlot();
         xyScatterPlot.setDomainCrosshairVisible(true);
@@ -1135,7 +1098,7 @@ public class MainPanelView extends GenericView {
     private ChartPanel createLineChartPanel() {
         /// create the chart...
         jfreeChartXYLinePLot = ChartFactory.createXYLineChart(
-                "Aptitudes", // chart title
+                "Aptitudes Por Individuo", // chart title
                 "Valor", // x axis label
                 "Iteraciones", // y axis label
                 createLineXYSampleData(), // data
@@ -1170,62 +1133,6 @@ public class MainPanelView extends GenericView {
         return xySeriesCollectionLineXYPlot;
     }
 
-    public void updateChart(final Double average, final int theAge, final LinkedList<Double> data) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-
-                    Double best = data.get(0);
-                    Double localWorst = data.get(data.size() - 1);
-
-                    if (statics.isSelected()) {
-                        bestAptitud.setText(best.toString());
-                        if (localWorst > worstAptitudNumber) {
-                            worstAptitud.setText(localWorst.toString());
-                            worstAptitudNumber = localWorst;
-                        }
-                        String promedio = average.toString();
-                        int hasDot = promedio.indexOf(".");
-                        if ((hasDot > 0) && (promedio.length() > hasDot + 3)) {
-                            promedio = promedio.substring(0, hasDot + 3);
-                        }
-                        averageAptitud.setText(promedio);
-                        population.setText(String.valueOf(data.size()));
-                        age.setText(theAge + "/" + iteracionesMaxima);
-                    }
-
-                    if (useChart.isSelected()) {
-                        series1.add(theAge, best);
-                        series2.add(theAge, localWorst);
-                        series3.add(theAge, average);
-                    }
-
-                    updateScatterPlot();
-                } catch (Exception e) {
-                    logguer.logError(e.getClass(), e.getMessage());
-                }
-            }
-
-            private void updateScatterPlot() {
-                if (useChart.isSelected()) {
-                    if (xySeriesCollectionScatterPlot.getSeriesCount() > 3) {
-                        xySeriesCollectionScatterPlot.removeSeries(0);
-                    }
-                    XYSeries series = new XYSeries("Age " + theAge);
-                    for (int i = 0; i < data.size(); i++) {
-                        Double myData = data.get(i);
-                        double x = i;
-                        double y = myData;
-                        series.add(x, y);
-                    }
-                    xySeriesCollectionScatterPlot.addSeries(series);
-                }
-            }
-        });
-
-
-    }
-
     private void init() {
         //set tab titles
         this.tabPanel.setTitleAt(0, "Carga de Datos");
@@ -1251,8 +1158,12 @@ public class MainPanelView extends GenericView {
         Component[] comps = stadistic.getComponents();
         for (int i = 0; i < comps.length; i++) {
             Component component = comps[i];
-            if (!component.equals(statics)) {
-                component.setEnabled(value);
+            if (component instanceof JPanel) {
+                Component[] labels = ((JPanel) component).getComponents();
+                for (int j = 0; j < labels.length; j++) {
+                    Component currentLabel = labels[j];
+                    currentLabel.setEnabled(value);
+                }
             }
         }
     }
@@ -1283,5 +1194,72 @@ public class MainPanelView extends GenericView {
         xySeriesCollectionLineXYPlot.addSeries(series1);
         xySeriesCollectionLineXYPlot.addSeries(series2);
         xySeriesCollectionLineXYPlot.addSeries(series3);
+    }
+
+    public void updateChart(final int theAge, final LinkedList<Individuo> data) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Collections.sort(data);
+
+                    Individuo ind = data.get(0);
+                    Double best = ind.getFitnessValue();
+                    Double localWorst = data.get(data.size() - 1).getFitnessValue();
+
+                    if (statics.isSelected()) {
+                        bestAptitud.setText(best.toString());
+                        if (localWorst > worstAptitudNumber) {
+                            worstAptitud.setText(localWorst.toString());
+                            worstAptitudNumber = localWorst;
+                        }
+
+                        population.setText(String.valueOf(data.size()));
+                        age.setText(theAge + "/" + iteracionesMaxima);
+                    }
+
+
+
+                    XYSeries series = new XYSeries("Age " + theAge);
+                    Double average = 0.0;
+                    for (int i = 0; i < data.size(); i++) {
+                        Double myData = data.get(i).getProfit();
+                        double x = i;
+                        double y = myData;
+                        series.add(x, y);
+                        average += data.get(i).getFitnessValue();
+                    }
+
+                    average = average/data.size();
+                    
+                    String promedio = average.toString();
+
+                    int hasDot = promedio.indexOf(".");
+                    if ((hasDot > 0) && (promedio.length() > hasDot + 3)) {
+                        promedio = promedio.substring(0, hasDot + 3);
+                    }
+                    
+                    averageAptitud.setText(promedio);
+
+                    if (useChart.isSelected()) {
+                        series1.add(theAge, best);
+                        series2.add(theAge, localWorst);
+                        series3.add(theAge, average);
+                    }
+                    
+                    updateScatterPlot(series);
+                } catch (Exception e) {
+                    logguer.logError(e.getClass(), e.getMessage());
+                }
+            }
+
+            private void updateScatterPlot(XYSeries series) {
+                if (useChart.isSelected()) {
+                    if (xySeriesCollectionScatterPlot.getSeriesCount() > 2) {
+                        xySeriesCollectionScatterPlot.removeSeries(0);
+                    }
+                    xySeriesCollectionScatterPlot.addSeries(series);
+                }
+            }
+        });
     }
 }

@@ -11,7 +11,6 @@ import genetics.functions.selection.CopyControlSelector;
 import genetics.functions.selection.ISelector;
 import genetics.functions.selection.RankingSelector;
 import genetics.individuos.Individuo;
-import genetics.individuos.PoblacionFactory;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -25,7 +24,7 @@ public class SelectionManager {
 
     public static enum Selectors { RANKING_SELECTOR, COPY_CONTROL_SELECTOR, BEST_SELECTOR };
 
-     public static int DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS = 40;
+     public static int DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS = 20;
 
     private HashMap<Selectors, ISelector> selectorClasses;
 

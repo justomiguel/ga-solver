@@ -14,8 +14,6 @@ import iapractica.controllers.MainPanelController;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Poblacion extends Thread {
 
@@ -84,14 +82,16 @@ public class Poblacion extends Thread {
 
         //set initial values
         selectionCoverageMethods.put(Selectors.RANKING_SELECTOR, 50);
-        selectionCoverageMethods.put(Selectors.COPY_CONTROL_SELECTOR, 0);
+       // selectionCoverageMethods.put(Selectors.COPY_CONTROL_SELECTOR, 50);
         selectionCoverageMethods.put(Selectors.BEST_SELECTOR, 50);
 
         cruzaCoverageMethods.put(Cruzators.BINOMIAL, 50);
         cruzaCoverageMethods.put(Cruzators.MULTIPUNTO, 50);
 
-        mutationsCoverageMethods.put(Mutators.SWAP, 50);
-        mutationsCoverageMethods.put(Mutators.ADJOIN, 50);
+        mutationsCoverageMethods.put(Mutators.RANDOM, 75);
+        mutationsCoverageMethods.put(Mutators.ZERO, 25);
+        mutationsCoverageMethods.put(Mutators.ADJOIN, 10);
+        mutationsCoverageMethods.put(Mutators.SWAP, 10);
 
         dataManager = new ExternalDataHandler();
     }
@@ -197,16 +197,7 @@ public class Poblacion extends Thread {
     }
 
     private void updateUIChart(int age, LinkedList<Individuo> currentPopulation) {
-        LinkedList<Double> newElements = new LinkedList<Double>();
-        double average = 0;
-        for (Individuo individuo : currentPopulation) {
-            double fitness = individuo.getFitnessValue();
-            newElements.add(fitness);
-            average += fitness;
-        }
-        average = average / currentPopulation.size();
-        Collections.sort(newElements);
-        this.controller.updateChart(newElements, age, average);
+        this.controller.updateChart(age, currentPopulation);
     }
 
     public void updateUIProgress(int progress) {
