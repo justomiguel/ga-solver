@@ -820,8 +820,10 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.ipady = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 4, 16);
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 4, 2);
         simlationProperties.add(stadistic, gridBagConstraints);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel7.border.title"))); // NOI18N
