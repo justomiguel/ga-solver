@@ -24,7 +24,7 @@ public class SelectionManager {
 
     public static enum Selectors { RANKING_SELECTOR, COPY_CONTROL_SELECTOR, BEST_SELECTOR };
 
-     public static int DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS = 20;
+     public int DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS = 20;
 
     private HashMap<Selectors, ISelector> selectorClasses;
 
@@ -49,11 +49,15 @@ public class SelectionManager {
                 ISelector selector = selectorClasses.get(selectorMethod);
                 //hay que ver si necesito clonarlos posta
                 //LinkedList<Individuo> cloneIndividuos = PoblacionFactory.getInstance().cloneInitialPopulation(poblacionOriginal);
-                newPopulation.addAll(selector.doSelection(poblacionOriginal, getCoverageOfMethod));
+                newPopulation.addAll(selector.doSelection(poblacionOriginal, getCoverageOfMethod, this.DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS));
              }
          }
 
          return newPopulation;
+    }
+    
+    public void setPercentage(int percentage){
+        this.DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS = percentage;
     }
 
 }

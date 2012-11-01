@@ -11,6 +11,9 @@
 package iapractica.views;
 
 import com.frre.cemami.utils.MathUtils;
+import genetics.functions.managers.CruzaManager;
+import genetics.functions.managers.MutatorManager;
+import genetics.functions.managers.SelectionManager;
 import genetics.individuos.Individuo;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.controllers.MainPanelController;
@@ -28,7 +31,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -38,6 +40,9 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public class MainPanelView extends GenericView {
 
+    private HashMap<SelectionManager.Selectors, Integer> selectionCoverageMethods;
+    private HashMap<CruzaManager.Cruzators, Integer> cruzaCoverageMethods;
+    private HashMap<MutatorManager.Mutators, Integer> mutationsCoverageMethods;
     //the charts
     private JFreeChart jfreeChartScatterPlotProfit;
     private JFreeChart jfreeChartScatterPlotFitness;
@@ -117,26 +122,28 @@ public class MainPanelView extends GenericView {
         operadoresGeneticos = new javax.swing.JPanel();
         seleccionPanel = new javax.swing.JPanel();
         Metodos = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        elitista = new javax.swing.JCheckBox();
+        ranking = new javax.swing.JCheckBox();
+        controlCopias = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
         jLabel12 = new javax.swing.JLabel();
-        jSpinner13 = new javax.swing.JSpinner();
+        selectorPercentage = new javax.swing.JSpinner();
         seleccionPanel1 = new javax.swing.JPanel();
         Metodos3 = new javax.swing.JPanel();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
+        zeroMutation = new javax.swing.JCheckBox();
+        random = new javax.swing.JCheckBox();
+        adder = new javax.swing.JCheckBox();
+        maximizer = new javax.swing.JCheckBox();
         jCheckBox14 = new javax.swing.JCheckBox();
         jLabel15 = new javax.swing.JLabel();
-        jSpinner14 = new javax.swing.JSpinner();
+        mutatorPercentage = new javax.swing.JSpinner();
         seleccionPanel2 = new javax.swing.JPanel();
         Metodos4 = new javax.swing.JPanel();
-        jCheckBox15 = new javax.swing.JCheckBox();
-        jCheckBox16 = new javax.swing.JCheckBox();
+        binomial = new javax.swing.JCheckBox();
+        multipunto = new javax.swing.JCheckBox();
         jCheckBox18 = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
-        jSpinner15 = new javax.swing.JSpinner();
+        cruzaPercentage = new javax.swing.JSpinner();
         simlationProperties = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         velocidad = new javax.swing.JSlider();
@@ -145,6 +152,7 @@ public class MainPanelView extends GenericView {
         jPanel4 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         playBtn = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         stadistic = new javax.swing.JPanel();
@@ -169,6 +177,7 @@ public class MainPanelView extends GenericView {
         selectChartsPanel = new javax.swing.JPanel();
         scatterPlotCombo = new javax.swing.JComboBox();
         useChart = new javax.swing.JCheckBox();
+        sortData = new javax.swing.JCheckBox();
         linePlotterCombo = new javax.swing.JComboBox();
         chartPanel = new javax.swing.JPanel();
         chart1 = new javax.swing.JPanel();
@@ -470,17 +479,17 @@ public class MainPanelView extends GenericView {
         Metodos.setName("Metodos"); // NOI18N
         Metodos.setLayout(new java.awt.GridLayout(3, 0));
 
-        jCheckBox1.setText(resourceMap.getString("jCheckBox1.text")); // NOI18N
-        jCheckBox1.setName("jCheckBox1"); // NOI18N
-        Metodos.add(jCheckBox1);
+        elitista.setText(resourceMap.getString("elitista.text")); // NOI18N
+        elitista.setName("elitista"); // NOI18N
+        Metodos.add(elitista);
 
-        jCheckBox2.setText(resourceMap.getString("jCheckBox2.text")); // NOI18N
-        jCheckBox2.setName("jCheckBox2"); // NOI18N
-        Metodos.add(jCheckBox2);
+        ranking.setText(resourceMap.getString("ranking.text")); // NOI18N
+        ranking.setName("ranking"); // NOI18N
+        Metodos.add(ranking);
 
-        jCheckBox6.setText(resourceMap.getString("jCheckBox6.text")); // NOI18N
-        jCheckBox6.setName("jCheckBox6"); // NOI18N
-        Metodos.add(jCheckBox6);
+        controlCopias.setText(resourceMap.getString("controlCopias.text")); // NOI18N
+        controlCopias.setName("controlCopias"); // NOI18N
+        Metodos.add(controlCopias);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -511,7 +520,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         seleccionPanel.add(jLabel12, gridBagConstraints);
 
-        jSpinner13.setName("jSpinner13"); // NOI18N
+        selectorPercentage.setName("selectorPercentage"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -519,7 +528,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.ipadx = 159;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
-        seleccionPanel.add(jSpinner13, gridBagConstraints);
+        seleccionPanel.add(selectorPercentage, gridBagConstraints);
 
         operadoresGeneticos.add(seleccionPanel);
 
@@ -528,25 +537,34 @@ public class MainPanelView extends GenericView {
         seleccionPanel1.setLayout(new java.awt.GridBagLayout());
 
         Metodos3.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Metodos3.border.title"))); // NOI18N
+        Metodos3.setAutoscrolls(true);
         Metodos3.setName("Metodos3"); // NOI18N
-        Metodos3.setLayout(new java.awt.GridLayout(3, 0));
+        Metodos3.setLayout(new java.awt.GridLayout(4, 0));
 
-        jCheckBox11.setText(resourceMap.getString("jCheckBox11.text")); // NOI18N
-        jCheckBox11.setName("jCheckBox11"); // NOI18N
-        Metodos3.add(jCheckBox11);
+        zeroMutation.setText(resourceMap.getString("zeroMutation.text")); // NOI18N
+        zeroMutation.setName("zeroMutation"); // NOI18N
+        Metodos3.add(zeroMutation);
 
-        jCheckBox12.setText(resourceMap.getString("jCheckBox12.text")); // NOI18N
-        jCheckBox12.setName("jCheckBox12"); // NOI18N
-        Metodos3.add(jCheckBox12);
+        random.setText(resourceMap.getString("random.text")); // NOI18N
+        random.setName("random"); // NOI18N
+        Metodos3.add(random);
+
+        adder.setText(resourceMap.getString("adder.text")); // NOI18N
+        adder.setName("adder"); // NOI18N
+        Metodos3.add(adder);
+
+        maximizer.setText(resourceMap.getString("maximizer.text")); // NOI18N
+        maximizer.setName("maximizer"); // NOI18N
+        Metodos3.add(maximizer);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 17;
-        gridBagConstraints.ipady = -5;
+        gridBagConstraints.ipadx = 23;
+        gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(11, 0, 5, 0);
         seleccionPanel1.add(Metodos3, gridBagConstraints);
 
         jCheckBox14.setText(resourceMap.getString("jCheckBox14.text")); // NOI18N
@@ -568,7 +586,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         seleccionPanel1.add(jLabel15, gridBagConstraints);
 
-        jSpinner14.setName("jSpinner14"); // NOI18N
+        mutatorPercentage.setName("mutatorPercentage"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -576,7 +594,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.ipadx = 159;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
-        seleccionPanel1.add(jSpinner14, gridBagConstraints);
+        seleccionPanel1.add(mutatorPercentage, gridBagConstraints);
 
         operadoresGeneticos.add(seleccionPanel1);
 
@@ -588,13 +606,13 @@ public class MainPanelView extends GenericView {
         Metodos4.setName("Metodos4"); // NOI18N
         Metodos4.setLayout(new java.awt.GridLayout(3, 0));
 
-        jCheckBox15.setText(resourceMap.getString("jCheckBox15.text")); // NOI18N
-        jCheckBox15.setName("jCheckBox15"); // NOI18N
-        Metodos4.add(jCheckBox15);
+        binomial.setText(resourceMap.getString("binomial.text")); // NOI18N
+        binomial.setName("binomial"); // NOI18N
+        Metodos4.add(binomial);
 
-        jCheckBox16.setText(resourceMap.getString("jCheckBox16.text")); // NOI18N
-        jCheckBox16.setName("jCheckBox16"); // NOI18N
-        Metodos4.add(jCheckBox16);
+        multipunto.setText(resourceMap.getString("multipunto.text")); // NOI18N
+        multipunto.setName("multipunto"); // NOI18N
+        Metodos4.add(multipunto);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -625,7 +643,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         seleccionPanel2.add(jLabel16, gridBagConstraints);
 
-        jSpinner15.setName("jSpinner15"); // NOI18N
+        cruzaPercentage.setName("cruzaPercentage"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -633,7 +651,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.ipadx = 159;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
-        seleccionPanel2.add(jSpinner15, gridBagConstraints);
+        seleccionPanel2.add(cruzaPercentage, gridBagConstraints);
 
         operadoresGeneticos.add(seleccionPanel2);
 
@@ -666,7 +684,6 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 522;
-        gridBagConstraints.ipady = -7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 2);
         jPanel5.add(velocidad, gridBagConstraints);
@@ -709,6 +726,7 @@ public class MainPanelView extends GenericView {
         jButton6.setName("jButton6"); // NOI18N
         jPanel4.add(jButton6);
 
+        playBtn.setText(resourceMap.getString("playBtn.text")); // NOI18N
         playBtn.setName("playBtn"); // NOI18N
         playBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -721,6 +739,10 @@ public class MainPanelView extends GenericView {
             }
         });
         jPanel4.add(playBtn);
+
+        jButton5.setText(resourceMap.getString("jButton5.text")); // NOI18N
+        jButton5.setName("jButton5"); // NOI18N
+        jPanel4.add(jButton5);
 
         jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
         jButton4.setName("jButton4"); // NOI18N
@@ -739,10 +761,10 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 308;
+        gridBagConstraints.ipadx = 258;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 15, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 14, 0, 8);
         simlationProperties.add(jPanel4, gridBagConstraints);
 
         stadistic.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("stadistic.border.title"))); // NOI18N
@@ -893,6 +915,15 @@ public class MainPanelView extends GenericView {
         });
         selectChartsPanel.add(useChart);
 
+        sortData.setText(resourceMap.getString("sortData.text")); // NOI18N
+        sortData.setName("sortData"); // NOI18N
+        sortData.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                sortDataItemStateChanged(evt);
+            }
+        });
+        selectChartsPanel.add(sortData);
+
         linePlotterCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         linePlotterCombo.setName("linePlotterCombo"); // NOI18N
         linePlotterCombo.addItemListener(new java.awt.event.ItemListener() {
@@ -974,10 +1005,10 @@ public class MainPanelView extends GenericView {
         }
         MainPanelController main = (MainPanelController) this.getController();
         main.addMateriaPrima(valores);
-
         main.setMaximumPopulation(Integer.parseInt(indivMax1.getValue().toString()));
         iteracionesMaxima = Integer.parseInt(iteracionesMax1.getValue().toString());
         main.setMaximumAge(iteracionesMaxima);
+
         PopUpFactory.showConfirmPopUP(this, "Valores Agregados con exito");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1022,33 +1053,102 @@ public class MainPanelView extends GenericView {
         // TODO add your handling code here:
         MainPanelController main = (MainPanelController) this.getController();
         main.destroyCurrentSimulation();
+        this.playBtn.setEnabled(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void playBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playBtnMouseClicked
         // TODO add your handling code here:
-        MainPanelController main = (MainPanelController) this.getController();
-
-
-        if (!main.threadIsRunning()) {
-            try {
-                resetCharts();
-                main.startSimulation();
-            } catch (NoMateriaPrimaAddedException ex) {
-                PopUpFactory.showErrorPopUP(this, "No agresgaste materia prima para comenzar con la simulacion");
+        if (validateSubmit()) {
+            MainPanelController main = (MainPanelController) this.getController();
+            if (!main.threadIsRunning()) {
+                try {
+                    resetCharts();
+                    main.startSimulation();
+                    this.playBtn.setEnabled(false);
+                } catch (NoMateriaPrimaAddedException ex) {
+                    PopUpFactory.showErrorPopUP(this, "No agresgaste materia prima para comenzar con la simulacion");
+                }
             }
         }
 
     }//GEN-LAST:event_playBtnMouseClicked
 
+    private boolean validateSubmit() {
+        int percentage = 0;
+        try {
+            percentage += Integer.parseInt(selectorPercentage.getValue().toString());
+            percentage += Integer.parseInt(cruzaPercentage.getValue().toString());
+            percentage += Integer.parseInt(mutatorPercentage.getValue().toString());
+        } catch (NumberFormatException e) {
+            PopUpFactory.showErrorPopUP(this, "Los Campos En la seleccion de valores para operadores \n deben ser solamente numeros");
+            return false;
+        }
+
+        if (percentage > 100) {
+            PopUpFactory.showErrorPopUP(this, "La sumatoria de los Campos en la seleccion de valores para operadores \n deben superar 100");
+            return false;
+        }
+
+        boolean rankin = ranking.isSelected();
+        boolean copias = controlCopias.isSelected();
+        boolean elitista2 = elitista.isSelected();
+
+        if (!rankin && !copias && !elitista2) {
+            PopUpFactory.showErrorPopUP(this, "eliji uno");
+            return false;
+        } else if (rankin && copias && elitista2) {
+            //set initial values
+            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 45);
+            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 30);
+            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 25);
+        } else {
+            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 0);
+            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 0);
+            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 100);
+        }
+
+        boolean bino = binomial.isSelected();
+        boolean multi = multipunto.isSelected();
+
+        if (!multi && !bino) {
+            PopUpFactory.showErrorPopUP(this, "eliji uno");
+            return false;
+        } else if (multi && bino) {
+            cruzaCoverageMethods.put(CruzaManager.Cruzators.BINOMIAL, 50);
+            cruzaCoverageMethods.put(CruzaManager.Cruzators.MULTIPUNTO, 50);
+        }
+
+
+        boolean r = random.isSelected();
+        boolean z = zeroMutation.isSelected();
+        boolean a = adder.isSelected();
+        boolean m = maximizer.isSelected();
+
+        if (!r && !z && !a && !m) {
+            PopUpFactory.showErrorPopUP(this, "eliji uno");
+            return false;
+        } else if (r && z && a && m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 25);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 25);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 25);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 25);
+        }
+
+        MainPanelController main = (MainPanelController) this.getController();
+        main.setGAOperators(Integer.parseInt(selectorPercentage.getValue().toString()), Integer.parseInt(mutatorPercentage.getValue().toString()), Integer.parseInt(cruzaPercentage.getValue().toString()), mutationsCoverageMethods, selectionCoverageMethods, cruzaCoverageMethods);
+
+        return true;
+    }
+
     private void scatterPlotComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_scatterPlotComboItemStateChanged
         // TODO add your handling code here:
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 chart1.removeAll();
                 String key = scatterPlotCombo.getSelectedItem().toString();
                 chart1.add(myChartPanelS.get(key));
             }
-         });
+        });
     }//GEN-LAST:event_scatterPlotComboItemStateChanged
 
     private void linePlotterComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_linePlotterComboItemStateChanged
@@ -1059,46 +1159,48 @@ public class MainPanelView extends GenericView {
                 String key = linePlotterCombo.getSelectedItem().toString();
                 chart2.add(myChartPanelS.get(key));
             }
-         });
+        });
     }//GEN-LAST:event_linePlotterComboItemStateChanged
 
     private void scatterPlotComboPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_scatterPlotComboPropertyChange
         // TODO add your handling code here:
-       // System.out.println(this.scatterPlotCombo.getSelectedItem());
+        // System.out.println(this.scatterPlotCombo.getSelectedItem());
     }//GEN-LAST:event_scatterPlotComboPropertyChange
 
     private void linePlotterComboPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_linePlotterComboPropertyChange
         // TODO add your handling code here:
-       //  System.out.println(this.linePlotterCombo.getSelectedItem());
+        //  System.out.println(this.linePlotterCombo.getSelectedItem());
     }//GEN-LAST:event_linePlotterComboPropertyChange
 
+    private void sortDataItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortDataItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sortDataItemStateChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Metodos;
     private javax.swing.JPanel Metodos3;
     private javax.swing.JPanel Metodos4;
+    private javax.swing.JCheckBox adder;
     private javax.swing.JLabel age;
     private javax.swing.JLabel averageAptitud;
     private javax.swing.JLabel bestAptitud;
+    private javax.swing.JCheckBox binomial;
     private javax.swing.JPanel cargaDatos;
     private javax.swing.JPanel chart1;
     private javax.swing.JPanel chart2;
     private javax.swing.JPanel chartPanel;
+    private javax.swing.JCheckBox controlCopias;
+    private javax.swing.JSpinner cruzaPercentage;
+    private javax.swing.JCheckBox elitista;
     private javax.swing.JSpinner indivMax1;
     private javax.swing.JSpinner iteracionesMax1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
     private javax.swing.JCheckBox jCheckBox18;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1131,9 +1233,6 @@ public class MainPanelView extends GenericView {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner13;
-    private javax.swing.JSpinner jSpinner14;
-    private javax.swing.JSpinner jSpinner15;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JSpinner jSpinner4;
@@ -1143,23 +1242,31 @@ public class MainPanelView extends GenericView {
     private javax.swing.JSpinner jSpinner8;
     private javax.swing.JComboBox linePlotterCombo;
     private javax.swing.JPanel mainContainer;
+    private javax.swing.JCheckBox maximizer;
+    private javax.swing.JCheckBox multipunto;
+    private javax.swing.JSpinner mutatorPercentage;
     private javax.swing.JPanel operadoresGeneticos;
     private javax.swing.JButton playBtn;
     private javax.swing.JLabel population;
     private javax.swing.JPanel propertiesManager;
+    private javax.swing.JCheckBox random;
+    private javax.swing.JCheckBox ranking;
     private javax.swing.JComboBox scatterPlotCombo;
     private javax.swing.JPanel seleccionPanel;
     private javax.swing.JPanel seleccionPanel1;
     private javax.swing.JPanel seleccionPanel2;
     private javax.swing.JPanel selectChartsPanel;
+    private javax.swing.JSpinner selectorPercentage;
     private javax.swing.JPanel simlationContainer;
     private javax.swing.JPanel simlationProperties;
+    private javax.swing.JCheckBox sortData;
     private javax.swing.JPanel stadistic;
     private javax.swing.JCheckBox statics;
     private javax.swing.JTabbedPane tabPanel;
     private javax.swing.JCheckBox useChart;
     private javax.swing.JSlider velocidad;
     private javax.swing.JLabel worstAptitud;
+    private javax.swing.JCheckBox zeroMutation;
     // End of variables declaration//GEN-END:variables
 
     public JPanel getChartPanel() {
@@ -1263,7 +1370,7 @@ public class MainPanelView extends GenericView {
                 spinnersCargaDatos.add((JSpinner) component);
             }
         }
-        this.velocidad.setValue(10);
+        this.velocidad.setValue(0);
 
         myChartPanelS = new HashMap<String, ChartPanel>();
         seriesFitness = new LinkedList<XYSeries>();
@@ -1272,6 +1379,15 @@ public class MainPanelView extends GenericView {
         //set The combos
         this.scatterPlotCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{POPULATION_FITNESS, POPULATION_PROFIT}));
         this.linePlotterCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{AVERAGE_FITNESS, AVERAGE_PROFIT}));
+
+        this.playBtn.setEnabled(true);
+
+        //setting selectors
+        selectionCoverageMethods = new HashMap<SelectionManager.Selectors, Integer>();
+        //setting cruzators
+        cruzaCoverageMethods = new HashMap<CruzaManager.Cruzators, Integer>();
+        //setting mutators
+        mutationsCoverageMethods = new HashMap<MutatorManager.Mutators, Integer>();
     }
 
     private void enableStadistics() {
@@ -1293,6 +1409,9 @@ public class MainPanelView extends GenericView {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 jProgressBar1.setValue(progress);
+                if (progress == 100) {
+                    playBtn.setEnabled(true);
+                }
             }
         });
     }
@@ -1325,7 +1444,9 @@ public class MainPanelView extends GenericView {
                 try {
 
                     //sort the data
-                    //Collections.sort(data);
+                    if (sortData.isSelected()) {
+                        Collections.sort(data);
+                    }
 
                     //get the serie for the scatter plot
                     XYSeries currentAgeSerieFitness = new XYSeries("Age " + theAge);
@@ -1333,13 +1454,13 @@ public class MainPanelView extends GenericView {
 
                     Double averageFitness = 0.0;
                     Double averageProfit = 0.0;
-                    
+
                     Double bestProfit = 0.0;
-                    Double bestFitness = 0.0;
-                    
+                    Double bestFitness = Double.MAX_VALUE;
+
                     Double worstProfit = Double.MAX_VALUE;
-                    Double worstFitnes = Double.MAX_VALUE;
-                    
+                    Double worstFitnes = 0.0;
+
                     for (int i = 0; i < data.size(); i++) {
                         double myFitnessData = data.get(i).getFitnessValue();
                         double myProfitData = data.get(i).getProfit();
@@ -1349,19 +1470,19 @@ public class MainPanelView extends GenericView {
 
                         averageFitness += myFitnessData;
                         averageProfit += myProfitData;
-                        
-                        if (myFitnessData > bestFitness) {
+
+                        if (myFitnessData < bestFitness) {
                             bestFitness = myFitnessData;
                         }
-                        
+
                         if (myProfitData > bestProfit) {
                             bestProfit = myProfitData;
                         }
-                        
-                        if (myFitnessData < worstFitnes) {
+
+                        if (myFitnessData > worstFitnes) {
                             worstFitnes = myFitnessData;
                         }
-                        
+
                         if (myProfitData < worstProfit) {
                             worstProfit = myProfitData;
                         }

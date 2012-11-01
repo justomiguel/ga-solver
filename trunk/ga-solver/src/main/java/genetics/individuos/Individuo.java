@@ -1,5 +1,6 @@
 package genetics.individuos;
 
+import com.frre.cemami.utils.DefaultLogguer;
 import genetics.cromosomas.ICromosoma;
 import genetics.productos.Producto;
 import genetics.productos.exceptions.GeneticException;
@@ -70,6 +71,18 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
     @Override
     public void mutate() {
         // TODO Auto-generated method stub
+    }
+    
+    public boolean equalsTo(Individuo another){
+        int products = this.getTotalDiferrentProducts()+1;
+        for (int i = 1; i < products; i++) {
+            int productsSize = this.getProductsSize(i);
+            if (another.getProductsSize(i) != productsSize){
+                return false;
+            }
+        }
+        DefaultLogguer.getLogger().logInfo("MISMO BOLASTRACA");
+        return true;
     }
 
     @Override

@@ -6,10 +6,10 @@ package genetics.functions.managers;
 
 import com.frre.cemami.utils.DefaultLogguer;
 import com.frre.cemami.utils.MathUtils;
-import genetics.functions.mutations.AdJoinMutation;
+import genetics.functions.mutations.AddMutation;
 import genetics.functions.mutations.IMutator;
+import genetics.functions.mutations.MaxMutation;
 import genetics.functions.mutations.RandomMutation;
-import genetics.functions.mutations.SwapMutation;
 import genetics.functions.mutations.ZeroMutation;
 import genetics.individuos.Individuo;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
@@ -26,23 +26,23 @@ public class MutatorManager {
 
     public static enum Mutators {
 
-        SWAP,
-        ADJOIN,
         ZERO, 
-        RANDOM
+        RANDOM,
+        MAXIMIZER,
+        ADDER
     };
 
-    public static int DEFAULT_SURVIVORS_BY_MUTATORS_METHODS = 40;
+    public int DEFAULT_SURVIVORS_BY_MUTATORS_METHODS = 40;
     
     private HashMap<Mutators, IMutator> mutatorClasses;
     static DefaultLogguer logguer = DefaultLogguer.getLogger();
 
     public MutatorManager() {
         mutatorClasses = new HashMap<Mutators, IMutator>();
-        mutatorClasses.put(Mutators.SWAP, new SwapMutation());
-        mutatorClasses.put(Mutators.ADJOIN, new AdJoinMutation());
         mutatorClasses.put(Mutators.ZERO, new ZeroMutation());
         mutatorClasses.put(Mutators.RANDOM, new RandomMutation());
+        mutatorClasses.put(Mutators.ADDER, new AddMutation());
+        mutatorClasses.put(Mutators.MAXIMIZER, new MaxMutation());
     }
 
     public LinkedList<Individuo> doMutation(LinkedList<Individuo> poblacionOriginal, HashMap<Mutators, Integer> coverageMethods) {
@@ -70,8 +70,17 @@ public class MutatorManager {
                     int chosenOne = MathUtils.getRandomNumber(0, numberOfPopulation-1);
                     try {
                         Individuo son = mutator.doMutation(poblacionOriginal.get(chosenOne));
-                        numberOfCopiesForThisMethod--;
-                        newPopulation.add(son);
+                        boolean alreadyThere = false;
+                        for (Individuo individuo : poblacionOriginal) {
+                            if (individuo.equalsTo(son)){
+                                alreadyThere = true;
+                                break;
+                            }
+                        }
+                        if (!alreadyThere){
+                            numberOfCopiesForThisMethod--;
+                            newPopulation.add(son);
+                        }
                     }  catch (NoMateriaPrimaAddedException ex) {
                        logguer.logError(this, ex.getMessage(), ex);
                     } catch (ProductCreationException ex) {
@@ -82,5 +91,9 @@ public class MutatorManager {
         }
 
         return newPopulation;
+    }
+    
+    public void setPercentage(int percentage){
+        this.DEFAULT_SURVIVORS_BY_MUTATORS_METHODS = percentage;
     }
 }

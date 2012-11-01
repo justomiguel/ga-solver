@@ -11,7 +11,6 @@ import genetics.functions.managers.SelectionManager.Selectors;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.controllers.GenericController;
 import iapractica.controllers.MainPanelController;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -46,7 +45,7 @@ public class Poblacion extends Thread {
     private MainPanelController controller;
     //materias primas
     private LinkedList<Integer> materiasPrimas;
-    private int sleepTime = 100;
+    private int sleepTime = 10;
 
     public Poblacion(GenericController controller, LinkedList<Integer> materiasPrimas) {
         maximumAge = MAXIMUM_DEFAULT_AGE;
@@ -79,19 +78,6 @@ public class Poblacion extends Thread {
         cruzaCoverageMethods = new HashMap<Cruzators, Integer>();
         //setting mutators
         mutationsCoverageMethods = new HashMap<Mutators, Integer>();
-
-        //set initial values
-        selectionCoverageMethods.put(Selectors.RANKING_SELECTOR, 50);
-       // selectionCoverageMethods.put(Selectors.COPY_CONTROL_SELECTOR, 50);
-        selectionCoverageMethods.put(Selectors.BEST_SELECTOR, 50);
-
-        cruzaCoverageMethods.put(Cruzators.BINOMIAL, 50);
-        cruzaCoverageMethods.put(Cruzators.MULTIPUNTO, 50);
-
-        mutationsCoverageMethods.put(Mutators.RANDOM, 75);
-        mutationsCoverageMethods.put(Mutators.ZERO, 25);
-        //mutationsCoverageMethods.put(Mutators.ADJOIN, 10);
-        //mutationsCoverageMethods.put(Mutators.SWAP, 10);
 
         dataManager = new ExternalDataHandler();
     }
@@ -197,7 +183,8 @@ public class Poblacion extends Thread {
     }
 
     private void updateUIChart(int age, LinkedList<Individuo> currentPopulation) {
-        this.controller.updateChart(age, currentPopulation);
+        LinkedList<Individuo> cloneIndividuos = PoblacionFactory.getInstance().cloneInitialPopulation(currentPopulation);
+        this.controller.updateChart(age, cloneIndividuos);
     }
 
     public void updateUIProgress(int progress) {
@@ -236,9 +223,22 @@ public class Poblacion extends Thread {
 
     public void setSimulationVelocity(int value) {
         this.sleepTime = value * 10;
+        if (sleepTime == 0){
+            sleepTime = 10;
+        }
     }
 
     public void forward(int i) {
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public void setGAOperators(int selectionPercentage, int mutatorPercentage, int cruzaPercentage, HashMap<Mutators, Integer> mutationsCoverageMethods, HashMap<Selectors, Integer> selectionCoverageMethods, HashMap<Cruzators, Integer> cruzaCoverageMethods) {
+        this.mutatorManager.setPercentage(mutatorPercentage);
+        this.selectionManager.setPercentage(selectionPercentage);
+        this.cruzaManager.setPercentage(cruzaPercentage);
+        
+        this.cruzaCoverageMethods = cruzaCoverageMethods;
+        this.selectionCoverageMethods = selectionCoverageMethods;
+        this.mutationsCoverageMethods = mutationsCoverageMethods;
     }
 }
