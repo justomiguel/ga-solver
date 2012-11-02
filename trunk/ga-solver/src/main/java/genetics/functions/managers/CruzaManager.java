@@ -44,6 +44,11 @@ public class CruzaManager {
         Set<Cruzators> keys = coverageMethods.keySet();
 
         LinkedList<Individuo> newPopulation = new LinkedList<Individuo>();
+        
+        if (DEFAULT_SURVIVORS_BY_CRUZATOR_METHODS == 0){
+            return newPopulation;
+        }
+        
         int father;
         int mother;
 
