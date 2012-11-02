@@ -125,7 +125,6 @@ public class MainPanelView extends GenericView {
         elitista = new javax.swing.JCheckBox();
         ranking = new javax.swing.JCheckBox();
         controlCopias = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
         jLabel12 = new javax.swing.JLabel();
         selectorPercentage = new javax.swing.JSpinner();
         seleccionPanel1 = new javax.swing.JPanel();
@@ -134,14 +133,12 @@ public class MainPanelView extends GenericView {
         random = new javax.swing.JCheckBox();
         adder = new javax.swing.JCheckBox();
         maximizer = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
         jLabel15 = new javax.swing.JLabel();
         mutatorPercentage = new javax.swing.JSpinner();
         seleccionPanel2 = new javax.swing.JPanel();
         Metodos4 = new javax.swing.JPanel();
         binomial = new javax.swing.JCheckBox();
         multipunto = new javax.swing.JCheckBox();
-        jCheckBox18 = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
         cruzaPercentage = new javax.swing.JSpinner();
         simlationProperties = new javax.swing.JPanel();
@@ -501,16 +498,6 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
         seleccionPanel.add(Metodos, gridBagConstraints);
 
-        jCheckBox8.setText(resourceMap.getString("jCheckBox8.text")); // NOI18N
-        jCheckBox8.setName("jCheckBox8"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 68, 0, 2);
-        seleccionPanel.add(jCheckBox8, gridBagConstraints);
-
         jLabel12.setText(resourceMap.getString("jLabel12.text")); // NOI18N
         jLabel12.setName("jLabel12"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -567,16 +554,6 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(11, 0, 5, 0);
         seleccionPanel1.add(Metodos3, gridBagConstraints);
 
-        jCheckBox14.setText(resourceMap.getString("jCheckBox14.text")); // NOI18N
-        jCheckBox14.setName("jCheckBox14"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 68, 0, 2);
-        seleccionPanel1.add(jCheckBox14, gridBagConstraints);
-
         jLabel15.setText(resourceMap.getString("jLabel15.text")); // NOI18N
         jLabel15.setName("jLabel15"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -623,16 +600,6 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
         seleccionPanel2.add(Metodos4, gridBagConstraints);
-
-        jCheckBox18.setText(resourceMap.getString("jCheckBox18.text")); // NOI18N
-        jCheckBox18.setName("jCheckBox18"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 68, 0, 2);
-        seleccionPanel2.add(jCheckBox18, gridBagConstraints);
 
         jLabel16.setText(resourceMap.getString("jLabel16.text")); // NOI18N
         jLabel16.setName("jLabel16"); // NOI18N
@@ -1069,6 +1036,8 @@ public class MainPanelView extends GenericView {
                     PopUpFactory.showErrorPopUP(this, "No agresgaste materia prima para comenzar con la simulacion");
                 }
             }
+        } else {
+            this.tabPanel.setSelectedIndex(1);
         }
 
     }//GEN-LAST:event_playBtnMouseClicked
@@ -1085,7 +1054,10 @@ public class MainPanelView extends GenericView {
         }
 
         if (percentage > 100) {
-            PopUpFactory.showErrorPopUP(this, "La sumatoria de los Campos en la seleccion de valores para operadores \n deben superar 100");
+            PopUpFactory.showErrorPopUP(this, "La sumatoria de los Campos en la seleccion de valores para operadores \n no debe de superar 100");
+            return false;
+        } else if (percentage == 0){
+            PopUpFactory.showErrorPopUP(this, "La sumatoria de los Campos en la seleccion de valores para operadores \n debe de ser igual 100");
             return false;
         }
 
@@ -1093,29 +1065,65 @@ public class MainPanelView extends GenericView {
         boolean copias = controlCopias.isSelected();
         boolean elitista2 = elitista.isSelected();
 
-        if (!rankin && !copias && !elitista2) {
-            PopUpFactory.showErrorPopUP(this, "eliji uno");
+        if (!rankin && !copias && !elitista2 && Integer.parseInt(selectorPercentage.getValue().toString()) > 0) {
+            PopUpFactory.showErrorPopUP(this, "Debes elejir al menos un metodo de seleccion");
             return false;
-        } else if (rankin && copias && elitista2) {
+        } else if (!rankin && !copias && elitista2) {
             //set initial values
-            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 45);
-            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 30);
-            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 25);
-        } else {
             selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 0);
             selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 0);
             selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 100);
+        } else if (!rankin && copias && !elitista2) {
+            //set initial values
+            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 0);
+            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 0);
+            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 100);
+        } else if (!rankin && copias && elitista2) {
+            //set initial values
+            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 0);
+            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 50);
+            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 50);
+        } else if (rankin && !copias && !elitista2) {
+            //set initial values
+            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 100);
+            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 0);
+            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 0);
+        } else if (rankin && !copias && elitista2) {
+            //set initial values
+            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 50);
+            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 0);
+            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 50);
+        } else if (rankin && copias && !elitista2) {
+            //set initial values
+            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 50);
+            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 50);
+            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 0);
+        } else if (rankin && copias && elitista2){
+            //set initial values
+            selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 40);
+            selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 40);
+            selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 20);
+        } else {
+            logguer.logError("La cague en seleccion");
         }
 
         boolean bino = binomial.isSelected();
         boolean multi = multipunto.isSelected();
 
-        if (!multi && !bino) {
-            PopUpFactory.showErrorPopUP(this, "eliji uno");
+        if (!multi && !bino && Integer.parseInt(cruzaPercentage.getValue().toString()) > 0) {
+            PopUpFactory.showErrorPopUP(this, "Debes elejir al menos un metodo de Cruza");
             return false;
-        } else if (multi && bino) {
+        } else if (!multi && bino) {
+            cruzaCoverageMethods.put(CruzaManager.Cruzators.BINOMIAL, 100);
+            cruzaCoverageMethods.put(CruzaManager.Cruzators.MULTIPUNTO, 0);
+        } else if (multi && !bino) {
+            cruzaCoverageMethods.put(CruzaManager.Cruzators.BINOMIAL, 0);
+            cruzaCoverageMethods.put(CruzaManager.Cruzators.MULTIPUNTO, 100);
+        } else if (multi && bino){
             cruzaCoverageMethods.put(CruzaManager.Cruzators.BINOMIAL, 50);
             cruzaCoverageMethods.put(CruzaManager.Cruzators.MULTIPUNTO, 50);
+        } else {
+            logguer.logError("La cague en cruza");
         }
 
 
@@ -1124,14 +1132,86 @@ public class MainPanelView extends GenericView {
         boolean a = adder.isSelected();
         boolean m = maximizer.isSelected();
 
-        if (!r && !z && !a && !m) {
-            PopUpFactory.showErrorPopUP(this, "eliji uno");
+        if (!r && !z && !a && !m && Integer.parseInt(mutatorPercentage.getValue().toString()) > 0) {
+            PopUpFactory.showErrorPopUP(this, "Debes elejir al menos un metodo de Mutacion");
             return false;
+        } else if (!r && !z && !a && m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 100);
+        } else if (!r && !z && a && !m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 100);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
+        } else if (!r && !z && a && m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 50);
+        } else if (!r && z && !a && !m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 100);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
+        } else if (!r && z && !a && m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 50);
+        } else if (!r && z && a && !m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
+        } else if (!r && z && a && m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 20);
+        } else if (r && !z && !a && !m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 100);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
+        } else if (r && !z && !a && m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 50);
+        } else if (r && !z && a && !m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
+        } else if (r && !z && a && m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 20);
+        } else if (r && z && !a && !m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
+        } else if (r && z && !a && m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 20);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 40);
+        } else if (r && z && a && !m) {
+            mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 20);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
         } else if (r && z && a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 25);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 25);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 25);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 25);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 25);
+        } else {
+            logguer.logError("La cague en mutacion");
         }
 
         MainPanelController main = (MainPanelController) this.getController();
@@ -1199,9 +1279,6 @@ public class MainPanelView extends GenericView {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox18;
-    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1388,6 +1465,24 @@ public class MainPanelView extends GenericView {
         cruzaCoverageMethods = new HashMap<CruzaManager.Cruzators, Integer>();
         //setting mutators
         mutationsCoverageMethods = new HashMap<MutatorManager.Mutators, Integer>();
+        
+        this.tabPanel.setAutoscrolls(true);
+        
+        this.mutatorPercentage.setValue(20);
+        this.selectorPercentage.setValue(40);
+        this.cruzaPercentage.setValue(40);
+        
+        this.elitista.setSelected(true);
+        this.controlCopias.setSelected(true);
+        this.ranking.setSelected(true);
+        
+        this.adder.setSelected(true);
+        this.maximizer.setSelected(true);
+        this.zeroMutation.setSelected(true);
+        this.random.setSelected(true);
+        
+        this.binomial.setSelected(true);
+        this.multipunto.setSelected(true);
     }
 
     private void enableStadistics() {

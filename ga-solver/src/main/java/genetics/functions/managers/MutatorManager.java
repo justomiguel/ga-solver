@@ -51,6 +51,10 @@ public class MutatorManager {
 
         LinkedList<Individuo> newPopulation = new LinkedList<Individuo>();
 
+        if (DEFAULT_SURVIVORS_BY_MUTATORS_METHODS == 0){
+            return newPopulation;
+        }
+        
         for (Mutators mutatorMethod : keys) {
             int getCoverageOfMethod = coverageMethods.get(mutatorMethod);
             if (getCoverageOfMethod > 0) {
