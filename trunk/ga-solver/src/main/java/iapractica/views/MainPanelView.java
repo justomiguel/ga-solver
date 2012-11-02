@@ -1025,7 +1025,7 @@ public class MainPanelView extends GenericView {
         // TODO add your handling code here:
         MainPanelController main = (MainPanelController) this.getController();
         main.destroyCurrentSimulation();
-        this.playBtn.setEnabled(true);
+        this.enablePlayButton(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void playBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playBtnMouseClicked
@@ -1036,7 +1036,7 @@ public class MainPanelView extends GenericView {
                 try {
                     resetCharts();
                     main.startSimulation();
-                    this.playBtn.setEnabled(false);
+                    this.enablePlayButton(false);
                 } catch (NoMateriaPrimaAddedException ex) {
                     PopUpFactory.showErrorPopUP(this, "No agresgaste materia prima para comenzar con la simulacion");
                 }
@@ -1462,7 +1462,7 @@ public class MainPanelView extends GenericView {
         this.scatterPlotCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{POPULATION_FITNESS, POPULATION_PROFIT}));
         this.linePlotterCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{AVERAGE_FITNESS, AVERAGE_PROFIT}));
 
-        this.playBtn.setEnabled(true);
+        this.enablePlayButton(true);
 
         //setting selectors
         selectionCoverageMethods = new HashMap<SelectionManager.Selectors, Integer>();
@@ -1489,6 +1489,11 @@ public class MainPanelView extends GenericView {
         this.binomial.setSelected(true);
         this.multipunto.setSelected(true);
     }
+    
+    
+    public void enablePlayButton(boolean value){
+        
+    }
 
     private void enableStadistics() {
         boolean value = statics.isSelected();
@@ -1510,7 +1515,7 @@ public class MainPanelView extends GenericView {
             public void run() {
                 jProgressBar1.setValue(progress);
                 if (progress == 100) {
-                    playBtn.setEnabled(true);
+                    enablePlayButton(true);
                 }
             }
         });
