@@ -82,6 +82,7 @@ public class MainPanelController extends GenericController {
             this.population.setRunning(false);
             this.population.interrupt();
         }
+        this.population = null;
     }
     
     @Override

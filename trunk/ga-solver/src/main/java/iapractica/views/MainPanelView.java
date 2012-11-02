@@ -147,10 +147,10 @@ public class MainPanelView extends GenericView {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
         playBtn = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        pauseBtn = new javax.swing.JButton();
+        nextBnt = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         stadistic = new javax.swing.JPanel();
         statics = new javax.swing.JCheckBox();
@@ -689,10 +689,10 @@ public class MainPanelView extends GenericView {
         jPanel4.setName("jPanel4"); // NOI18N
         jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton6.setIcon(resourceMap.getIcon("jButton6.icon")); // NOI18N
-        jButton6.setText(resourceMap.getString("jButton6.text")); // NOI18N
-        jButton6.setName("jButton6"); // NOI18N
-        jPanel4.add(jButton6);
+        backBtn.setIcon(resourceMap.getIcon("backBtn.icon")); // NOI18N
+        backBtn.setText(resourceMap.getString("backBtn.text")); // NOI18N
+        backBtn.setName("backBtn"); // NOI18N
+        jPanel4.add(backBtn);
 
         playBtn.setIcon(resourceMap.getIcon("playBtn.icon")); // NOI18N
         playBtn.setText(resourceMap.getString("playBtn.text")); // NOI18N
@@ -709,15 +709,15 @@ public class MainPanelView extends GenericView {
         });
         jPanel4.add(playBtn);
 
-        jButton5.setIcon(resourceMap.getIcon("jButton5.icon")); // NOI18N
-        jButton5.setText(resourceMap.getString("jButton5.text")); // NOI18N
-        jButton5.setName("jButton5"); // NOI18N
-        jPanel4.add(jButton5);
+        pauseBtn.setIcon(resourceMap.getIcon("pauseBtn.icon")); // NOI18N
+        pauseBtn.setText(resourceMap.getString("pauseBtn.text")); // NOI18N
+        pauseBtn.setName("pauseBtn"); // NOI18N
+        jPanel4.add(pauseBtn);
 
-        jButton4.setIcon(resourceMap.getIcon("jButton4.icon")); // NOI18N
-        jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
-        jButton4.setName("jButton4"); // NOI18N
-        jPanel4.add(jButton4);
+        nextBnt.setIcon(resourceMap.getIcon("nextBnt.icon")); // NOI18N
+        nextBnt.setText(resourceMap.getString("nextBnt.text")); // NOI18N
+        nextBnt.setName("nextBnt"); // NOI18N
+        jPanel4.add(nextBnt);
 
         jButton3.setIcon(resourceMap.getIcon("jButton3.icon")); // NOI18N
         jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
@@ -848,6 +848,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 768;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -856,7 +857,7 @@ public class MainPanelView extends GenericView {
 
         selectChartsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("selectChartsPanel.border.title"))); // NOI18N
         selectChartsPanel.setName("selectChartsPanel"); // NOI18N
-        selectChartsPanel.setLayout(new java.awt.GridLayout());
+        selectChartsPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         scatterPlotCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         scatterPlotCombo.setName("scatterPlotCombo"); // NOI18N
@@ -929,16 +930,16 @@ public class MainPanelView extends GenericView {
         chartPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("chartPanel.border.title"))); // NOI18N
         chartPanel.setAutoscrolls(true);
         chartPanel.setName("chartPanel"); // NOI18N
-        chartPanel.setLayout(new java.awt.GridLayout());
+        chartPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         chart1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         chart1.setName("chart1"); // NOI18N
-        chart1.setLayout(new java.awt.GridLayout());
+        chart1.setLayout(new java.awt.GridLayout(1, 0));
         chartPanel.add(chart1);
 
         chart2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         chart2.setName("chart2"); // NOI18N
-        chart2.setLayout(new java.awt.GridLayout());
+        chart2.setLayout(new java.awt.GridLayout(1, 0));
         chartPanel.add(chart2);
 
         simlationContainer.add(chartPanel);
@@ -1266,6 +1267,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JCheckBox adder;
     private javax.swing.JLabel age;
     private javax.swing.JLabel averageAptitud;
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel bestAptitud;
     private javax.swing.JCheckBox binomial;
     private javax.swing.JPanel cargaDatos;
@@ -1280,9 +1282,6 @@ public class MainPanelView extends GenericView {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1326,7 +1325,9 @@ public class MainPanelView extends GenericView {
     private javax.swing.JCheckBox maximizer;
     private javax.swing.JCheckBox multipunto;
     private javax.swing.JSpinner mutatorPercentage;
+    private javax.swing.JButton nextBnt;
     private javax.swing.JPanel operadoresGeneticos;
+    private javax.swing.JButton pauseBtn;
     private javax.swing.JButton playBtn;
     private javax.swing.JLabel population;
     private javax.swing.JPanel propertiesManager;
