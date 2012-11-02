@@ -696,7 +696,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                              <GridBagConstraints gridX="0" gridY="0" gridWidth="2" gridHeight="1" fill="0" ipadX="258" ipadY="10" insetsTop="10" insetsLeft="14" insetsBottom="0" insetsRight="8" anchor="18" weightX="0.0" weightY="0.0"/>
+                              <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="112" ipadY="10" insetsTop="10" insetsLeft="14" insetsBottom="0" insetsRight="8" anchor="18" weightX="0.0" weightY="0.0"/>
                             </Constraint>
                           </Constraints>
 
@@ -707,12 +707,14 @@
                           <SubComponents>
                             <Component class="javax.swing.JButton" name="jButton6">
                               <Properties>
+                                <Property name="icon" type="javax.swing.Icon" resourceKey="jButton6.icon"/>
                                 <Property name="text" type="java.lang.String" resourceKey="jButton6.text"/>
                                 <Property name="name" type="java.lang.String" value="jButton6" noResource="true"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JButton" name="playBtn">
                               <Properties>
+                                <Property name="icon" type="javax.swing.Icon" resourceKey="playBtn.icon"/>
                                 <Property name="text" type="java.lang.String" resourceKey="playBtn.text"/>
                                 <Property name="name" type="java.lang.String" value="playBtn" noResource="true"/>
                               </Properties>
@@ -723,18 +725,21 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="jButton5">
                               <Properties>
+                                <Property name="icon" type="javax.swing.Icon" resourceKey="jButton5.icon"/>
                                 <Property name="text" type="java.lang.String" resourceKey="jButton5.text"/>
                                 <Property name="name" type="java.lang.String" value="jButton5" noResource="true"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JButton" name="jButton4">
                               <Properties>
+                                <Property name="icon" type="javax.swing.Icon" resourceKey="jButton4.icon"/>
                                 <Property name="text" type="java.lang.String" resourceKey="jButton4.text"/>
                                 <Property name="name" type="java.lang.String" value="jButton4" noResource="true"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JButton" name="jButton3">
                               <Properties>
+                                <Property name="icon" type="javax.swing.Icon" resourceKey="jButton3.icon"/>
                                 <Property name="text" type="java.lang.String" resourceKey="jButton3.text"/>
                                 <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
                               </Properties>
@@ -757,7 +762,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                              <GridBagConstraints gridX="3" gridY="0" gridWidth="5" gridHeight="3" fill="0" ipadX="40" ipadY="12" insetsTop="3" insetsLeft="0" insetsBottom="4" insetsRight="2" anchor="18" weightX="0.0" weightY="0.0"/>
+                              <GridBagConstraints gridX="3" gridY="0" gridWidth="4" gridHeight="3" fill="1" ipadX="30" ipadY="31" insetsTop="1" insetsLeft="0" insetsBottom="4" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
                             </Constraint>
                           </Constraints>
 
@@ -930,7 +935,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                              <GridBagConstraints gridX="1" gridY="4" gridWidth="7" gridHeight="1" fill="0" ipadX="571" ipadY="21" insetsTop="0" insetsLeft="13" insetsBottom="0" insetsRight="8" anchor="10" weightX="2.2" weightY="1.6"/>
+                              <GridBagConstraints gridX="0" gridY="4" gridWidth="7" gridHeight="1" fill="0" ipadX="385" ipadY="21" insetsTop="0" insetsLeft="13" insetsBottom="0" insetsRight="8" anchor="10" weightX="2.2" weightY="1.6"/>
                             </Constraint>
                           </Constraints>
 

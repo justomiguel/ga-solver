@@ -689,10 +689,12 @@ public class MainPanelView extends GenericView {
         jPanel4.setName("jPanel4"); // NOI18N
         jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
+        jButton6.setIcon(resourceMap.getIcon("jButton6.icon")); // NOI18N
         jButton6.setText(resourceMap.getString("jButton6.text")); // NOI18N
         jButton6.setName("jButton6"); // NOI18N
         jPanel4.add(jButton6);
 
+        playBtn.setIcon(resourceMap.getIcon("playBtn.icon")); // NOI18N
         playBtn.setText(resourceMap.getString("playBtn.text")); // NOI18N
         playBtn.setName("playBtn"); // NOI18N
         playBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -707,14 +709,17 @@ public class MainPanelView extends GenericView {
         });
         jPanel4.add(playBtn);
 
+        jButton5.setIcon(resourceMap.getIcon("jButton5.icon")); // NOI18N
         jButton5.setText(resourceMap.getString("jButton5.text")); // NOI18N
         jButton5.setName("jButton5"); // NOI18N
         jPanel4.add(jButton5);
 
+        jButton4.setIcon(resourceMap.getIcon("jButton4.icon")); // NOI18N
         jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
         jButton4.setName("jButton4"); // NOI18N
         jPanel4.add(jButton4);
 
+        jButton3.setIcon(resourceMap.getIcon("jButton3.icon")); // NOI18N
         jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
         jButton3.setName("jButton3"); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -727,8 +732,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 258;
+        gridBagConstraints.ipadx = 112;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 14, 0, 8);
@@ -825,12 +829,12 @@ public class MainPanelView extends GenericView {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 0, 4, 2);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 31;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 4, 0);
         simlationProperties.add(stadistic, gridBagConstraints);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel7.border.title"))); // NOI18N
@@ -906,10 +910,10 @@ public class MainPanelView extends GenericView {
         selectChartsPanel.add(linePlotterCombo);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.ipadx = 571;
+        gridBagConstraints.ipadx = 385;
         gridBagConstraints.ipady = 21;
         gridBagConstraints.weightx = 2.2;
         gridBagConstraints.weighty = 1.6;
