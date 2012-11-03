@@ -11,6 +11,7 @@ import genetics.functions.managers.SelectionManager.Selectors;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.controllers.GenericController;
 import iapractica.controllers.MainPanelController;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -134,6 +135,7 @@ public class Poblacion extends Thread {
         }
 
         //first 5
+        Collections.sort(currentPopulation);
         int five = 5;
         for (Individuo individuo : currentPopulation) {
             if (five != 0) {
