@@ -92,6 +92,7 @@ public class MainPanelController extends GenericController {
     
     public void addMateriaPrima(int[] materiasPrimas) {
         int size = materiasPrimas.length;
+        this.materiasPrimas.clear();
         for (int i = 0; i < size; i++) {
             this.materiasPrimas.add(materiasPrimas[i]);
         }
