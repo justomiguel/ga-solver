@@ -6,8 +6,8 @@ public abstract class Producto implements IGen, Cloneable {
 
     protected int[] materiasPrimas;
     protected double profitValue;
-    protected static final int[] restriccionesMin = new int[8];
-    protected static final int[] restriccionesMax = new int[8];
+    protected final int[] restriccionesMin = new int[8];
+    protected final int[] restriccionesMax = new int[8];
 
     public Producto() {
         materiasPrimas = new int[8];

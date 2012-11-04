@@ -42,19 +42,28 @@ public class PoblacionFactory {
             logguer.logInfo("Max of " + i + " " + number);
             maxQuantities.add(number);
         }
-        
+
+        int[] productos = new int[4];
+
+
+        //obtengo los productos base y sus restricciones dentro de ellos
         LinkedList<Producto> productosBase = new LinkedList<Producto>();
         for (int i = 0; i < 4; i++) {
             Producto producto = null;
             try {
-               producto = ProductosFactory.getProducto(i+1);
-            } catch (ProductCreationException ex) {
+                producto = ProductosFactory.getProducto(i + 1);
+            }
+            catch (ProductCreationException ex) {
             }
             productosBase.add(producto);
         }
 
-
-        int[] productos = new int[4];
+        //armo una lista donde voy a guardar las configuraciones por producto
+        LinkedList<LinkedList<Integer>> materiaPrima = new LinkedList<LinkedList<Integer>>();
+        for (int i = 0; i < 4; i++) {
+            LinkedList<Integer> linkedList = new LinkedList<Integer>();
+            materiaPrima.add(linkedList);
+        }
 
         Random r = new Random();
         int currentSize = 0;
@@ -63,6 +72,19 @@ public class PoblacionFactory {
             productos[1] = getProductSize(1, maxQuantities, r);
             productos[2] = getProductSize(2, maxQuantities, r);
             productos[3] = getProductSize(3, maxQuantities, r);
+
+            for (int i = 0; i < productos.length; i++) {
+                int j = productos[i];
+                if (j > 0) {
+                    for (int k = 0; k < 8; k++) {
+                        Producto theProduct = productosBase.get(i);
+                        int restriccionMinima = theProduct.getRestriccionesMin()[k];
+                        int restriccionMaxima = theProduct.getRestriccionesMax()[k];
+                        materiaPrima.get(i).add(k, MathUtils.getRandomNumber(restriccionMinima, restriccionMaxima));
+                    }
+                }
+            }
+
             try {
                 Individuo individuo = IndividuosFactory.getInstance().createIndividuo(productos);
                 boolean alreadyThere = false;

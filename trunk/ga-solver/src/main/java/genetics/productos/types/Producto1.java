@@ -4,7 +4,7 @@ import genetics.productos.Producto;
 
 public class Producto1 extends Producto {
 	
-	static {
+	 {
 		restriccionesMin[0] = 80;
 		restriccionesMin[1] = 0;
 		restriccionesMin[2] = 44;
@@ -15,7 +15,7 @@ public class Producto1 extends Producto {
 		restriccionesMin[7] = 0;
 	}
         
-        static {
+         {
 		restriccionesMax[0] = 95;
 		restriccionesMax[1] = 0;
 		restriccionesMax[2] = 65;
