@@ -12,6 +12,7 @@ import genetics.individuos.Poblacion;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.drawers.DataDrawer;
 import iapractica.views.MainPanelView;
+import iapractica.views.ResultsView;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -131,6 +132,12 @@ public class MainPanelController extends GenericController {
         this.cruzaCoverageMethods = cruzaCoverageMethods;
         this.selectionCoverageMethods = selectionCoverageMethods;
         this.mutationsCoverageMethods = mutationsCoverageMethods;
+    }
+
+    public void showLastScreen(LinkedList<Individuo> currentPopulation) {
+        ResultsView view = new ResultsView();
+        view.setViewContents(currentPopulation);
+        view.setVisible(true);
     }
 
 }

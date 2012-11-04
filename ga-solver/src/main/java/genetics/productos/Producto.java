@@ -6,7 +6,8 @@ public abstract class Producto implements IGen, Cloneable {
 
     protected int[] materiasPrimas;
     protected double profitValue;
-    protected static final int[] restricciones = new int[8];
+    protected static final int[] restriccionesMin = new int[8];
+    protected static final int[] restriccionesMax = new int[8];
 
     public Producto() {
         materiasPrimas = new int[8];
@@ -20,10 +21,6 @@ public abstract class Producto implements IGen, Cloneable {
         this.materiasPrimas = materiasPrimas;
     }
 
-    public int[] getRestricciones() {
-        return restricciones;
-    }
-
     public double getProfitValue() {
         return profitValue;
     }
@@ -35,6 +32,14 @@ public abstract class Producto implements IGen, Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    public int[] getRestriccionesMin() {
+        return restriccionesMin;
+    }
+
+    public int[] getRestriccionesMax() {
+        return restriccionesMax;
     }
 
 

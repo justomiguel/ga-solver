@@ -2,10 +2,14 @@ package genetics.individuos;
 
 import com.frre.cemami.utils.DefaultLogguer;
 import com.frre.cemami.utils.MathUtils;
+import genetics.productos.Producto;
+import genetics.productos.ProductosFactory;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import genetics.productos.exceptions.ProductCreationException;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PoblacionFactory {
 
@@ -37,6 +41,16 @@ public class PoblacionFactory {
             int number = IndividuosFactory.getInstance().maxQuantityOfProductToBeCreated(i + 1);
             logguer.logInfo("Max of " + i + " " + number);
             maxQuantities.add(number);
+        }
+        
+        LinkedList<Producto> productosBase = new LinkedList<Producto>();
+        for (int i = 0; i < 4; i++) {
+            Producto producto = null;
+            try {
+               producto = ProductosFactory.getProducto(i+1);
+            } catch (ProductCreationException ex) {
+            }
+            productosBase.add(producto);
         }
 
 
@@ -91,13 +105,13 @@ public class PoblacionFactory {
     private int getProductSize(int productNumber, LinkedList<Integer> maxQuantities, Random r) {
         double number = r.nextDouble();
         if (number < 0.25) {
-            return MathUtils.getRandomNumber(0, maxQuantities.get(productNumber));
+            return maxQuantities.get(productNumber);
         } else if (number < 0.50) {
             return MathUtils.getRandomNumber(0, maxQuantities.get(productNumber) / 2);
         } else if (number < 0.75) {
             return MathUtils.getRandomNumber(maxQuantities.get(productNumber) / 2, maxQuantities.get(productNumber));
         } else {
-            return MathUtils.getRandomNumber(0, 1);
+            return 0;
         }
     }
 }
