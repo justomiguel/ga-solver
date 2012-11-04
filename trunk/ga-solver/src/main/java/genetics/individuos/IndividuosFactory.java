@@ -32,7 +32,7 @@ public class IndividuosFactory {
     }
 
     @SuppressWarnings("unchecked")
-    public Individuo createIndividuo(int[] productos) throws ProductCreationException, NoMateriaPrimaAddedException {
+    public Individuo createIndividuo(int[] productos, int[] materiaPrima) throws ProductCreationException, NoMateriaPrimaAddedException {
 
         Individuo individuo = new Individuo();
         if (materiasPrimas.isEmpty()) {
@@ -40,20 +40,33 @@ public class IndividuosFactory {
         }
         LinkedList<Integer> materiasPrimasClone = (LinkedList<Integer>) materiasPrimas.clone();
 
+        LinkedList<LinkedList<Producto>> bestProduction = new LinkedList<LinkedList<Producto>>();
+        for (int i = 0; i < 4; i++) {
+            bestProduction.add(new LinkedList<Producto>());
+        }
+
         for (int i = 0; i < productos.length; i++) {
             int quantityOfProduct = productos[i];
             while (quantityOfProduct > 0) {
                 Producto producto = ProductosFactory.getProducto(i + 1);
-                int[] restriccionesProducto = producto.getRestricciones();
-                for (int j = 0; j < restriccionesProducto.length; j++) {
-                    int montoMateriaPrimaMinimo = restriccionesProducto[j];
-                    int materiaPrimaDisponible = materiasPrimasClone.get(j);
-                    materiaPrimaDisponible = materiaPrimaDisponible - montoMateriaPrimaMinimo;
-                    if (materiaPrimaDisponible < 0) {
-                        String errorDesc = "No hay suficiente materia prima para esta configuracion";
-                        throw new ProductCreationException(errorDesc);
+                int[] restriccionesMaxProducto = producto.getRestriccionesMax();
+                int[] restriccionesMinProducto = producto.getRestriccionesMin();
+                for (int j = 0; j < restriccionesMinProducto.length; j++) {
+                    int montoMateriaPrimaMinimo = restriccionesMinProducto[j];
+                    int montoMateriaPrimaMaximo = restriccionesMaxProducto[j];
+                    int montoMateriaPrimaAUsar = materiaPrima[j];
+                    if (montoMateriaPrimaAUsar >= montoMateriaPrimaMinimo && montoMateriaPrimaAUsar <= montoMateriaPrimaMaximo) {
+                        int materiaPrimaDisponible = materiasPrimasClone.get(j);
+                        materiaPrimaDisponible = materiaPrimaDisponible - montoMateriaPrimaAUsar;
+                        if (materiaPrimaDisponible < 0) {
+                            String errorDesc = "No hay suficiente materia prima para esta configuracion";
+                            throw new ProductCreationException(errorDesc);
+                        } else {
+                            materiasPrimasClone.set(j, materiaPrimaDisponible);
+                        }
                     } else {
-                        materiasPrimasClone.set(j, materiaPrimaDisponible);
+                        String errorDesc = "Materia Prima Incorrecta";
+                        throw new ProductCreationException(errorDesc);
                     }
                 }
                 quantityOfProduct--;
@@ -62,8 +75,8 @@ public class IndividuosFactory {
         }
         double fitnessValue = FitnessFunction.getFitnessValue(individuo);
         individuo.setFitnessValue(fitnessValue);
-        if (individuo.getProfit() == 0){
-             throw new ProductCreationException("No permito insectos");
+        if (individuo.getProfit() == 0) {
+            throw new ProductCreationException("No permito insectos");
         }
         return individuo;
     }
@@ -92,7 +105,7 @@ public class IndividuosFactory {
             }
             try {
                 Producto producto = ProductosFactory.getProducto(product);
-                int[] restricciones = producto.getRestricciones();
+                int[] restricciones = producto.getRestriccionesMin();
                 LinkedList<Integer> materiasPrimasClone = (LinkedList<Integer>) materiasPrimas.clone();
                 number = Integer.MAX_VALUE;
                 for (int i = 0; i < restricciones.length; i++) {
@@ -105,15 +118,16 @@ public class IndividuosFactory {
                         }
                     }
                 }
-            } catch (ProductCreationException ex) {
+            }
+            catch (ProductCreationException ex) {
                 logguer.logError(this, "Error when creating product", ex);
             }
             maxQuantitiesOfProduct.put(product, number);
         }
         return number;
     }
-    
-    public void clearMateriasPrimas(){
+
+    public void clearMateriasPrimas() {
         this.maxQuantitiesOfProduct.clear();
     }
 }

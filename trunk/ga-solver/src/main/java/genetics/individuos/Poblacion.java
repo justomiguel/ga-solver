@@ -137,24 +137,20 @@ public final class Poblacion extends Thread {
                 }
             }
         }
-
-        //first 5
-        Collections.sort(currentPopulation);
-        int five = 5;
-        for (Individuo individuo : currentPopulation) {
-            if (five != 0) {
-                logguer.logInfo(individuo.toString());
-                five--;
-            }
-        }
-
+        
         running = false;
 
         this.updateUIProgress(100);
+        
+        this.showLastScreen();
     }
 
     public int getAge() {
         return age;
+    }
+
+    public LinkedList<Individuo> getCurrentPopulation() {
+        return currentPopulation;
     }
 
     public void setAge(int age) {
@@ -259,5 +255,19 @@ public final class Poblacion extends Thread {
         //update The progress bar
         int percetageOfSucces = age * 100 / maximumAge;
         this.updateUIProgress(50 + percetageOfSucces * 50 / 100);
+    }
+
+    private void showLastScreen() {
+        //first 5
+        Collections.sort(currentPopulation);
+        int five = 5;
+        for (Individuo individuo : currentPopulation) {
+            if (five != 0) {
+                logguer.logInfo(individuo.toString());
+                five--;
+            }
+        }
+
+        this.controller.showLastScreen(currentPopulation);
     }
 }
