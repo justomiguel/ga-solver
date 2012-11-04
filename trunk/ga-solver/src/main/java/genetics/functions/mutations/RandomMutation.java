@@ -39,7 +39,7 @@ public class RandomMutation implements IMutator {
         for (int i = 0; i < totalProducts; i++) {
             int productsSize = 0;
             if (genNumber1 == i){
-                productsSize = MathUtils.getRandomNumber(0, maxQuantities.get(i));
+                productsSize = MathUtils.getRandomNumber(0, maxQuantities.get(i)/2);
             } else {
                 productsSize = individuo.getProductsSize(i+1);
             }
