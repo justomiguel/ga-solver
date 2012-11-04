@@ -118,7 +118,7 @@ public class Poblacion extends Thread {
 
         while (running && age < maximumAge) {
             if (!inPause) {
-                dataManager.saveToExternalFile(age, currentPopulation);
+                //dataManager.saveToExternalFile(age, currentPopulation);
                 evolve();
                 updateUIChart(age, currentPopulation);
 

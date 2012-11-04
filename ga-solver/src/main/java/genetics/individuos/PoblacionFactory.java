@@ -27,6 +27,10 @@ public class PoblacionFactory {
 
         IndividuosFactory.getInstance().setMateriasPrimas(materiasPrimas);
         
+        //ass= this is the first step when creating a population I clear the materias primas collection
+        //to get the new numbers 
+        IndividuosFactory.getInstance().clearMateriasPrimas();
+        
         LinkedList<Integer> maxQuantities = new LinkedList<Integer>();
         for (int i = 0; i < 4; i++) {
             int number = IndividuosFactory.getInstance().maxQuantityOfProductToBeCreated(i+1);

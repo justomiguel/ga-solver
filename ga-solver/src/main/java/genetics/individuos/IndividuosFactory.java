@@ -112,4 +112,8 @@ public class IndividuosFactory {
         }
         return number;
     }
+    
+    public void clearMateriasPrimas(){
+        this.maxQuantitiesOfProduct.clear();
+    }
 }
