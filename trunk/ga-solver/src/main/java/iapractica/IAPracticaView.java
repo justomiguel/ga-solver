@@ -25,6 +25,7 @@ public class IAPracticaView extends FrameView {
     public IAPracticaView(SingleFrameApplication app) {
         super(app);
 
+       // this.getFrame().setTitle("GA-SOLVER - INTELIGENCIA ARTIFICIAL - UTN FRRe - 2012");
         initComponents();
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
