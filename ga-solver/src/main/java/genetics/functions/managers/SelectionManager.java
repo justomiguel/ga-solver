@@ -10,6 +10,7 @@ import genetics.functions.selection.CopyControlSelector;
 import genetics.functions.selection.ISelector;
 import genetics.functions.selection.RankingSelector;
 import genetics.individuos.Individuo;
+import genetics.individuos.PoblacionFactory;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -25,7 +26,7 @@ public class SelectionManager {
 
         RANKING_SELECTOR, COPY_CONTROL_SELECTOR, BEST_SELECTOR
     };
-    public int DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS = 20;
+    public double DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS = 20.0;
     private HashMap<Selectors, ISelector> selectorClasses;
     static DefaultLogguer logguer = DefaultLogguer.getLogger();
 
@@ -51,7 +52,7 @@ public class SelectionManager {
             if (getCoverageOfMethod > 0) {
                 ISelector selector = selectorClasses.get(selectorMethod);
                 //hay que ver si necesito clonarlos posta
-                //LinkedList<Individuo> cloneIndividuos = PoblacionFactory.getInstance().cloneInitialPopulation(poblacionOriginal);
+                LinkedList<Individuo> cloneIndividuos = PoblacionFactory.getInstance().cloneInitialPopulation(poblacionOriginal);
                 newPopulation.addAll(selector.doSelection(poblacionOriginal, getCoverageOfMethod, this.DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS));
             }
         }

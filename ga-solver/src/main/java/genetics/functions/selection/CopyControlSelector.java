@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class CopyControlSelector implements ISelector {
 
-    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, int selectionMethodCoverage, int survivors) {
+    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, double selectionMethodCoverage, double survivors) {
 
         LinkedList<Individuo> newPopulation = new LinkedList<Individuo>();
 
@@ -33,7 +33,7 @@ public class CopyControlSelector implements ISelector {
             individuosAverage[i] = poblacion.get(i).getFitnessValue() / average;
         }
 
-        int numberOfCopies = (selectionMethodCoverage*survivors/100) * size / 100;
+        double numberOfCopies = (selectionMethodCoverage*survivors/100) * size / 100;
         for (int i = 0; i < size; i++) {
             Double number = individuosAverage[i];
             int numberOfIndToBeCopied = number.intValue();
