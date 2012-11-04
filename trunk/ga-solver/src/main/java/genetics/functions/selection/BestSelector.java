@@ -5,7 +5,6 @@
 
 package genetics.functions.selection;
 
-import genetics.functions.managers.SelectionManager;
 import genetics.individuos.Individuo;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -16,13 +15,13 @@ import java.util.LinkedList;
  */
 public class BestSelector implements ISelector {
 
-    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, int selectionMethodCoverage, int survivors) {
+    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, double selectionMethodCoverage, double survivors) {
         LinkedList<Individuo> newPopulation = new LinkedList<Individuo>();
-        int size = poblacion.size();
+        double size = poblacion.size();
 
         Collections.sort(poblacion);
 
-        int numberOfCopies = (selectionMethodCoverage*survivors/100) * size / 100;
+        double numberOfCopies = (selectionMethodCoverage*survivors/100) * size / 100;
         for (int i = 0; i < numberOfCopies; i++) {
             newPopulation.add(poblacion.get(i));
         }

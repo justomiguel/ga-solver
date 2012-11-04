@@ -32,7 +32,7 @@ public class MutatorManager {
         ADDER
     };
 
-    public int DEFAULT_SURVIVORS_BY_MUTATORS_METHODS = 40;
+    public double DEFAULT_SURVIVORS_BY_MUTATORS_METHODS = 40;
     
     private HashMap<Mutators, IMutator> mutatorClasses;
     static DefaultLogguer logguer = DefaultLogguer.getLogger();
@@ -56,7 +56,7 @@ public class MutatorManager {
         }
         
         for (Mutators mutatorMethod : keys) {
-            int getCoverageOfMethod = coverageMethods.get(mutatorMethod);
+            double getCoverageOfMethod = coverageMethods.get(mutatorMethod);
             if (getCoverageOfMethod > 0) {
                 IMutator mutator = mutatorClasses.get(mutatorMethod);
 
@@ -64,10 +64,10 @@ public class MutatorManager {
                 int numberOfPopulation = poblacionOriginal.size();
 
                 // porcentage a pasar por este metodo
-                int percentageOfCopiesToBeGeneratedByThisMethod = getCoverageOfMethod * DEFAULT_SURVIVORS_BY_MUTATORS_METHODS / 100;
+                double percentageOfCopiesToBeGeneratedByThisMethod = getCoverageOfMethod * DEFAULT_SURVIVORS_BY_MUTATORS_METHODS / 100;
 
                 // total de copias de acuerdo al porcentaje anterior
-                int numberOfCopiesForThisMethod = percentageOfCopiesToBeGeneratedByThisMethod * numberOfPopulation / 100;
+                double numberOfCopiesForThisMethod = percentageOfCopiesToBeGeneratedByThisMethod * numberOfPopulation / 100;
 
                 // genero las individuos que necesito
                 while (numberOfCopiesForThisMethod > 0) {

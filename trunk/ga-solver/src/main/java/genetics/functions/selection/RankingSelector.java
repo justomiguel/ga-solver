@@ -17,7 +17,7 @@ public class RankingSelector implements ISelector {
 
     protected Random random = new Random();
 
-    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, int selectionMethodCoverage, int survivors) {
+    public LinkedList<Individuo> doSelection(LinkedList<Individuo> poblacion, double selectionMethodCoverage, double survivors) {
         
         LinkedList<Individuo> newPopulation = new LinkedList<Individuo>();
 
@@ -34,7 +34,7 @@ public class RankingSelector implements ISelector {
                 copiesNumber[i] = indCopiesToBeSelected;
             }
 
-            int localSurvivors = ((selectionMethodCoverage*survivors/100) * populationSize) / 100;
+            double localSurvivors = ((selectionMethodCoverage*survivors/100) * populationSize) / 100;
 
             for (int i = 0; i < copiesNumber.length; i++) {
                 Double copiesNumberOfInd = copiesNumber[i];
