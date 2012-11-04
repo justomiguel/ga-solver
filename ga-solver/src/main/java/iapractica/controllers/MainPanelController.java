@@ -66,15 +66,11 @@ public class MainPanelController extends GenericController {
     }
     
     public void getBackOneAge() {
-        population.rewind(1);
+        population.rewind();
     }
     
     public void forwardOneAge() {
-        population.forward(1);
-    }
-    
-    public void stopSimulation() {
-        population.rewind(-1);
+        population.forward();
     }
     
     public void destroyCurrentSimulation() {

@@ -23,6 +23,7 @@ import java.awt.Component;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import org.jfree.chart.ChartFactory;
@@ -67,6 +68,7 @@ public class MainPanelView extends GenericView {
     private static final String POPULATION_FITNESS = "Soluciones Por Valor de Aptitud";
     private static final String AVERAGE_FITNESS = "Promedio Por Valor de Aptitud";
     private static final String AVERAGE_PROFIT = "Promedio Por Valor de Ganancia";
+    private boolean inPauseStatus = false;
 
     /**
      * Creates new form MainPanel
@@ -692,6 +694,11 @@ public class MainPanelView extends GenericView {
         backBtn.setIcon(resourceMap.getIcon("backBtn.icon")); // NOI18N
         backBtn.setText(resourceMap.getString("backBtn.text")); // NOI18N
         backBtn.setName("backBtn"); // NOI18N
+        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backBtnMouseClicked(evt);
+            }
+        });
         jPanel4.add(backBtn);
 
         playBtn.setIcon(resourceMap.getIcon("playBtn.icon")); // NOI18N
@@ -712,11 +719,24 @@ public class MainPanelView extends GenericView {
         pauseBtn.setIcon(resourceMap.getIcon("pauseBtn.icon")); // NOI18N
         pauseBtn.setText(resourceMap.getString("pauseBtn.text")); // NOI18N
         pauseBtn.setName("pauseBtn"); // NOI18N
+        pauseBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                pauseBtnMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pauseBtnMouseClicked(evt);
+            }
+        });
         jPanel4.add(pauseBtn);
 
         nextBnt.setIcon(resourceMap.getIcon("nextBnt.icon")); // NOI18N
         nextBnt.setText(resourceMap.getString("nextBnt.text")); // NOI18N
         nextBnt.setName("nextBnt"); // NOI18N
+        nextBnt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextBntMouseClicked(evt);
+            }
+        });
         jPanel4.add(nextBnt);
 
         jButton3.setIcon(resourceMap.getIcon("jButton3.icon")); // NOI18N
@@ -970,7 +990,8 @@ public class MainPanelView extends GenericView {
                     int pos = Integer.parseInt(name);
                     valores[pos - 1] = value;
                 }
-            } catch (NumberFormatException e) {
+            }
+            catch (NumberFormatException e) {
                 PopUpFactory.showErrorPopUP(this, "Los Campos deben ser solamente numeros");
                 return;
             }
@@ -1037,7 +1058,8 @@ public class MainPanelView extends GenericView {
                     resetCharts();
                     main.startSimulation();
                     this.enablePlayButton(false);
-                } catch (NoMateriaPrimaAddedException ex) {
+                }
+                catch (NoMateriaPrimaAddedException ex) {
                     PopUpFactory.showErrorPopUP(this, "No agresgaste materia prima para comenzar con la simulacion");
                 }
             }
@@ -1053,7 +1075,8 @@ public class MainPanelView extends GenericView {
             percentage += Integer.parseInt(selectorPercentage.getValue().toString());
             percentage += Integer.parseInt(cruzaPercentage.getValue().toString());
             percentage += Integer.parseInt(mutatorPercentage.getValue().toString());
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException e) {
             PopUpFactory.showErrorPopUP(this, "Los Campos En la seleccion de valores para operadores \n deben ser solamente numeros");
             return false;
         }
@@ -1061,7 +1084,7 @@ public class MainPanelView extends GenericView {
         if (percentage > 100) {
             PopUpFactory.showErrorPopUP(this, "La sumatoria de los Campos en la seleccion de valores para operadores \n no debe de superar 100");
             return false;
-        } else if (percentage == 0){
+        } else if (percentage == 0) {
             PopUpFactory.showErrorPopUP(this, "La sumatoria de los Campos en la seleccion de valores para operadores \n debe de ser igual 100");
             return false;
         }
@@ -1103,7 +1126,7 @@ public class MainPanelView extends GenericView {
             selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 50);
             selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 50);
             selectionCoverageMethods.put(SelectionManager.Selectors.BEST_SELECTOR, 0);
-        } else if (rankin && copias && elitista2){
+        } else if (rankin && copias && elitista2) {
             //set initial values
             selectionCoverageMethods.put(SelectionManager.Selectors.RANKING_SELECTOR, 40);
             selectionCoverageMethods.put(SelectionManager.Selectors.COPY_CONTROL_SELECTOR, 40);
@@ -1124,7 +1147,7 @@ public class MainPanelView extends GenericView {
         } else if (multi && !bino) {
             cruzaCoverageMethods.put(CruzaManager.Cruzators.BINOMIAL, 0);
             cruzaCoverageMethods.put(CruzaManager.Cruzators.MULTIPUNTO, 100);
-        } else if (multi && bino){
+        } else if (multi && bino) {
             cruzaCoverageMethods.put(CruzaManager.Cruzators.BINOMIAL, 50);
             cruzaCoverageMethods.put(CruzaManager.Cruzators.MULTIPUNTO, 50);
         } else {
@@ -1228,6 +1251,7 @@ public class MainPanelView extends GenericView {
     private void scatterPlotComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_scatterPlotComboItemStateChanged
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 chart1.removeAll();
                 String key = scatterPlotCombo.getSelectedItem().toString();
@@ -1239,6 +1263,7 @@ public class MainPanelView extends GenericView {
     private void linePlotterComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_linePlotterComboItemStateChanged
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 chart2.removeAll();
                 String key = linePlotterCombo.getSelectedItem().toString();
@@ -1260,6 +1285,50 @@ public class MainPanelView extends GenericView {
     private void sortDataItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortDataItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_sortDataItemStateChanged
+
+    private void pauseBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pauseBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pauseBtnMouseClicked
+
+    private void pauseBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pauseBtnMouseReleased
+        // TODO add your handling code here:
+        inPauseStatus = !inPauseStatus;
+        this.nextBnt.setEnabled(inPauseStatus);
+        this.backBtn.setEnabled(inPauseStatus);
+        MainPanelController main = (MainPanelController) this.getController();
+        main.pauseSimulation(inPauseStatus);
+    }//GEN-LAST:event_pauseBtnMouseReleased
+
+    private void nextBntMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextBntMouseClicked
+        // TODO add your handling code here:
+        if (inPauseStatus) {
+            MainPanelController main = (MainPanelController) this.getController();
+            main.forwardOneAge();
+        }
+    }//GEN-LAST:event_nextBntMouseClicked
+
+    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
+        // TODO add your handling code here:
+        if (inPauseStatus) {
+                backBtn.setEnabled(false);
+                MainPanelController main = (MainPanelController) this.getController();
+
+                for (XYSeries series : seriesProfit) {
+                    if (series.getItemCount() > 0){
+                        series.remove(series.getItemCount()-1);
+                    }
+                }
+                
+                for (XYSeries series : seriesFitness) {
+                    if (series.getItemCount() > 0){
+                        series.remove(series.getItemCount()-1);
+                    }
+                }
+                
+                main.getBackOneAge();
+        }
+
+    }//GEN-LAST:event_backBtnMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Metodos;
     private javax.swing.JPanel Metodos3;
@@ -1355,9 +1424,8 @@ public class MainPanelView extends GenericView {
         return chartPanel;
     }
 
-    public void addPanel(JPanel panel) {
-        this.chartPanel.add(panel);
-        this.pack();
+    public void permitGoBack(boolean value) {
+        this.backBtn.setEnabled(value);
     }
 
     @Override
@@ -1380,10 +1448,13 @@ public class MainPanelView extends GenericView {
         myChartPanelS.put(AVERAGE_FITNESS, createLineChartPanel(AVERAGE_FITNESS, "Individuos", "Fitness", jfreeChartXYLinePLotFitness, xySeriesCollectionLineXYFitnessPlot));
 
 
-        this.chart1.add(myChartPanelS.get(POPULATION_FITNESS));
-        //this.chart1.add(myChartPanelS.get(POPULATION_PROFIT));
-        //this.chart2.add(myChartPanelS.get(AVERAGE_PROFIT));
-        this.chart2.add(myChartPanelS.get(AVERAGE_FITNESS));
+        //this.chart1.add(myChartPanelS.get(POPULATION_FITNESS));
+        this.chart1.add(myChartPanelS.get(POPULATION_PROFIT));
+        this.chart2.add(myChartPanelS.get(AVERAGE_PROFIT));
+        //this.chart2.add(myChartPanelS.get(AVERAGE_FITNESS));
+
+        this.scatterPlotCombo.setSelectedItem(POPULATION_PROFIT);
+        this.linePlotterCombo.setSelectedItem(AVERAGE_PROFIT);
     }
 
     private ChartPanel createChartPanel(String title, String x, String y, JFreeChart thePlot, XYSeriesCollection myPlot) {
@@ -1470,29 +1541,33 @@ public class MainPanelView extends GenericView {
         cruzaCoverageMethods = new HashMap<CruzaManager.Cruzators, Integer>();
         //setting mutators
         mutationsCoverageMethods = new HashMap<MutatorManager.Mutators, Integer>();
-        
+
         this.tabPanel.setAutoscrolls(true);
-        
+
         this.mutatorPercentage.setValue(20);
         this.selectorPercentage.setValue(40);
         this.cruzaPercentage.setValue(40);
-        
+
         this.elitista.setSelected(true);
         this.controlCopias.setSelected(true);
         this.ranking.setSelected(true);
-        
+
         this.adder.setSelected(true);
         this.maximizer.setSelected(true);
         this.zeroMutation.setSelected(true);
         this.random.setSelected(true);
-        
+
         this.binomial.setSelected(true);
         this.multipunto.setSelected(true);
-    }
-    
-    
-    public void enablePlayButton(boolean value){
         
+                this.backBtn.setEnabled(false);
+        this.nextBnt.setEnabled(false);
+    }
+
+    public void enablePlayButton(boolean value) {
+        this.playBtn.setEnabled(value);
+        inPauseStatus = !value;
+        this.pauseBtn.setEnabled(!value);
     }
 
     private void enableStadistics() {
@@ -1501,7 +1576,7 @@ public class MainPanelView extends GenericView {
         for (int i = 0; i < comps.length; i++) {
             Component component = comps[i];
             if (component instanceof JPanel) {
-                Component[] labels = ((JPanel) component).getComponents();
+                Component[] labels = ( (JPanel) component ).getComponents();
                 for (int j = 0; j < labels.length; j++) {
                     Component currentLabel = labels[j];
                     currentLabel.setEnabled(value);
@@ -1512,6 +1587,7 @@ public class MainPanelView extends GenericView {
 
     public void updateProgress(final int progress) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 jProgressBar1.setValue(progress);
                 if (progress == 100) {
@@ -1523,6 +1599,7 @@ public class MainPanelView extends GenericView {
 
     public void resetCharts() {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 xySeriesCollectionLineXYFitnessPlot.removeAllSeries();
                 xySeriesCollectionLineXYProfitPlot.removeAllSeries();
@@ -1539,12 +1616,14 @@ public class MainPanelView extends GenericView {
                     xYSeries.clear();
                     xySeriesCollectionLineXYFitnessPlot.addSeries(xYSeries);
                 }
+
             }
         });
     }
 
     public void updateChart(final int theAge, final LinkedList<Individuo> data) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
 
@@ -1610,7 +1689,7 @@ public class MainPanelView extends GenericView {
                         String promedio = averageFitness.toString();
 
                         int hasDot = promedio.indexOf(".");
-                        if ((hasDot > 0) && (promedio.length() > hasDot + 3)) {
+                        if (( hasDot > 0 ) && ( promedio.length() > hasDot + 3 )) {
                             promedio = promedio.substring(0, hasDot + 3);
                         }
 
@@ -1632,7 +1711,8 @@ public class MainPanelView extends GenericView {
                         updateScatterPlot(xySeriesCollectionScatterProfitPlot, currentAgeSerieProfit);
                     }
 
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     logguer.logError(e.getClass(), e.getMessage());
                 }
             }
@@ -1644,5 +1724,6 @@ public class MainPanelView extends GenericView {
                 container.addSeries(series);
             }
         });
+        backBtn.setEnabled(true);
     }
 }

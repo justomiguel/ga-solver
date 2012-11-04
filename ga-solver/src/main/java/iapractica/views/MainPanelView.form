@@ -711,6 +711,9 @@
                                 <Property name="text" type="java.lang.String" resourceKey="backBtn.text"/>
                                 <Property name="name" type="java.lang.String" value="backBtn" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backBtnMouseClicked"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="playBtn">
                               <Properties>
@@ -729,6 +732,10 @@
                                 <Property name="text" type="java.lang.String" resourceKey="pauseBtn.text"/>
                                 <Property name="name" type="java.lang.String" value="pauseBtn" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pauseBtnMouseReleased"/>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pauseBtnMouseClicked"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="nextBnt">
                               <Properties>
@@ -736,6 +743,9 @@
                                 <Property name="text" type="java.lang.String" resourceKey="nextBnt.text"/>
                                 <Property name="name" type="java.lang.String" value="nextBnt" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nextBntMouseClicked"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="jButton3">
                               <Properties>

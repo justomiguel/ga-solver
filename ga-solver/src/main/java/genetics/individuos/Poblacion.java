@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Poblacion extends Thread {
+public final class Poblacion extends Thread {
 
     static DefaultLogguer logguer = DefaultLogguer.getLogger();
     private static final int MAXIMUM_DEFAULT_AGE = 600;
@@ -46,7 +46,7 @@ public class Poblacion extends Thread {
     private MainPanelController controller;
     //materias primas
     private LinkedList<Integer> materiasPrimas;
-    private int sleepTime = 10;
+    private int sleepTime = 0;
 
     public Poblacion(GenericController controller, LinkedList<Integer> materiasPrimas) {
         maximumAge = MAXIMUM_DEFAULT_AGE;
@@ -102,7 +102,8 @@ public class Poblacion extends Thread {
         this.updateUIProgress(5);
         try {
             currentPopulation = PoblacionFactory.getInstance().createInitialRandomPopulation(this, maximumPopulation, materiasPrimas);
-        } catch (NoMateriaPrimaAddedException ex) {
+        }
+        catch (NoMateriaPrimaAddedException ex) {
             logguer.logError(this, ex.getMessage(), ex);
         }
 
@@ -118,17 +119,20 @@ public class Poblacion extends Thread {
 
         while (running && age < maximumAge) {
             if (!inPause) {
-                //dataManager.saveToExternalFile(age, currentPopulation);
-                evolve();
-                updateUIChart(age, currentPopulation);
-
-                //update The progress bar
-                int percetageOfSucces = age * 100 / maximumAge;
-                this.updateUIProgress(50 + percetageOfSucces * 50 / 100);
-
+                processAge();
+                if (sleepTime > 0) {
+                    try {
+                        Thread.sleep(sleepTime);
+                    }
+                    catch (InterruptedException ex) {
+                        logguer.logError(this, ex.getMessage(), ex);
+                    }
+                }
+            } else {
                 try {
-                    Thread.sleep(sleepTime);
-                } catch (InterruptedException ex) {
+                    Thread.sleep(10);
+                }
+                catch (InterruptedException ex) {
                     logguer.logError(this, ex.getMessage(), ex);
                 }
             }
@@ -145,7 +149,7 @@ public class Poblacion extends Thread {
         }
 
         running = false;
-        
+
         this.updateUIProgress(100);
     }
 
@@ -208,11 +212,17 @@ public class Poblacion extends Thread {
     }
 
     public void pause(boolean value) {
-       this.setInPause(value);
+        this.setInPause(value);
     }
 
-    public void rewind(int i) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public void rewind() {
+        if (age>1){
+            age--;
+            currentPopulation = dataManager.getFromExternalFile(age);
+            processAge();
+            age--;
+            
+        }
     }
 
     public int getMaximumPopulation() {
@@ -225,22 +235,29 @@ public class Poblacion extends Thread {
 
     public void setSimulationVelocity(int value) {
         this.sleepTime = value * 10;
-        if (sleepTime == 0){
-            sleepTime = 10;
-        }
     }
 
-    public void forward(int i) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public void forward() {
+        processAge();
     }
 
     public void setGAOperators(int selectionPercentage, int mutatorPercentage, int cruzaPercentage, HashMap<Mutators, Integer> mutationsCoverageMethods, HashMap<Selectors, Integer> selectionCoverageMethods, HashMap<Cruzators, Integer> cruzaCoverageMethods) {
         this.mutatorManager.setPercentage(mutatorPercentage);
         this.selectionManager.setPercentage(selectionPercentage);
         this.cruzaManager.setPercentage(cruzaPercentage);
-        
+
         this.cruzaCoverageMethods = cruzaCoverageMethods;
         this.selectionCoverageMethods = selectionCoverageMethods;
         this.mutationsCoverageMethods = mutationsCoverageMethods;
+    }
+
+    private void processAge() {
+        dataManager.saveToExternalFile(age, currentPopulation);
+        evolve();
+        updateUIChart(age, currentPopulation);
+
+        //update The progress bar
+        int percetageOfSucces = age * 100 / maximumAge;
+        this.updateUIProgress(50 + percetageOfSucces * 50 / 100);
     }
 }

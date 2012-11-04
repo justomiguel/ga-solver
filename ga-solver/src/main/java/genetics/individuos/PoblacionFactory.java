@@ -5,6 +5,7 @@ import com.frre.cemami.utils.MathUtils;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import genetics.productos.exceptions.ProductCreationException;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class PoblacionFactory {
 
@@ -26,52 +27,77 @@ public class PoblacionFactory {
         LinkedList<Individuo> initialPop = new LinkedList<Individuo>();
 
         IndividuosFactory.getInstance().setMateriasPrimas(materiasPrimas);
-        
+
         //ass= this is the first step when creating a population I clear the materias primas collection
         //to get the new numbers 
         IndividuosFactory.getInstance().clearMateriasPrimas();
-        
+
         LinkedList<Integer> maxQuantities = new LinkedList<Integer>();
         for (int i = 0; i < 4; i++) {
-            int number = IndividuosFactory.getInstance().maxQuantityOfProductToBeCreated(i+1);
-            logguer.logInfo("Max of "+i+" "+number);
+            int number = IndividuosFactory.getInstance().maxQuantityOfProductToBeCreated(i + 1);
+            logguer.logInfo("Max of " + i + " " + number);
             maxQuantities.add(number);
         }
 
 
         int[] productos = new int[4];
+
+        Random r = new Random();
         int currentSize = 0;
-        
         while (currentSize < initialPopulation) {
-            productos[0] = MathUtils.getRandomNumber(0, maxQuantities.get(0));
-            productos[1] = MathUtils.getRandomNumber(0, maxQuantities.get(1));
-            productos[2] = MathUtils.getRandomNumber(0, maxQuantities.get(2));
-            productos[3] = MathUtils.getRandomNumber(0, maxQuantities.get(3));
+            productos[0] = getProductSize(0, maxQuantities, r);
+            productos[1] = getProductSize(1, maxQuantities, r);
+            productos[2] = getProductSize(2, maxQuantities, r);
+            productos[3] = getProductSize(3, maxQuantities, r);
             try {
                 Individuo individuo = IndividuosFactory.getInstance().createIndividuo(productos);
-                initialPop.add(individuo);
-                currentSize = initialPop.size();
-                int percetageOfSucces = currentSize*100/initialPopulation;
-                p.updateUIProgress(5+percetageOfSucces*40/100);
-            } catch (ProductCreationException ex) {
+                boolean alreadyThere = false;
+                for (Individuo muchachin : initialPop) {
+                    if (muchachin.equalsTo(individuo)) {
+                        alreadyThere = true;
+                        break;
+                    }
+                }
+                if (!alreadyThere) {
+                    initialPop.add(individuo);
+                    currentSize++;
+                    int percetageOfSucces = currentSize * 100 / initialPopulation;
+                    p.updateUIProgress(5 + percetageOfSucces * 40 / 100);
+                }
+            }
+            catch (ProductCreationException ex) {
                 //logguer.logError(this, "No pudo crear producto por que materia prima insuficiente", ex);
-            }  
-        }  
+            }
+        }
+
         return initialPop;
     }
 
-    public LinkedList<Individuo> cloneInitialPopulation(LinkedList<Individuo> initialPop){
+    public LinkedList<Individuo> cloneInitialPopulation(LinkedList<Individuo> initialPop) {
         LinkedList<Individuo> ind = new LinkedList<Individuo>();
         for (int i = 0; i < initialPop.size(); i++) {
             Individuo individuo = null;
             try {
                 individuo = (Individuo) initialPop.get(i).clone();
-            } catch (CloneNotSupportedException ex) {
-               logguer.logError(this, "Can Not Clone Element du to ",ex);
+            }
+            catch (CloneNotSupportedException ex) {
+                logguer.logError(this, "Can Not Clone Element due to ", ex);
             }
             ind.add(individuo);
         }
         return ind;
     }
 
+    private int getProductSize(int productNumber, LinkedList<Integer> maxQuantities, Random r) {
+        double number = r.nextDouble();
+        if (number < 0.25) {
+            return MathUtils.getRandomNumber(0, maxQuantities.get(productNumber));
+        } else if (number < 0.50) {
+            return MathUtils.getRandomNumber(0, maxQuantities.get(productNumber) / 2);
+        } else if (number < 0.75) {
+            return MathUtils.getRandomNumber(maxQuantities.get(productNumber) / 2, maxQuantities.get(productNumber));
+        } else {
+            return MathUtils.getRandomNumber(0, 1);
+        }
+    }
 }
