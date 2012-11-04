@@ -32,7 +32,7 @@ public class IndividuosFactory {
     }
 
     @SuppressWarnings("unchecked")
-    public Individuo createIndividuo(int[] productos, int[] materiaPrima) throws ProductCreationException, NoMateriaPrimaAddedException {
+    public Individuo createIndividuo(int[] productos, LinkedList<LinkedList<Integer>> materiaPrima) throws ProductCreationException, NoMateriaPrimaAddedException {
 
         Individuo individuo = new Individuo();
         if (materiasPrimas.isEmpty()) {
@@ -53,20 +53,75 @@ public class IndividuosFactory {
                 int[] restriccionesMinProducto = producto.getRestriccionesMin();
                 for (int j = 0; j < restriccionesMinProducto.length; j++) {
                     int montoMateriaPrimaMinimo = restriccionesMinProducto[j];
-                    int montoMateriaPrimaMaximo = restriccionesMaxProducto[j];
-                    int montoMateriaPrimaAUsar = materiaPrima[j];
-                    if (montoMateriaPrimaAUsar >= montoMateriaPrimaMinimo && montoMateriaPrimaAUsar <= montoMateriaPrimaMaximo) {
-                        int materiaPrimaDisponible = materiasPrimasClone.get(j);
-                        materiaPrimaDisponible = materiaPrimaDisponible - montoMateriaPrimaAUsar;
-                        if (materiaPrimaDisponible < 0) {
-                            String errorDesc = "No hay suficiente materia prima para esta configuracion";
-                            throw new ProductCreationException(errorDesc);
+                    if (montoMateriaPrimaMinimo != 0) {
+                        int montoMateriaPrimaMaximo = restriccionesMaxProducto[j];
+                        int montoMateriaPrimaAUsar = materiaPrima.get(i).get(j);
+                        if (montoMateriaPrimaAUsar >= montoMateriaPrimaMinimo && montoMateriaPrimaAUsar <= montoMateriaPrimaMaximo) {
+                            int materiaPrimaDisponible = materiasPrimasClone.get(j);
+                            materiaPrimaDisponible = materiaPrimaDisponible - montoMateriaPrimaAUsar;
+                            if (materiaPrimaDisponible < 0) {
+                                String errorDesc = "No hay suficiente materia prima para esta configuracion";
+                                throw new ProductCreationException(errorDesc);
+                            } else {
+                                materiasPrimasClone.set(j, materiaPrimaDisponible);
+                            }
                         } else {
-                            materiasPrimasClone.set(j, materiaPrimaDisponible);
+                            String errorDesc = "Materia Prima Incorrecta";
+                            throw new ProductCreationException(errorDesc);
                         }
-                    } else {
-                        String errorDesc = "Materia Prima Incorrecta";
-                        throw new ProductCreationException(errorDesc);
+                    }
+                }
+                quantityOfProduct--;
+                individuo.add(i, producto);
+            }
+        }
+        double fitnessValue = FitnessFunction.getFitnessValue(individuo);
+        individuo.setFitnessValue(fitnessValue);
+        if (individuo.getProfit() == 0) {
+            throw new ProductCreationException("No permito insectos");
+        }
+        return individuo;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Individuo createIndividuo(int[] productos) throws ProductCreationException, NoMateriaPrimaAddedException {
+
+        Individuo individuo = new Individuo();
+        if (materiasPrimas.isEmpty()) {
+            throw new NoMateriaPrimaAddedException("No se puede crear Individuo por que no se setearon las masterias primas");
+        }
+        LinkedList<Integer> materiasPrimasClone = (LinkedList<Integer>) materiasPrimas.clone();
+
+        LinkedList<LinkedList<Producto>> bestProduction = new LinkedList<LinkedList<Producto>>();
+        for (int i = 0; i < 4; i++) {
+            bestProduction.add(new LinkedList<Producto>());
+        }
+
+        for (int i = 0; i < productos.length; i++) {
+            int quantityOfProduct = productos[i];
+            while (quantityOfProduct > 0) {
+                Producto producto = ProductosFactory.getProducto(i + 1);
+                int[] restriccionesMaxProducto = producto.getRestriccionesMax();
+                int[] restriccionesMinProducto = producto.getRestriccionesMin();
+                for (int j = 0; j < restriccionesMinProducto.length; j++) {
+                    int montoMateriaPrimaMinimo = restriccionesMinProducto[j];
+                    if (montoMateriaPrimaMinimo != 0) {
+                        int montoMateriaPrimaMaximo = restriccionesMaxProducto[j];
+                       // int montoMateriaPrimaAUsar = materiaPrima.get(i).get(j);
+                        int montoMateriaPrimaAUsar = montoMateriaPrimaMinimo;
+                        if (montoMateriaPrimaAUsar >= montoMateriaPrimaMinimo && montoMateriaPrimaAUsar <= montoMateriaPrimaMaximo) {
+                            int materiaPrimaDisponible = materiasPrimasClone.get(j);
+                            materiaPrimaDisponible = materiaPrimaDisponible - montoMateriaPrimaAUsar;
+                            if (materiaPrimaDisponible < 0) {
+                                String errorDesc = "No hay suficiente materia prima para esta configuracion";
+                                throw new ProductCreationException(errorDesc);
+                            } else {
+                                materiasPrimasClone.set(j, materiaPrimaDisponible);
+                            }
+                        } else {
+                            String errorDesc = "Materia Prima Incorrecta";
+                            throw new ProductCreationException(errorDesc);
+                        }
                     }
                 }
                 quantityOfProduct--;
