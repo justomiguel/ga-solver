@@ -76,8 +76,8 @@ public class PoblacionFactory {
             for (int i = 0; i < productos.length; i++) {
                 int j = productos[i];
                 if (j > 0) {
+                    Producto theProduct = productosBase.get(i);
                     for (int k = 0; k < 8; k++) {
-                        Producto theProduct = productosBase.get(i);
                         int restriccionMinima = theProduct.getRestriccionesMin()[k];
                         int restriccionMaxima = theProduct.getRestriccionesMax()[k];
                         materiaPrima.get(i).add(k, MathUtils.getRandomNumber(restriccionMinima, restriccionMaxima));
@@ -86,7 +86,7 @@ public class PoblacionFactory {
             }
 
             try {
-                Individuo individuo = IndividuosFactory.getInstance().createIndividuo(productos);
+                Individuo individuo = IndividuosFactory.getInstance().createIndividuo(productos, materiaPrima);
                 boolean alreadyThere = false;
                 for (Individuo muchachin : initialPop) {
                     if (muchachin.equalsTo(individuo)) {

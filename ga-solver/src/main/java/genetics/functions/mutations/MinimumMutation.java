@@ -17,7 +17,7 @@ import java.util.Random;
  *
  * @author Justo Vargas
  */
-public class RandomMutation implements IMutator {
+public class MinimumMutation implements IMutator {
 
     @Override
     public Individuo doMutation(Individuo individuo, LinkedList<Producto> productosBase) throws ProductCreationException, NoMateriaPrimaAddedException {
@@ -27,23 +27,9 @@ public class RandomMutation implements IMutator {
 
         int totalProducts = productos.length;
 
-        Random r = new Random();
-
-        LinkedList<Integer> maxQuantities = new LinkedList<Integer>();
-        for (int i = 0; i < 4; i++) {
-            int number = IndividuosFactory.getInstance().maxQuantityOfProductToBeCreated(i + 1);
-            maxQuantities.add(number);
-        }
-
-        int genNumber1 = MathUtils.getRandomNumber(0, totalProducts - 1);
-
         for (int i = 0; i < totalProducts; i++) {
             int productsSize = 0;
-            if (genNumber1 == i) {
-                productsSize = MathUtils.getRandomNumber(0, maxQuantities.get(i) / 2);
-            } else {
-                productsSize = individuo.getProductsSize(i + 1);
-            }
+            productsSize = individuo.getProductsSize(i + 1);
             productos[i] = productsSize;
         }
 
@@ -58,25 +44,13 @@ public class RandomMutation implements IMutator {
             int j = productos[i];
             if (j > 0) {
                 Producto theProduct = productosBase.get(i);
-                Producto myProduct = individuo.getProductAt(i + 1);
                 for (int k = 0; k < 8; k++) {
                     int restriccionMinima = theProduct.getRestriccionesMin()[k];
-                    int restriccionMaxima = theProduct.getRestriccionesMax()[k];
-                    int restriccionToBeUsed = 0;
-                    if (( Math.random() > 0.5 )) {
-                        restriccionToBeUsed = MathUtils.getRandomNumber(restriccionMinima, restriccionMaxima);
-                    } else {
-                        if (myProduct != null) {
-                            restriccionToBeUsed = myProduct.getRestriccionesUsed()[k];
-                        } else {
-                            restriccionToBeUsed = MathUtils.getRandomNumber(restriccionMinima, restriccionMaxima);
-                        }
-                    }
+                    int restriccionToBeUsed = restriccionMinima;
                     materiaPrima.get(i).add(k, restriccionToBeUsed);
                 }
             }
         }
-
 
         mutatedInd = IndividuosFactory.getInstance().createIndividuo(productos, materiaPrima);
         return mutatedInd;

@@ -1166,77 +1166,77 @@ public class MainPanelView extends GenericView {
         } else if (!r && !z && !a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 100);
         } else if (!r && !z && a && !m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 100);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 100);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
         } else if (!r && !z && a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 50);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 50);
         } else if (!r && z && !a && !m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 100);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
         } else if (!r && z && !a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 50);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 50);
         } else if (!r && z && a && !m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 50);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 50);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
         } else if (!r && z && a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 40);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 40);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 20);
         } else if (r && !z && !a && !m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 100);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
         } else if (r && !z && !a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 50);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 50);
         } else if (r && !z && a && !m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 50);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 50);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 50);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
         } else if (r && !z && a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 40);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 0);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 40);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 20);
         } else if (r && z && !a && !m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 50);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 50);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
         } else if (r && z && !a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 40);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 20);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 0);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 0);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 40);
         } else if (r && z && a && !m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 40);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 20);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 40);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 40);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 0);
         } else if (r && z && a && m) {
             mutationsCoverageMethods.put(MutatorManager.Mutators.RANDOM, 25);
             mutationsCoverageMethods.put(MutatorManager.Mutators.ZERO, 25);
-            mutationsCoverageMethods.put(MutatorManager.Mutators.ADDER, 25);
+            mutationsCoverageMethods.put(MutatorManager.Mutators.MINIMUM, 25);
             mutationsCoverageMethods.put(MutatorManager.Mutators.MAXIMIZER, 25);
         } else {
             logguer.logError("La cague en mutacion");
