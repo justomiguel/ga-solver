@@ -52,6 +52,16 @@ public abstract class Producto implements IGen, Cloneable {
         this.restriccionesUsed = restriccionesUsed;
     }
 
+    @Override
+    public String toString() {
+        String response = "Ganancia del Producto = " + profitValue + "\n" ;
+        for (int i = 0; i < restriccionesUsed.length; i++) {
+            int j = restriccionesUsed[i];
+            response += "           Materia "+(i+1)+": "+j+"\n";
+        }
+        return response;
+    }
+
     
 
 

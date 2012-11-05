@@ -975,7 +975,7 @@ public class MainPanelView extends GenericView {
         // TODO add your handling code here:
         for (JSpinner jSpinner : spinnersCargaDatos) {
             Integer number = (int) MathUtils.getRandomNumber(0, 1000);
-            jSpinner.setValue(300);
+            jSpinner.setValue(1000);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

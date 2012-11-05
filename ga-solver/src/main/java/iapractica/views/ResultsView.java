@@ -5,6 +5,7 @@
 package iapractica.views;
 
 import genetics.individuos.Individuo;
+import iapractica.views.popups.PopUpFactory;
 import java.util.LinkedList;
 
 /**
@@ -13,6 +14,8 @@ import java.util.LinkedList;
  */
 public class ResultsView extends javax.swing.JFrame {
 
+    
+    private LinkedList<Individuo> myFinalPopulation;
     /**
      * Creates new form ResultsView
      */
@@ -22,6 +25,8 @@ public class ResultsView extends javax.swing.JFrame {
     
     
     public void setViewContents(LinkedList<Individuo> myFinalPopulation){
+        
+        this.myFinalPopulation = myFinalPopulation;
         
         Object [][] objectToModel = new Object[5][7];
         
@@ -59,7 +64,11 @@ public class ResultsView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        myTable = new javax.swing.JTable();
+        myTable = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -92,6 +101,11 @@ public class ResultsView extends javax.swing.JFrame {
             }
         ));
         myTable.setName("myTable"); // NOI18N
+        myTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                myTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(myTable);
         myTable.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("myTable.columnModel.title0")); // NOI18N
         myTable.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("myTable.columnModel.title1")); // NOI18N
@@ -151,44 +165,14 @@ public class ResultsView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        }
-        catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ResultsView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ResultsView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ResultsView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ResultsView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void myTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTableMouseClicked
+        // TODO add your handling code here:
+        int rowNumber = myTable.getSelectedRow();
+        //if (rowNumber > 0){
+            PopUpFactory.showConfirmPopUP(this, "Solucion Nro"+(rowNumber+1)+" \n "+myFinalPopulation.get(rowNumber));
+        //}
+    }//GEN-LAST:event_myTableMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ResultsView().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
