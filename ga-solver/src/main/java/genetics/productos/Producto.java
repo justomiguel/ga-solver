@@ -57,7 +57,7 @@ public abstract class Producto implements IGen, Cloneable {
         String response = "Ganancia del Producto por Unidad = " + profitValue + "\n" ;
         for (int i = 0; i < restriccionesUsed.length; i++) {
             int j = restriccionesUsed[i];
-            response += "           Materia Utilizada por Unidad "+(i+1)+": "+j+"\n";
+            response += "           Materia Prima "+(i+1)+" Utilizada por Unidad : "+j+"\n";
         }
         return response;
     }
