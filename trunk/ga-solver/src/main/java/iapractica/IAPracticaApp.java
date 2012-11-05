@@ -4,6 +4,7 @@
 package iapractica;
 
 import com.frre.cemami.utils.DefaultLogguer;
+import com.frre.cemami.utils.SplashDemo;
 import genetics.individuos.Poblacion;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
@@ -46,6 +47,7 @@ public class IAPracticaApp extends SingleFrameApplication {
     public static void main(String[] args) {
 
         logguer.logInfo(IAPracticaApp.getInstance(), "App started");
+         SplashDemo test = new SplashDemo();
         launch(IAPracticaApp.class, args);
     }
 }

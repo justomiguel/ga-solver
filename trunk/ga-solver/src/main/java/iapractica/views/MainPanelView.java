@@ -129,6 +129,7 @@ public class MainPanelView extends GenericView {
         controlCopias = new javax.swing.JCheckBox();
         jLabel12 = new javax.swing.JLabel();
         selectorPercentage = new javax.swing.JSpinner();
+        jLabel13 = new javax.swing.JLabel();
         seleccionPanel1 = new javax.swing.JPanel();
         Metodos3 = new javax.swing.JPanel();
         zeroMutation = new javax.swing.JCheckBox();
@@ -137,12 +138,14 @@ public class MainPanelView extends GenericView {
         maximizer = new javax.swing.JCheckBox();
         jLabel15 = new javax.swing.JLabel();
         mutatorPercentage = new javax.swing.JSpinner();
+        jLabel14 = new javax.swing.JLabel();
         seleccionPanel2 = new javax.swing.JPanel();
         Metodos4 = new javax.swing.JPanel();
         binomial = new javax.swing.JCheckBox();
         multipunto = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
         cruzaPercentage = new javax.swing.JSpinner();
+        jLabel22 = new javax.swing.JLabel();
         simlationProperties = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         velocidad = new javax.swing.JSlider();
@@ -471,6 +474,7 @@ public class MainPanelView extends GenericView {
         operadoresGeneticos.setLayout(new java.awt.GridLayout(1, 0));
 
         seleccionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("seleccionPanel.border.title"))); // NOI18N
+        seleccionPanel.setAutoscrolls(true);
         seleccionPanel.setName("seleccionPanel"); // NOI18N
         seleccionPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -518,6 +522,11 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         seleccionPanel.add(selectorPercentage, gridBagConstraints);
+
+        jLabel13.setIcon(resourceMap.getIcon("jLabel13.icon")); // NOI18N
+        jLabel13.setText(resourceMap.getString("jLabel13.text")); // NOI18N
+        jLabel13.setName("jLabel13"); // NOI18N
+        seleccionPanel.add(jLabel13, new java.awt.GridBagConstraints());
 
         operadoresGeneticos.add(seleccionPanel);
 
@@ -575,6 +584,11 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         seleccionPanel1.add(mutatorPercentage, gridBagConstraints);
 
+        jLabel14.setIcon(resourceMap.getIcon("jLabel14.icon")); // NOI18N
+        jLabel14.setText(resourceMap.getString("jLabel14.text")); // NOI18N
+        jLabel14.setName("jLabel14"); // NOI18N
+        seleccionPanel1.add(jLabel14, new java.awt.GridBagConstraints());
+
         operadoresGeneticos.add(seleccionPanel1);
 
         seleccionPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("seleccionPanel2.border.title"))); // NOI18N
@@ -621,6 +635,11 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         seleccionPanel2.add(cruzaPercentage, gridBagConstraints);
+
+        jLabel22.setIcon(resourceMap.getIcon("jLabel22.icon")); // NOI18N
+        jLabel22.setText(resourceMap.getString("jLabel22.text")); // NOI18N
+        jLabel22.setName("jLabel22"); // NOI18N
+        seleccionPanel2.add(jLabel22, new java.awt.GridBagConstraints());
 
         operadoresGeneticos.add(seleccionPanel2);
 
@@ -1355,6 +1374,8 @@ public class MainPanelView extends GenericView {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1363,6 +1384,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
