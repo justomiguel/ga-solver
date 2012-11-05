@@ -407,6 +407,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(2, 20, 0, 0);
         cargaDatos.add(jLabel11, gridBagConstraints);
 
+        jButton1.setIcon(resourceMap.getIcon("jButton1.icon")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -423,6 +424,7 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.insets = new java.awt.Insets(12, 170, 116, 0);
         cargaDatos.add(jButton1, gridBagConstraints);
 
+        jButton2.setIcon(resourceMap.getIcon("jButton2.icon")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
