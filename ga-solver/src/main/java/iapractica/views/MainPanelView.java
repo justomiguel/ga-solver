@@ -80,6 +80,8 @@ public class MainPanelView extends GenericView {
         init();
         makeJFreChartPanel();
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(MainPanelView.class);
+        this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
 
     }
 

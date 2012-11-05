@@ -5,6 +5,7 @@
 package iapractica;
 
 import iapractica.controllers.MainPanelController;
+import java.awt.Toolkit;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -27,9 +28,13 @@ public class IAPracticaView extends FrameView {
 
        // this.getFrame().setTitle("GA-SOLVER - INTELIGENCIA ARTIFICIAL - UTN FRRe - 2012");
         initComponents();
-
-        // status bar initialization - message timeout, idle icon and busy animation, etc
+        
+         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
+        
+        this.getFrame().setIconImage(resourceMap.getImageIcon("image.icon").getImage());
+
+       
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
         messageTimer = new Timer(messageTimeout, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -145,6 +150,7 @@ public class IAPracticaView extends FrameView {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getActionMap(IAPracticaView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+        exitMenuItem.setIcon(resourceMap.getIcon("exitMenuItem.icon")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
 
@@ -154,6 +160,9 @@ public class IAPracticaView extends FrameView {
         helpMenu.setName("helpMenu"); // NOI18N
 
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
+        aboutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        aboutMenuItem.setIcon(resourceMap.getIcon("aboutMenuItem.icon")); // NOI18N
+        aboutMenuItem.setText(resourceMap.getString("aboutMenuItem.text")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
 

@@ -23,6 +23,9 @@ public class ResultsView extends javax.swing.JFrame {
      */
     public ResultsView() {
         initComponents();
+        
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(MainPanelView.class);
+        this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
     }
 
     public void setViewContents(LinkedList<Individuo> myFinalPopulation) {
@@ -85,9 +88,11 @@ public class ResultsView extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(ResultsView.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setAutoscrolls(true);
         jPanel1.setName("jPanel1"); // NOI18N
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
