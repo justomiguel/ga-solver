@@ -9,6 +9,8 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
     private static int DEFAULT_DIFFERENT_PRODUCTS = 4;
     private double fitnessValue;
     private LinkedList<LinkedList<Producto>> productos;
+    
+    private int materiaPrimaSobrante;
 
     public Individuo() {
         this(DEFAULT_DIFFERENT_PRODUCTS);
@@ -122,6 +124,14 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
         return clone;
     }
 
+    public int getMateriaPrimaSobrante() {
+        return materiaPrimaSobrante;
+    }
+
+    public void setMateriaPrimaSobrante(int materiaPrimaSobrante) {
+        this.materiaPrimaSobrante = materiaPrimaSobrante;
+    }
+
     /*
     @Override
     public int hashCode() {
@@ -151,6 +161,8 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
         builder.append(getProfit());
         builder.append(" \n  Aptitud = ");
         builder.append(fitnessValue);
+        builder.append(" \n  Sobrante Materias Primas = ");
+        builder.append(materiaPrimaSobrante);
         
         int productsNumber = productos.size();
         for (int i = 0; i < productsNumber; i++) {

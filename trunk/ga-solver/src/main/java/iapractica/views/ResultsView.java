@@ -6,6 +6,8 @@ package iapractica.views;
 
 import genetics.individuos.Individuo;
 import iapractica.views.popups.PopUpFactory;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 /**
@@ -14,26 +16,35 @@ import java.util.LinkedList;
  */
 public class ResultsView extends javax.swing.JFrame {
 
-    
     private LinkedList<Individuo> myFinalPopulation;
+
     /**
      * Creates new form ResultsView
      */
     public ResultsView() {
         initComponents();
     }
-    
-    
-    public void setViewContents(LinkedList<Individuo> myFinalPopulation){
-        
+
+    public void setViewContents(LinkedList<Individuo> myFinalPopulation) {
+
+        Collections.sort(myFinalPopulation);
+
         this.myFinalPopulation = myFinalPopulation;
+
+        LinkedList<Integer> nuevaLista = new LinkedList<Integer>();
+
+        for (int i = 0; i < 10; i++) {
+            nuevaLista.add(myFinalPopulation.get(i).getMateriaPrimaSobrante());
+        }
+                
+        Collections.sort(nuevaLista);
         
-        Object [][] objectToModel = new Object[5][7];
-        
-        for (int i = 0; i < 5; i++) {
+        Object[][] objectToModel = new Object[10][7];
+
+        for (int i = 0; i < 10; i++) {
             Object[] filas = objectToModel[i];
-            filas[0] = i+1;
-            Individuo cromosoma = myFinalPopulation.get(0);
+            filas[0] = i + 1;
+            Individuo cromosoma = getIndBySobrante(myFinalPopulation, nuevaLista.get(i));
             filas[1] = cromosoma.getFitnessValue();
             filas[2] = cromosoma.getProfit();
             filas[3] = cromosoma.getProductsSize(1);
@@ -41,14 +52,13 @@ public class ResultsView extends javax.swing.JFrame {
             filas[5] = cromosoma.getProductsSize(3);
             filas[6] = cromosoma.getProductsSize(4);
         }
-        
+
         myTable.setModel(new javax.swing.table.DefaultTableModel(
-            objectToModel,
-            new String [] {
-                "Solucion Nro", "Valor Aptitud", "Ganancia", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
-            }
-        ));
-        
+                objectToModel,
+                new String[]{
+                    "Solucion Nro", "Valor Aptitud", "Ganancia", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
+                }));
+
     }
 
     /**
@@ -77,9 +87,10 @@ public class ResultsView extends javax.swing.JFrame {
         setName("Form"); // NOI18N
         getContentPane().setLayout(new java.awt.GridLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel1.border.title"))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setName("jPanel1"); // NOI18N
 
+        jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
@@ -123,36 +134,36 @@ public class ResultsView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(305, 305, 305)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(jLabel1)))
+                .addContainerGap(195, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jButton1)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -169,10 +180,9 @@ public class ResultsView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int rowNumber = myTable.getSelectedRow();
         //if (rowNumber > 0){
-            PopUpFactory.showConfirmPopUP(this, "Solucion Nro"+(rowNumber+1)+" \n "+myFinalPopulation.get(rowNumber));
+        PopUpFactory.showConfirmPopUP(this, "Solucion Nro" + ( rowNumber + 1 ) + " \n " + myFinalPopulation.get(rowNumber));
         //}
     }//GEN-LAST:event_myTableMouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -181,4 +191,13 @@ public class ResultsView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable myTable;
     // End of variables declaration//GEN-END:variables
+
+    private Individuo getIndBySobrante(LinkedList<Individuo> myFinalPopulation, Integer sobrante) {
+        for (Individuo individuo : myFinalPopulation) {
+            if (individuo.getMateriaPrimaSobrante() == sobrante){
+                return individuo;
+            }
+        }
+        return null;
+    }
 }
