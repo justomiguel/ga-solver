@@ -484,8 +484,8 @@ public class MainPanelView extends GenericView {
         jLabel24.setText(resourceMap.getString("jLabel24.text")); // NOI18N
         jLabel24.setName("jLabel24"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 9;
         cargaDatos.add(jLabel24, gridBagConstraints);
 
         tabPanel.addTab("Carga de Datos", cargaDatos);

@@ -4,6 +4,7 @@
  */
 package iapractica.views;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -31,12 +32,20 @@ public class MyPanelImage  extends JPanel {
        } catch (IOException ex) {
             // handle exception...
        }
+       
+        Dimension size = new Dimension(this.image.getWidth(null), this.image.getHeight(null));
+        this.setSize(size);
     }
     
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters            
+    }
+    
+    public Dimension getImageSize(){
+        Dimension size = new Dimension(this.image.getWidth(null)+50, this.image.getHeight(null)+50);
+        return size;
     }
     
     

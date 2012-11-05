@@ -17,9 +17,11 @@ public class VerImagen extends javax.swing.JFrame {
      */
     public VerImagen(String path) {
         initComponents();
-        this.jPanel1.add(new MyPanelImage(path));
+        MyPanelImage myP = new MyPanelImage(path);
+        jPanel1.setSize(myP.getSize());
+        this.jPanel1.add(myP);
         this.setTitle(path);
-        this.setSize(new Dimension(500, 300));
+        this.setSize(myP.getImageSize());
         this.setVisible(true);
         
     }
