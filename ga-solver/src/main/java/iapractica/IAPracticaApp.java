@@ -47,7 +47,6 @@ public class IAPracticaApp extends SingleFrameApplication {
     public static void main(String[] args) {
 
         logguer.logInfo(IAPracticaApp.getInstance(), "App started");
-         SplashDemo test = new SplashDemo();
         launch(IAPracticaApp.class, args);
     }
 }
