@@ -43,6 +43,7 @@ public class ResultsView extends javax.swing.JFrame {
                 "Solucion Nro", "Valor Aptitud", "Ganancia", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
             }
         ));
+        
     }
 
     /**
