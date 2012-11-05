@@ -4,7 +4,7 @@
  */
 package iapractica.views;
 
-import java.awt.Dimension;
+import iapractica.views.myPanels.MyPanelImage;
 
 /**
  *

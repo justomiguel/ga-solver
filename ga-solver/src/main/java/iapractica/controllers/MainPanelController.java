@@ -12,7 +12,7 @@ import genetics.individuos.Poblacion;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.drawers.DataDrawer;
 import iapractica.views.MainPanelView;
-import iapractica.views.ResultsView;
+import iapractica.views.FinalResultsView;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -143,7 +143,7 @@ public class MainPanelController extends GenericController {
         }
         MainPanelView panel = (MainPanelView) view;
         panel.saveImages();
-        ResultsView view = new ResultsView(currentPopulation, (LinkedList<Integer>)materiasPrimas.clone());
+        FinalResultsView view = new FinalResultsView(currentPopulation, (LinkedList<Integer>)materiasPrimas.clone());
         view.setVisible(true);
     }
 

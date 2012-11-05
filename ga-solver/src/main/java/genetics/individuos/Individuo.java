@@ -37,15 +37,12 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
         return profit;
     }
 
-    public double getMateriaPrimaUsedPerProduct(int productNumber) {
+    public double getMateriaPrimaUsedPerProduct(int productNumber, int materiaPrimaNumber) {
         double materiaPrimaUsed = 0;
         Producto p = this.getProductAt(productNumber);
         if (p != null) {
             int[] rest = p.getRestriccionesUsed();
-            for (int j = 0; j < rest.length; j++) {
-                int usado = rest[j];
-                materiaPrimaUsed += usado;
-            }
+            return rest[materiaPrimaNumber];
         }
         return materiaPrimaUsed;
     }
@@ -186,6 +183,25 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
                 builder.append("     ");
                 builder.append(p);
             }
+        }
+        return builder.toString();
+    }
+    
+    public String toStringResult() {
+        StringBuilder builder = new StringBuilder();
+        int productsNumber = productos.size();
+        for (int i = 0; i < productsNumber; i++) {
+            builder.append("Cantidad a Producir de Producto ");
+            builder.append(i + 1);
+            builder.append(": ");
+            builder.append(productos.get(i).size());
+            builder.append("\n");
+            Producto p = this.getProductAt(i + 1);
+            if (p != null) {
+                builder.append("     ");
+                builder.append(p);
+            }
+            builder.append("\n");
         }
         return builder.toString();
     }
