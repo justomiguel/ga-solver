@@ -90,7 +90,7 @@ public class ExternalDataHandler {
 
        public LinkedList<Individuo> restorePopulationFromExternalData(LinkedList<ExternalData> data) throws ProductCreationException{
         LinkedList<Individuo> population = new LinkedList<Individuo>();
-        for (ExternalData myData : data) {
+       /* for (ExternalData myData : data) {
             Individuo ind;
             try {
                 ind = IndividuosFactory.getInstance().createIndividuo(myData.getProductS());
@@ -98,7 +98,7 @@ public class ExternalDataHandler {
             } catch (NoMateriaPrimaAddedException ex) {
                 logguer.logError(this, ex.getMessage(), ex);
             }
-        }
+        }*/
         return population;
     }
 

@@ -3,7 +3,6 @@ package genetics.individuos;
 import com.frre.cemami.utils.DefaultLogguer;
 import genetics.cromosomas.ICromosoma;
 import genetics.productos.Producto;
-import genetics.productos.exceptions.GeneticException;
 import java.util.LinkedList;
 
 public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
@@ -29,10 +28,9 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
         for (int i = 1; i < products; i++) {
             int productsSize = this.getProductsSize(i);
             double productValue = 0;
-            try {
-                productValue = this.getProductAt(i).getProfitValue();
-            } catch (GeneticException ex) {
-               
+            Producto p = this.getProductAt(i);
+            if (p!= null){
+                productValue = p.getProfitValue();
             }
             profit += productsSize*productValue ;
         }
@@ -51,11 +49,11 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
         return productos.get(productNumber - 1);
     }
 
-    public Producto getProductAt(int productNumber) throws GeneticException {
+    public Producto getProductAt(int productNumber) {
         if (productos.get(productNumber - 1).size() > 0) {
             return productos.get(productNumber - 1).get(0);
         }
-        throw new GeneticException("Can not retrieve the product cause the cromosome has 0 genes of it");
+        return null;
     }
 
     public int getTotalDiferrentProducts() {
@@ -76,11 +74,25 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
     public boolean equalsTo(Individuo another){
         int products = this.getTotalDiferrentProducts()+1;
         for (int i = 1; i < products; i++) {
-            int productsSize = this.getProductsSize(i);
-            if (another.getProductsSize(i) != productsSize){
+            int myProductsSize = this.getProductsSize(i);
+            int theirProductSize = another.getProductsSize(i);
+            if (another.getProductsSize(i) != myProductsSize){
                 return false;
             }
+            if (myProductsSize!=0 && theirProductSize!=0){
+                Producto myProduct = this.getProductAt(i);
+                Producto theirProduct = another.getProductAt(i);
+                int[] myRest = myProduct.getRestriccionesUsed();
+                int[] theRest = theirProduct.getRestriccionesUsed();
+                int size = myRest.length;
+                for (int j = 0; j < size; j++) {
+                    if (myRest[j] != theRest[j]){
+                        return false;
+                    }
+                }
+            }
         }
+        DefaultLogguer.getLogger().logError("Por materias primas iguales");
         return true;
     }
 

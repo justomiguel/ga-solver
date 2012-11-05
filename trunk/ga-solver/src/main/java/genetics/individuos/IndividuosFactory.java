@@ -51,14 +51,17 @@ public class IndividuosFactory {
                 Producto producto = ProductosFactory.getProducto(i + 1);
                 int[] restriccionesMaxProducto = producto.getRestriccionesMax();
                 int[] restriccionesMinProducto = producto.getRestriccionesMin();
+                int[] restriccionesMinToBeUSed = new int[8];
                 for (int j = 0; j < restriccionesMinProducto.length; j++) {
                     int montoMateriaPrimaMinimo = restriccionesMinProducto[j];
                     if (montoMateriaPrimaMinimo != 0) {
                         int montoMateriaPrimaMaximo = restriccionesMaxProducto[j];
                         int montoMateriaPrimaAUsar = materiaPrima.get(i).get(j);
+                        restriccionesMinToBeUSed[j] = montoMateriaPrimaAUsar;
                         if (montoMateriaPrimaAUsar >= montoMateriaPrimaMinimo && montoMateriaPrimaAUsar <= montoMateriaPrimaMaximo) {
                             int materiaPrimaDisponible = materiasPrimasClone.get(j);
                             materiaPrimaDisponible = materiaPrimaDisponible - montoMateriaPrimaAUsar;
+                            
                             if (materiaPrimaDisponible < 0) {
                                 String errorDesc = "No hay suficiente materia prima para esta configuracion";
                                 throw new ProductCreationException(errorDesc);
@@ -72,7 +75,9 @@ public class IndividuosFactory {
                     }
                 }
                 quantityOfProduct--;
+                producto.setRestriccionesUsed(restriccionesMinToBeUSed);
                 individuo.add(i, producto);
+                
             }
         }
         double fitnessValue = FitnessFunction.getFitnessValue(individuo);
@@ -83,6 +88,7 @@ public class IndividuosFactory {
         return individuo;
     }
 
+    /*
     @SuppressWarnings("unchecked")
     public Individuo createIndividuo(int[] productos) throws ProductCreationException, NoMateriaPrimaAddedException {
 
@@ -134,7 +140,7 @@ public class IndividuosFactory {
             throw new ProductCreationException("No permito insectos");
         }
         return individuo;
-    }
+    }*/
 
     public LinkedList<Integer> getMateriasPrimas() {
         return materiasPrimas;

@@ -8,6 +8,8 @@ public abstract class Producto implements IGen, Cloneable {
     protected double profitValue;
     protected final int[] restriccionesMin = new int[8];
     protected final int[] restriccionesMax = new int[8];
+    
+     protected int[] restriccionesUsed = new int[8];
 
     public Producto() {
         materiasPrimas = new int[8];
@@ -42,6 +44,15 @@ public abstract class Producto implements IGen, Cloneable {
         return restriccionesMax;
     }
 
+    public int[] getRestriccionesUsed() {
+        return restriccionesUsed;
+    }
+
+    public void setRestriccionesUsed(int[] restriccionesUsed) {
+        this.restriccionesUsed = restriccionesUsed;
+    }
+
+    
 
 
 }

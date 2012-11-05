@@ -6,12 +6,14 @@ package genetics.functions.managers;
 
 import com.frre.cemami.utils.DefaultLogguer;
 import com.frre.cemami.utils.MathUtils;
-import genetics.functions.mutations.AddMutation;
 import genetics.functions.mutations.IMutator;
 import genetics.functions.mutations.MaxMutation;
+import genetics.functions.mutations.MinimumMutation;
 import genetics.functions.mutations.RandomMutation;
 import genetics.functions.mutations.ZeroMutation;
 import genetics.individuos.Individuo;
+import genetics.productos.Producto;
+import genetics.productos.ProductosFactory;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import genetics.productos.exceptions.ProductCreationException;
 import java.util.HashMap;
@@ -29,7 +31,7 @@ public class MutatorManager {
         ZERO, 
         RANDOM,
         MAXIMIZER,
-        ADDER
+        MINIMUM
     };
 
     public double DEFAULT_SURVIVORS_BY_MUTATORS_METHODS = 40;
@@ -41,7 +43,7 @@ public class MutatorManager {
         mutatorClasses = new HashMap<Mutators, IMutator>();
         mutatorClasses.put(Mutators.ZERO, new ZeroMutation());
         mutatorClasses.put(Mutators.RANDOM, new RandomMutation());
-        mutatorClasses.put(Mutators.ADDER, new AddMutation());
+        mutatorClasses.put(Mutators.MINIMUM, new MinimumMutation());
         mutatorClasses.put(Mutators.MAXIMIZER, new MaxMutation());
     }
 
@@ -55,6 +57,18 @@ public class MutatorManager {
             return newPopulation;
         }
         
+         //obtengo los productos base y sus restricciones dentro de ellos
+        LinkedList<Producto> productosBase = new LinkedList<Producto>();
+        for (int i = 0; i < 4; i++) {
+            Producto producto = null;
+            try {
+                producto = ProductosFactory.getProducto(i + 1);
+            }
+            catch (ProductCreationException ex) {
+            }
+            productosBase.add(producto);
+        }
+
         for (Mutators mutatorMethod : keys) {
             double getCoverageOfMethod = coverageMethods.get(mutatorMethod);
             if (getCoverageOfMethod > 0) {
@@ -73,7 +87,7 @@ public class MutatorManager {
                 while (numberOfCopiesForThisMethod > 0) {
                     int chosenOne = MathUtils.getRandomNumber(0, numberOfPopulation-1);
                     try {
-                        Individuo son = mutator.doMutation(poblacionOriginal.get(chosenOne));
+                        Individuo son = mutator.doMutation(poblacionOriginal.get(chosenOne), productosBase);
                         boolean alreadyThere = false;
                         for (Individuo individuo : poblacionOriginal) {
                             if (individuo.equalsTo(son)){
