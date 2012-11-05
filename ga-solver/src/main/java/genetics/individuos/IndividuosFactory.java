@@ -80,8 +80,14 @@ public class IndividuosFactory {
                 
             }
         }
+        
+        int sobrante = 0;
+        for (Integer inte : materiasPrimasClone) {
+            sobrante += inte;
+        }
         double fitnessValue = FitnessFunction.getFitnessValue(individuo);
         individuo.setFitnessValue(fitnessValue);
+        individuo.setMateriaPrimaSobrante(sobrante);
         if (individuo.getProfit() == 0) {
             throw new ProductCreationException("No permito insectos");
         }
@@ -157,6 +163,7 @@ public class IndividuosFactory {
     public void setMaxQuantitiesOfProduct(HashMap<Integer, Integer> maxQuantitiesOfProduct) {
         this.maxQuantitiesOfProduct = maxQuantitiesOfProduct;
     }
+    
 
     public int maxQuantityOfProductToBeCreated(int product) throws NoMateriaPrimaAddedException {
         Integer number = maxQuantitiesOfProduct.get(product);
