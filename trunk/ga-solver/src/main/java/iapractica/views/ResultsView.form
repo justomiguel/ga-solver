@@ -194,6 +194,12 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="myTableMouseClicked"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;  public boolean isCellEditable(int rowIndex, int colIndex) {&#xa;  return false; //Disallow the editing of any cell&#xa;  }&#xa;  }"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

@@ -148,6 +148,25 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
 
     @Override
     public String toString() {
-        return "Individuo{" + "Profit=" + getProfit() + " fitnessValue=" + fitnessValue + " productos= 1 --> [" + productos.get(0).size() + "] 2 --> [" + productos.get(1).size() + "] 3 --> [" + productos.get(2).size() + "] 4 --> [" + productos.get(3).size() + "] " + '}';
+        StringBuilder builder = new StringBuilder();
+        builder.append(" Ganancia = ");
+        builder.append(getProfit());
+        builder.append(" \n  Aptitud = ");
+        builder.append(fitnessValue);
+        
+        int productsNumber = productos.size();
+        for (int i = 0; i < productsNumber; i++) {
+            builder.append("\n  Producto ");
+            builder.append(i+1);
+            builder.append(": ");
+            builder.append(productos.get(i).size());
+            builder.append("\n");
+            Producto p = this.getProductAt(i+1);
+            if (p!= null){
+                builder.append("     ");
+                builder.append(p);
+            }
+        }
+        return  builder.toString();
     }
 }
