@@ -11,6 +11,7 @@
 package iapractica.views;
 
 import com.frre.cemami.utils.MathUtils;
+import com.frre.cemami.utils.Utils;
 import genetics.functions.managers.CruzaManager;
 import genetics.functions.managers.MutatorManager;
 import genetics.functions.managers.SelectionManager;
@@ -20,18 +21,14 @@ import iapractica.controllers.MainPanelController;
 import iapractica.views.popups.PopUpFactory;
 import java.awt.Color;
 import java.awt.Component;
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
@@ -1018,6 +1015,7 @@ public class MainPanelView extends GenericView {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int[] valores = new int[8];
+        int sumatoriaMatPrima = 0;
         for (JSpinner jSpinner : spinnersCargaDatos) {
             try {
                 if (jSpinner.getName().startsWith("j")) {
@@ -1025,12 +1023,18 @@ public class MainPanelView extends GenericView {
                     String name = jSpinner.getName().substring(jSpinner.getName().length() - 1);
                     int pos = Integer.parseInt(name);
                     valores[pos - 1] = value;
+                    sumatoriaMatPrima += value;
                 }
             }
             catch (NumberFormatException e) {
                 PopUpFactory.showErrorPopUP(this, "Los Campos deben ser solamente numeros");
                 return;
             }
+        }
+        
+        if (sumatoriaMatPrima == 0){
+            PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 de materia prima en todos lados");
+            return;
         }
         
         int individuosMaximos = Integer.parseInt(indivMax1.getValue().toString());
@@ -1780,46 +1784,10 @@ public class MainPanelView extends GenericView {
         backBtn.setEnabled(true);
     }
 
-    public synchronized void saveToFile(final JFreeChart chart, final String name) throws IOException {
-        
-        //java.awt.EventQueue.invokeLater(new Runnable() {
-           // @Override
-          //  public void run() {
-                if (chart != null) {
-                    File myDir = new File("images");
-                    if (!myDir.exists()) {
-                        myDir.mkdirs();
-                    }
-                    File myImage = new File("images/" + name + ".png");
-                    if (!myImage.exists()) {
-                        try {
-                            myImage.createNewFile();
-                        }
-                        catch (IOException ex) {
-                            Logger.getLogger(MainPanelView.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    try {
-                        ChartUtilities.saveChartAsPNG(myImage, chart, 400, 200);
-                    }
-                    catch (IOException ex) {
-                        Logger.getLogger(MainPanelView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-          //  }
-       // });
-        
-    }
-
     public void saveImages() {
-        try {
-            saveToFile(myChartPanelS.get(POPULATION_PROFIT).getChart(), "poblacionGanancias");
-            saveToFile(myChartPanelS.get(POPULATION_FITNESS).getChart(), "poblacionAptitud");
-            saveToFile(myChartPanelS.get(AVERAGE_FITNESS).getChart(), "promedioAptitud");
-            saveToFile(myChartPanelS.get(AVERAGE_PROFIT).getChart(), "promedioGanancias");
-        }
-        catch (IOException ex) {
-            logguer.logError(ex.getMessage());
-        }
+            Utils.saveToFile(myChartPanelS.get(POPULATION_PROFIT).getChart(), "poblacionGanancias");
+            Utils.saveToFile(myChartPanelS.get(POPULATION_FITNESS).getChart(), "poblacionAptitud");
+            Utils.saveToFile(myChartPanelS.get(AVERAGE_FITNESS).getChart(), "promedioAptitud");
+            Utils.saveToFile(myChartPanelS.get(AVERAGE_PROFIT).getChart(), "promedioGanancias");
     }
 }
