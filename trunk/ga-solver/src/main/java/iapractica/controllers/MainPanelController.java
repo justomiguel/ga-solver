@@ -15,6 +15,8 @@ import iapractica.views.MainPanelView;
 import iapractica.views.ResultsView;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -135,8 +137,15 @@ public class MainPanelController extends GenericController {
     }
 
     public void showLastScreen(LinkedList<Individuo> currentPopulation) {
-        ResultsView view = new ResultsView();
-        view.setViewContents(currentPopulation);
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException ex) {
+           
+        }
+        MainPanelView panel = (MainPanelView) view;
+        panel.saveImages();
+        ResultsView view = new ResultsView(currentPopulation);
         view.setVisible(true);
     }
 

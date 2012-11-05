@@ -20,14 +20,21 @@ import iapractica.controllers.MainPanelController;
 import iapractica.views.popups.PopUpFactory;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
@@ -123,6 +130,7 @@ public class MainPanelView extends GenericView {
         jLabel1 = new javax.swing.JLabel();
         indivMax1 = new javax.swing.JSpinner();
         iteracionesMax1 = new javax.swing.JSpinner();
+        jLabel24 = new javax.swing.JLabel();
         operadoresGeneticos = new javax.swing.JPanel();
         seleccionPanel = new javax.swing.JPanel();
         Metodos = new javax.swing.JPanel();
@@ -216,11 +224,11 @@ public class MainPanelView extends GenericView {
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(51, 10, 2, 0);
         cargaDatos.add(jLabel3, gridBagConstraints);
 
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
@@ -469,6 +477,14 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(11, 7, 0, 0);
         cargaDatos.add(iteracionesMax1, gridBagConstraints);
+
+        jLabel24.setIcon(resourceMap.getIcon("jLabel24.icon")); // NOI18N
+        jLabel24.setText(resourceMap.getString("jLabel24.text")); // NOI18N
+        jLabel24.setName("jLabel24"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        cargaDatos.add(jLabel24, gridBagConstraints);
 
         tabPanel.addTab("Carga de Datos", cargaDatos);
 
@@ -1331,22 +1347,22 @@ public class MainPanelView extends GenericView {
     private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
         // TODO add your handling code here:
         if (inPauseStatus) {
-                backBtn.setEnabled(false);
-                MainPanelController main = (MainPanelController) this.getController();
+            backBtn.setEnabled(false);
+            MainPanelController main = (MainPanelController) this.getController();
 
-                for (XYSeries series : seriesProfit) {
-                    if (series.getItemCount() > 0){
-                        series.remove(series.getItemCount()-1);
-                    }
+            for (XYSeries series : seriesProfit) {
+                if (series.getItemCount() > 0) {
+                    series.remove(series.getItemCount() - 1);
                 }
-                
-                for (XYSeries series : seriesFitness) {
-                    if (series.getItemCount() > 0){
-                        series.remove(series.getItemCount()-1);
-                    }
+            }
+
+            for (XYSeries series : seriesFitness) {
+                if (series.getItemCount() > 0) {
+                    series.remove(series.getItemCount() - 1);
                 }
-                
-                main.getBackOneAge();
+            }
+
+            main.getBackOneAge();
         }
 
     }//GEN-LAST:event_backBtnMouseClicked
@@ -1388,6 +1404,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1583,8 +1600,8 @@ public class MainPanelView extends GenericView {
 
         this.binomial.setSelected(true);
         this.multipunto.setSelected(true);
-        
-                this.backBtn.setEnabled(false);
+
+        this.backBtn.setEnabled(false);
         this.nextBnt.setEnabled(false);
     }
 
@@ -1735,9 +1752,10 @@ public class MainPanelView extends GenericView {
                         updateScatterPlot(xySeriesCollectionScatterProfitPlot, currentAgeSerieProfit);
                     }
 
+
                 }
                 catch (Exception e) {
-                    logguer.logError(e.getClass(), e.getMessage());
+                    logguer.logError(this, e.getMessage());
                 }
             }
 
@@ -1749,5 +1767,48 @@ public class MainPanelView extends GenericView {
             }
         });
         backBtn.setEnabled(true);
+    }
+
+    public void saveToFile(final JFreeChart chart, final String name) throws IOException {
+        
+        //java.awt.EventQueue.invokeLater(new Runnable() {
+           // @Override
+          //  public void run() {
+                if (chart != null) {
+                    File myDir = new File("images");
+                    if (!myDir.exists()) {
+                        myDir.mkdirs();
+                    }
+                    File myImage = new File("images/" + name + ".png");
+                    if (!myImage.exists()) {
+                        try {
+                            myImage.createNewFile();
+                        }
+                        catch (IOException ex) {
+                            Logger.getLogger(MainPanelView.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    try {
+                        ChartUtilities.saveChartAsPNG(myImage, chart, 400, 200);
+                    }
+                    catch (IOException ex) {
+                        Logger.getLogger(MainPanelView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+          //  }
+       // });
+        
+    }
+
+    public void saveImages() {
+        try {
+            saveToFile(myChartPanelS.get(POPULATION_PROFIT).getChart(), "poblacionGanancias");
+            saveToFile(myChartPanelS.get(POPULATION_FITNESS).getChart(), "poblacionAptitud");
+            saveToFile(myChartPanelS.get(AVERAGE_FITNESS).getChart(), "promedioAptitud");
+            saveToFile(myChartPanelS.get(AVERAGE_PROFIT).getChart(), "promedioGanancias");
+        }
+        catch (IOException ex) {
+            logguer.logError(ex.getMessage());
+        }
     }
 }
