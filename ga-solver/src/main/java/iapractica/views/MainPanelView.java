@@ -1771,7 +1771,7 @@ public class MainPanelView extends GenericView {
         backBtn.setEnabled(true);
     }
 
-    public void saveToFile(final JFreeChart chart, final String name) throws IOException {
+    public synchronized void saveToFile(final JFreeChart chart, final String name) throws IOException {
         
         //java.awt.EventQueue.invokeLater(new Runnable() {
            // @Override
