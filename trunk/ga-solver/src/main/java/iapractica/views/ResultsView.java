@@ -17,11 +17,13 @@ import java.util.LinkedList;
 public final class ResultsView extends javax.swing.JFrame {
 
     private LinkedList<Individuo> myFinalPopulation;
+    
+    private LinkedList<Integer> materiasPrimas;
 
     /**
      * Creates new form ResultsView
      */
-    public ResultsView(LinkedList<Individuo> myFinalPopulation) {
+    public ResultsView(LinkedList<Individuo> myFinalPopulation,  LinkedList<Integer> materiasPrimas) {
         initComponents();
         
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(MainPanelView.class);
@@ -52,7 +54,7 @@ public final class ResultsView extends javax.swing.JFrame {
                     "Solucion Nro", "Valor Aptitud", "Ganancia","Materia Prima Sobrante", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
                 }));
         
-       // loadImage();
+       this.materiasPrimas = materiasPrimas;
     }
     
 
@@ -250,7 +252,8 @@ public final class ResultsView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int rowNumber = myTable.getSelectedRow();
         //if (rowNumber > 0){
-        PopUpFactory.showConfirmPopUP(this, "Solucion Nro" + ( rowNumber + 1 ) + " \n " + myFinalPopulation.get(rowNumber));
+        new IndividualResult(String.valueOf(rowNumber), myFinalPopulation.get(rowNumber), materiasPrimas);
+        //PopUpFactory.showConfirmPopUP(this, "Solucion Nro" + ( rowNumber + 1 ) + " \n " + myFinalPopulation.get(rowNumber));
         //}
     }//GEN-LAST:event_myTableMouseClicked
 

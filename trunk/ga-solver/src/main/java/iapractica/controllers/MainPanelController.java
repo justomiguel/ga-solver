@@ -15,8 +15,6 @@ import iapractica.views.MainPanelView;
 import iapractica.views.ResultsView;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -145,7 +143,7 @@ public class MainPanelController extends GenericController {
         }
         MainPanelView panel = (MainPanelView) view;
         panel.saveImages();
-        ResultsView view = new ResultsView(currentPopulation);
+        ResultsView view = new ResultsView(currentPopulation, (LinkedList<Integer>)materiasPrimas.clone());
         view.setVisible(true);
     }
 

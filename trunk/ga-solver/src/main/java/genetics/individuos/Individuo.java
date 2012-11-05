@@ -9,7 +9,6 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
     private static int DEFAULT_DIFFERENT_PRODUCTS = 4;
     private double fitnessValue;
     private LinkedList<LinkedList<Producto>> productos;
-    
     private int materiaPrimaSobrante;
 
     public Individuo() {
@@ -22,20 +21,33 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
             productos.add(i, new LinkedList<Producto>());
         }
     }
-    
-    public double getProfit(){
+
+    public double getProfit() {
         double profit = 0;
-        int products = this.getTotalDiferrentProducts()+1;
+        int products = this.getTotalDiferrentProducts() + 1;
         for (int i = 1; i < products; i++) {
             int productsSize = this.getProductsSize(i);
             double productValue = 0;
             Producto p = this.getProductAt(i);
-            if (p!= null){
+            if (p != null) {
                 productValue = p.getProfitValue();
             }
-            profit += productsSize*productValue ;
+            profit += productsSize * productValue;
         }
         return profit;
+    }
+
+    public double getMateriaPrimaUsedPerProduct(int productNumber) {
+        double materiaPrimaUsed = 0;
+        Producto p = this.getProductAt(productNumber);
+        if (p != null) {
+            int[] rest = p.getRestriccionesUsed();
+            for (int j = 0; j < rest.length; j++) {
+                int usado = rest[j];
+                materiaPrimaUsed += usado;
+            }
+        }
+        return materiaPrimaUsed;
     }
 
     public void add(int index, Producto element) {
@@ -71,23 +83,23 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
     public void mutate() {
         // TODO Auto-generated method stub
     }
-    
-    public boolean equalsTo(Individuo another){
-        int products = this.getTotalDiferrentProducts()+1;
+
+    public boolean equalsTo(Individuo another) {
+        int products = this.getTotalDiferrentProducts() + 1;
         for (int i = 1; i < products; i++) {
             int myProductsSize = this.getProductsSize(i);
             int theirProductSize = another.getProductsSize(i);
-            if (another.getProductsSize(i) != myProductsSize){
+            if (another.getProductsSize(i) != myProductsSize) {
                 return false;
             }
-            if (myProductsSize!=0 && theirProductSize!=0){
+            if (myProductsSize != 0 && theirProductSize != 0) {
                 Producto myProduct = this.getProductAt(i);
                 Producto theirProduct = another.getProductAt(i);
                 int[] myRest = myProduct.getRestriccionesUsed();
                 int[] theRest = theirProduct.getRestriccionesUsed();
                 int size = myRest.length;
                 for (int j = 0; j < size; j++) {
-                    if (myRest[j] != theRest[j]){
+                    if (myRest[j] != theRest[j]) {
                         return false;
                     }
                 }
@@ -106,7 +118,6 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
     public void setFitnessValue(double fitnessValue) {
         this.fitnessValue = fitnessValue;
     }
-
 
     @Override
     public Object clone() throws CloneNotSupportedException {
@@ -133,14 +144,13 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
     }
 
     /*
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((productos == null) ? 0 : productos.hashCode());
-        return result;
-    }*/
-
+     @Override
+     public int hashCode() {
+     final int prime = 31;
+     int result = 1;
+     result = prime * result + ((productos == null) ? 0 : productos.hashCode());
+     return result;
+     }*/
     @Override
     public int compareTo(Individuo o) {
         // TODO Auto-generated method stub
@@ -163,20 +173,20 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
         builder.append(fitnessValue);
         builder.append(" \n  Sobrante Materias Primas = ");
         builder.append(materiaPrimaSobrante);
-        
+
         int productsNumber = productos.size();
         for (int i = 0; i < productsNumber; i++) {
             builder.append("\n  Producto ");
-            builder.append(i+1);
+            builder.append(i + 1);
             builder.append(": ");
             builder.append(productos.get(i).size());
             builder.append("\n");
-            Producto p = this.getProductAt(i+1);
-            if (p!= null){
+            Producto p = this.getProductAt(i + 1);
+            if (p != null) {
                 builder.append("     ");
                 builder.append(p);
             }
         }
-        return  builder.toString();
+        return builder.toString();
     }
 }
