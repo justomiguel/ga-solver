@@ -1,6 +1,5 @@
 package genetics.individuos;
 
-import com.frre.cemami.utils.DefaultLogguer;
 import genetics.cromosomas.ICromosoma;
 import genetics.productos.Producto;
 import java.util.LinkedList;
@@ -92,7 +91,6 @@ public class Individuo implements ICromosoma, Comparable<Individuo>, Cloneable {
                 }
             }
         }
-        DefaultLogguer.getLogger().logError("Por materias primas iguales");
         return true;
     }
 
