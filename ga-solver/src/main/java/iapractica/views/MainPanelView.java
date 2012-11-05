@@ -20,14 +20,11 @@ import iapractica.controllers.MainPanelController;
 import iapractica.views.popups.PopUpFactory;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -1035,10 +1032,22 @@ public class MainPanelView extends GenericView {
                 return;
             }
         }
+        
+        int individuosMaximos = Integer.parseInt(indivMax1.getValue().toString());
+        if (individuosMaximos == 0){
+            PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 individuos");
+            return;
+        }
+        
+        iteracionesMaxima = Integer.parseInt(iteracionesMax1.getValue().toString());
+        if (iteracionesMaxima == 0){
+            PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 iteraciones");
+            return;
+        }
+        
         MainPanelController main = (MainPanelController) this.getController();
         main.addMateriaPrima(valores);
-        main.setMaximumPopulation(Integer.parseInt(indivMax1.getValue().toString()));
-        iteracionesMaxima = Integer.parseInt(iteracionesMax1.getValue().toString());
+        main.setMaximumPopulation(individuosMaximos);
         main.setMaximumAge(iteracionesMaxima);
 
         PopUpFactory.showConfirmPopUP(this, "Valores Agregados con exito");
