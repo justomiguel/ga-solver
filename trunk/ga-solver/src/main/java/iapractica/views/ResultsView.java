@@ -5,10 +5,8 @@
 package iapractica.views;
 
 import genetics.individuos.Individuo;
+import genetics.individuos.IndividuoSobrComparator;
 import iapractica.views.popups.PopUpFactory;
-import java.awt.Image;
-import java.net.URL;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -29,36 +27,29 @@ public final class ResultsView extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(MainPanelView.class);
         this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
         
-        Collections.sort(myFinalPopulation);
+        Collections.sort(myFinalPopulation, new IndividuoSobrComparator(true));
 
         this.myFinalPopulation = myFinalPopulation;
-
-        LinkedList<Integer> nuevaLista = new LinkedList<Integer>();
-
-        for (int i = 0; i < 10; i++) {
-            nuevaLista.add(myFinalPopulation.get(i).getMateriaPrimaSobrante());
-        }
-                
-        Collections.sort(nuevaLista);
         
-        Object[][] objectToModel = new Object[10][7];
+        Object[][] objectToModel = new Object[10][8];
 
         for (int i = 0; i < 10; i++) {
             Object[] filas = objectToModel[i];
             filas[0] = i + 1;
-            Individuo cromosoma = getIndBySobrante(myFinalPopulation, nuevaLista.get(i));
+            Individuo cromosoma = myFinalPopulation.get(i);
             filas[1] = cromosoma.getFitnessValue();
             filas[2] = cromosoma.getProfit();
-            filas[3] = cromosoma.getProductsSize(1);
-            filas[4] = cromosoma.getProductsSize(2);
-            filas[5] = cromosoma.getProductsSize(3);
-            filas[6] = cromosoma.getProductsSize(4);
+            filas[3] = cromosoma.getMateriaPrimaSobrante();
+            filas[4] = cromosoma.getProductsSize(1);
+            filas[5] = cromosoma.getProductsSize(2);
+            filas[6] = cromosoma.getProductsSize(3);
+            filas[7] = cromosoma.getProductsSize(4);
         }
 
         myTable.setModel(new javax.swing.table.DefaultTableModel(
                 objectToModel,
                 new String[]{
-                    "Solucion Nro", "Valor Aptitud", "Ganancia", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
+                    "Solucion Nro", "Valor Aptitud", "Ganancia","Materia Prima Sobrante", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
                 }));
         
        // loadImage();
