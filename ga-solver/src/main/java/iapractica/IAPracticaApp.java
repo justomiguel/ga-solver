@@ -4,8 +4,6 @@
 package iapractica;
 
 import com.frre.cemami.utils.DefaultLogguer;
-import com.frre.cemami.utils.SplashDemo;
-import genetics.individuos.Poblacion;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
