@@ -69,7 +69,6 @@ public class MainPanelView extends GenericView {
     private static final String AVERAGE_FITNESS = "Promedio Por Valor de Aptitud";
     private static final String AVERAGE_PROFIT = "Promedio Por Valor de Ganancia";
     private boolean inPauseStatus = false;
-    
     private PopulationView populationView;
 
     /**
@@ -81,12 +80,13 @@ public class MainPanelView extends GenericView {
         this.playBtn.setText("Play");
         init();
         makeJFreChartPanel();
-        
+
         populationView = new PopulationView();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(MainPanelView.class);
         this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
 
+        historial.setSelected(true);
     }
 
     /**
@@ -128,6 +128,7 @@ public class MainPanelView extends GenericView {
         indivMax1 = new javax.swing.JSpinner();
         iteracionesMax1 = new javax.swing.JSpinner();
         jLabel24 = new javax.swing.JLabel();
+        historial = new javax.swing.JCheckBox();
         operadoresGeneticos = new javax.swing.JPanel();
         seleccionPanel = new javax.swing.JPanel();
         Metodos = new javax.swing.JPanel();
@@ -489,6 +490,14 @@ public class MainPanelView extends GenericView {
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 9;
         cargaDatos.add(jLabel24, gridBagConstraints);
+
+        historial.setText(resourceMap.getString("historial.text")); // NOI18N
+        historial.setToolTipText(resourceMap.getString("historial.toolTipText")); // NOI18N
+        historial.setName("historial"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 7;
+        cargaDatos.add(historial, gridBagConstraints);
 
         tabPanel.addTab("Carga de Datos", cargaDatos);
 
@@ -1057,6 +1066,7 @@ public class MainPanelView extends GenericView {
         main.addMateriaPrima(valores);
         main.setMaximumPopulation(individuosMaximos);
         main.setMaximumAge(iteracionesMaxima);
+        main.setHistorialActive(historial.isSelected());
 
         PopUpFactory.showConfirmPopUP(this, "Valores Agregados con exito");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1348,11 +1358,13 @@ public class MainPanelView extends GenericView {
 
     private void pauseBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pauseBtnMouseReleased
         // TODO add your handling code here:
-        inPauseStatus = !inPauseStatus;
-        this.nextBnt.setEnabled(inPauseStatus);
-        this.backBtn.setEnabled(inPauseStatus);
-        MainPanelController main = (MainPanelController) this.getController();
-        main.pauseSimulation(inPauseStatus);
+        if (historial.isSelected()) {
+            inPauseStatus = !inPauseStatus;
+            this.nextBnt.setEnabled(inPauseStatus);
+            this.backBtn.setEnabled(inPauseStatus);
+            MainPanelController main = (MainPanelController) this.getController();
+            main.pauseSimulation(inPauseStatus);
+        }
     }//GEN-LAST:event_pauseBtnMouseReleased
 
     private void nextBntMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextBntMouseClicked
@@ -1368,7 +1380,7 @@ public class MainPanelView extends GenericView {
         if (inPauseStatus) {
             backBtn.setEnabled(false);
             MainPanelController main = (MainPanelController) this.getController();
-            
+
             for (XYSeries series : seriesProfit) {
                 if (series.getItemCount() > 0) {
                     series.remove(series.getItemCount() - 1);
@@ -1390,7 +1402,6 @@ public class MainPanelView extends GenericView {
         // TODO add your handling code here:
         this.populationView.setVisible(popuView.isSelected());
     }//GEN-LAST:event_popuViewItemStateChanged
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Metodos;
     private javax.swing.JPanel Metodos3;
@@ -1409,6 +1420,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JCheckBox controlCopias;
     private javax.swing.JSpinner cruzaPercentage;
     private javax.swing.JCheckBox elitista;
+    private javax.swing.JCheckBox historial;
     private javax.swing.JSpinner indivMax1;
     private javax.swing.JSpinner iteracionesMax1;
     private javax.swing.JButton jButton1;
@@ -1767,9 +1779,9 @@ public class MainPanelView extends GenericView {
                         averageAptitud.setText(promedio);
                     }
 
-                     if (popuView.isSelected()) {
-                         populationView.setTableContents(data, theAge);
-                     }
+                    if (popuView.isSelected()) {
+                        populationView.setTableContents(data, theAge);
+                    }
                     //ypdate chart
                     if (useChart.isSelected()) {
 
@@ -1790,8 +1802,8 @@ public class MainPanelView extends GenericView {
                 catch (Exception e) {
                     logguer.logError(e.getMessage());
                 }
-                
-                if (inPauseStatus){
+
+                if (inPauseStatus) {
                     backBtn.setEnabled(true);
                 }
             }
@@ -1818,6 +1830,4 @@ public class MainPanelView extends GenericView {
         super.dispose();
         this.populationView.dispose();
     }
-    
-    
 }

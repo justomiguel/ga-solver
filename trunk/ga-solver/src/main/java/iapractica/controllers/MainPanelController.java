@@ -33,6 +33,7 @@ public class MainPanelController extends GenericController {
     private int cruzaManagerPercentage;
     private int mutatorManagerPercentage;
     private FinalResultsView theFinalView;
+    private boolean historialActive;
     
     public MainPanelController() {
         super(new MainPanelView());
@@ -54,7 +55,7 @@ public class MainPanelController extends GenericController {
         if (materiasPrimas.isEmpty()) {
             throw new NoMateriaPrimaAddedException("No Materia was added");
         }
-        population = new Poblacion(this, materiasPrimas, maximumAge,maximumPopulation);
+        population = new Poblacion(this, materiasPrimas, maximumAge,maximumPopulation, historialActive);
         population.setGAOperators(selectionManagerPercentage, mutatorManagerPercentage, cruzaManagerPercentage, mutationsCoverageMethods, selectionCoverageMethods, cruzaCoverageMethods);
         population.start();
     }
@@ -156,6 +157,10 @@ public class MainPanelController extends GenericController {
     @Override
     public boolean isActive() {
         return active;
+    }
+
+    public void setHistorialActive(boolean selected) {
+        this.historialActive = selected;
     }
 
    

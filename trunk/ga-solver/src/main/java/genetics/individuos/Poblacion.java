@@ -47,20 +47,15 @@ public final class Poblacion extends Thread {
     //materias primas
     private LinkedList<Integer> materiasPrimas;
     private int sleepTime = 0;
+    private final boolean activeHistorial;
 
-    public Poblacion(GenericController controller, LinkedList<Integer> materiasPrimas) {
-        maximumAge = MAXIMUM_DEFAULT_AGE;
-        maximumPopulation = MAXIMUM_DEFAULT_POPULATION_SIZE;
-        this.controller = (MainPanelController) controller;
-        this.materiasPrimas = materiasPrimas;
-        init();
-    }
 
-    public Poblacion(GenericController controller, LinkedList<Integer> materiasPrimas, int maxAge, int maxPopulation) {
+    public Poblacion(GenericController controller, LinkedList<Integer> materiasPrimas, int maxAge, int maxPopulation, boolean activeHistoria) {
         maximumAge = maxAge;
         maximumPopulation = maxPopulation;
         this.controller = (MainPanelController) controller;
         this.materiasPrimas = materiasPrimas;
+        this.activeHistorial = activeHistoria;
         init();
     }
 
@@ -118,7 +113,9 @@ public final class Poblacion extends Thread {
         this.updateUIProgress(50);
 
         dataManager.deleteOldElements();
-        dataManager.saveToMateriasPrimasExternalFile(materiasPrimas);
+        if (activeHistorial){
+            dataManager.saveToMateriasPrimasExternalFile(materiasPrimas);
+        }
         
         while (running && age < maximumAge) {
             if (!inPause) {
@@ -144,7 +141,9 @@ public final class Poblacion extends Thread {
         running = false;
 
         //save the last population
-        dataManager.saveToExternalFile(age, currentPopulation);
+        if (activeHistorial) {
+            dataManager.saveToExternalFile(age, currentPopulation);
+        }
         
         this.updateUIProgress(100);
         
@@ -254,7 +253,9 @@ public final class Poblacion extends Thread {
     }
 
     private void processAge() {
-        dataManager.saveToExternalFile(age, currentPopulation);
+        if (activeHistorial){
+            dataManager.saveToExternalFile(age, currentPopulation);
+        }
         evolve();
         updateUIChart(age, currentPopulation);
 
