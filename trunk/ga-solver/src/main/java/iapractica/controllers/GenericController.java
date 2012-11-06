@@ -15,11 +15,13 @@ import javax.swing.JFrame;
 public abstract class GenericController {
 
     protected GenericView view;
+    protected boolean active;
 
     public GenericController(GenericView view){
         this.view = view;
         setController();
         init();
+        active = true;
     }
 
     public abstract void init();
@@ -29,5 +31,7 @@ public abstract class GenericController {
     private void setController() {
         this.view.setController(this);
     }
+    
+     public abstract boolean isActive();
 
 }

@@ -23,7 +23,6 @@ import java.util.LinkedList;
 public class MainPanelController extends GenericController {
     
     private Poblacion population;
-    private DataDrawer drawer;
     private LinkedList<Integer> materiasPrimas = new LinkedList<Integer>();
     private int maximumPopulation;
     private int maximumAge;
@@ -46,11 +45,8 @@ public class MainPanelController extends GenericController {
     
     @Override
     public void show() {
-        MainPanelView panel = (MainPanelView) view;
         this.view.reset();
-        drawer = new DataDrawer(panel);
         this.view.setVisible(true);
-        
     }
     
     public void startSimulation() throws NoMateriaPrimaAddedException {
@@ -86,6 +82,7 @@ public class MainPanelController extends GenericController {
     @Override
     public void dispose() {
         destroyCurrentSimulation();
+        active = false;
     }
     
     public void addMateriaPrima(int[] materiasPrimas) {
@@ -155,5 +152,12 @@ public class MainPanelController extends GenericController {
         MainPanelView panel = (MainPanelView) view;
         panel.enablePlayButton(true);
     }
+
+    @Override
+    public boolean isActive() {
+        return active;
+    }
+
+   
 
 }

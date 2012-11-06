@@ -117,6 +117,8 @@ public final class Poblacion extends Thread {
 
         this.updateUIProgress(50);
 
+        dataManager.saveToMateriasPrimasExternalFile(materiasPrimas);
+        
         while (running && age < maximumAge) {
             if (!inPause) {
                 processAge();
@@ -140,6 +142,9 @@ public final class Poblacion extends Thread {
         
         running = false;
 
+        //save the last population
+        dataManager.saveToExternalFile(age, currentPopulation);
+        
         this.updateUIProgress(100);
         
         this.showLastScreen();

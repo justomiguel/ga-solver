@@ -7,6 +7,8 @@ public class Constants {
 	public static final String EXTERNAL_HISTORY_FOLDER = "./history";
 	
 	public static final String EXTERNAL_XML_FILE = "populationAge";
+        
+        public static final String EXTERNAL_XML_FILE_MATERIAS_PRIMAS = "materiasPrimas.xml";
 
         public static final String FILE_SEPARATOR = "/";
 }
