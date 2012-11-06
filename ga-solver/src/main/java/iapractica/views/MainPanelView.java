@@ -69,6 +69,8 @@ public class MainPanelView extends GenericView {
     private static final String AVERAGE_FITNESS = "Promedio Por Valor de Aptitud";
     private static final String AVERAGE_PROFIT = "Promedio Por Valor de Ganancia";
     private boolean inPauseStatus = false;
+    
+    private PopulationView populationView;
 
     /**
      * Creates new form MainPanel
@@ -79,6 +81,8 @@ public class MainPanelView extends GenericView {
         this.playBtn.setText("Play");
         init();
         makeJFreChartPanel();
+        
+        populationView = new PopulationView();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(MainPanelView.class);
         this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
@@ -183,7 +187,7 @@ public class MainPanelView extends GenericView {
         selectChartsPanel = new javax.swing.JPanel();
         scatterPlotCombo = new javax.swing.JComboBox();
         useChart = new javax.swing.JCheckBox();
-        jButton4 = new javax.swing.JButton();
+        popuView = new javax.swing.JCheckBox();
         sortData = new javax.swing.JCheckBox();
         linePlotterCombo = new javax.swing.JComboBox();
         ballPanel = new javax.swing.JPanel();
@@ -889,14 +893,14 @@ public class MainPanelView extends GenericView {
         });
         selectChartsPanel.add(useChart);
 
-        jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
-        jButton4.setName("jButton4"); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+        popuView.setText(resourceMap.getString("popuView.text")); // NOI18N
+        popuView.setName("popuView"); // NOI18N
+        popuView.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                popuViewItemStateChanged(evt);
             }
         });
-        selectChartsPanel.add(jButton4);
+        selectChartsPanel.add(popuView);
 
         sortData.setText(resourceMap.getString("sortData.text")); // NOI18N
         sortData.setName("sortData"); // NOI18N
@@ -1382,10 +1386,10 @@ public class MainPanelView extends GenericView {
 
     }//GEN-LAST:event_backBtnMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void popuViewItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_popuViewItemStateChanged
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
+        this.populationView.setVisible(popuView.isSelected());
+    }//GEN-LAST:event_popuViewItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Metodos;
@@ -1410,7 +1414,6 @@ public class MainPanelView extends GenericView {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1464,6 +1467,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JPanel operadoresGeneticos;
     private javax.swing.JButton pauseBtn;
     private javax.swing.JButton playBtn;
+    private javax.swing.JCheckBox popuView;
     private javax.swing.JLabel population;
     private javax.swing.JPanel propertiesManager;
     private javax.swing.JCheckBox random;
@@ -1763,6 +1767,9 @@ public class MainPanelView extends GenericView {
                         averageAptitud.setText(promedio);
                     }
 
+                     if (popuView.isSelected()) {
+                         populationView.setTableContents(data, theAge);
+                     }
                     //ypdate chart
                     if (useChart.isSelected()) {
 
@@ -1805,4 +1812,12 @@ public class MainPanelView extends GenericView {
         Utils.saveToFile(myChartPanelS.get(AVERAGE_FITNESS).getChart(), "promedioAptitud");
         Utils.saveToFile(myChartPanelS.get(AVERAGE_PROFIT).getChart(), "promedioGanancias");
     }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        this.populationView.dispose();
+    }
+    
+    
 }

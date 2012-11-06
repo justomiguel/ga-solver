@@ -16,27 +16,23 @@ import java.util.LinkedList;
  * @author Justo Vargas
  */
 public final class PopulationView extends javax.swing.JFrame {
-
-    private LinkedList<Individuo> myFinalPopulation;
     
-    private LinkedList<Integer> materiasPrimas;
-    
-    private IndividualResult myWindow;
-    
-
+      
     /**
      * Creates new form ResultsView
      */
-    public PopulationView(LinkedList<Individuo> myFinalPopulation,  LinkedList<Integer> materiasPrimas) {
+    public PopulationView() {
         initComponents();
         
-        this.setTitle("GA-Solver - Poblacion Actual");
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(PopulationView.class);
         this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
         
-        Collections.sort(myFinalPopulation, new IndividuoSobrComparator(true));
-
-        this.myFinalPopulation = myFinalPopulation;
+        
+    }
+    
+    public void setTableContents(LinkedList<Individuo> myFinalPopulation, int age){
+        
+        this.setTitle("GA-Solver - Poblacion Actual - Iteracion Numero "+age);
         
         Object[][] objectToModel = new Object[myFinalPopulation.size()][8];
 
@@ -59,7 +55,6 @@ public final class PopulationView extends javax.swing.JFrame {
                     "Solucion Nro", "Valor Aptitud", "Ganancia","Materia Prima Sobrante", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
                 }));
         
-       this.materiasPrimas = materiasPrimas;
     }
     
 
@@ -85,7 +80,6 @@ public final class PopulationView extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(PopulationView.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
-        setResizable(false);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
