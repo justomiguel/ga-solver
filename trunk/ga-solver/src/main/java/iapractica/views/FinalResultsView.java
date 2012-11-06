@@ -6,6 +6,7 @@ package iapractica.views;
 
 import genetics.individuos.Individuo;
 import genetics.individuos.IndividuoSobrComparator;
+import iapractica.controllers.MainPanelController;
 import java.util.Collections;
 
 import java.util.LinkedList;
@@ -23,12 +24,15 @@ public final class FinalResultsView extends javax.swing.JFrame {
     
     private IndividualResult myWindow;
     
+    private MainPanelController controller ;
 
     /**
      * Creates new form ResultsView
      */
-    public FinalResultsView(LinkedList<Individuo> myFinalPopulation,  LinkedList<Integer> materiasPrimas) {
+    public FinalResultsView(MainPanelController aThis, LinkedList<Individuo> myFinalPopulation,  LinkedList<Integer> materiasPrimas) {
         initComponents();
+        
+        controller = aThis;
         
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(FinalResultsView.class);
         this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
@@ -240,6 +244,12 @@ public final class FinalResultsView extends javax.swing.JFrame {
         //PopUpFactory.showConfirmPopUP(this, "Solucion Nro" + ( rowNumber + 1 ) + " \n " + myFinalPopulation.get(rowNumber));
         //}
     }//GEN-LAST:event_myTableMouseClicked
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        controller.notifyClosed();
+    }
 
     
 
