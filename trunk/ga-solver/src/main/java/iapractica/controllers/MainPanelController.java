@@ -136,15 +136,17 @@ public class MainPanelController extends GenericController {
 
     public void showLastScreen(LinkedList<Individuo> currentPopulation) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
         }
         catch (InterruptedException ex) {
            
         }
         MainPanelView panel = (MainPanelView) view;
-        panel.saveImages();
-        FinalResultsView view = new FinalResultsView(currentPopulation, (LinkedList<Integer>)materiasPrimas.clone());
-        view.setVisible(true);
+        if (view != null && view.isVisible()){
+            panel.saveImages();
+            FinalResultsView view = new FinalResultsView(currentPopulation, (LinkedList<Integer>)materiasPrimas.clone());
+            view.setVisible(true);
+        }
     }
 
 }
