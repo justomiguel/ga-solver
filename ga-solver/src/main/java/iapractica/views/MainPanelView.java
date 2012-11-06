@@ -183,9 +183,11 @@ public class MainPanelView extends GenericView {
         selectChartsPanel = new javax.swing.JPanel();
         scatterPlotCombo = new javax.swing.JComboBox();
         useChart = new javax.swing.JCheckBox();
+        jButton4 = new javax.swing.JButton();
         sortData = new javax.swing.JCheckBox();
         linePlotterCombo = new javax.swing.JComboBox();
         ballPanel = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
         chartPanel = new javax.swing.JPanel();
         chart1 = new javax.swing.JPanel();
         chart2 = new javax.swing.JPanel();
@@ -887,6 +889,15 @@ public class MainPanelView extends GenericView {
         });
         selectChartsPanel.add(useChart);
 
+        jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
+        jButton4.setName("jButton4"); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        selectChartsPanel.add(jButton4);
+
         sortData.setText(resourceMap.getString("sortData.text")); // NOI18N
         sortData.setName("sortData"); // NOI18N
         sortData.addItemListener(new java.awt.event.ItemListener() {
@@ -951,6 +962,12 @@ public class MainPanelView extends GenericView {
 
         ballPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ballPanel.setName("ballPanel"); // NOI18N
+
+        jLabel26.setFont(resourceMap.getFont("jLabel26.font")); // NOI18N
+        jLabel26.setText(resourceMap.getString("jLabel26.text")); // NOI18N
+        jLabel26.setName("jLabel26"); // NOI18N
+        ballPanel.add(jLabel26);
+
         simlationProperties.add(ballPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 800, 60));
 
         tabPanel.addTab("Propiedades Simulacion", simlationProperties);
@@ -1364,6 +1381,12 @@ public class MainPanelView extends GenericView {
         }
 
     }//GEN-LAST:event_backBtnMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Metodos;
     private javax.swing.JPanel Metodos3;
@@ -1387,6 +1410,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1405,6 +1429,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

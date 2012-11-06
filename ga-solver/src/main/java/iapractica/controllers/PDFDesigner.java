@@ -40,14 +40,18 @@ public class PDFDesigner {
 
     public static void makePDF(int solutionNumber, Individuo solucion, LinkedList<Integer> materiasPrimas) {
         try {
-            File myFile = new File("Solucion" + solutionNumber + ".pdf");
+            File myDir = new File("pdfs");
+                if (!myDir.exists()) {
+                    myDir.mkdirs();
+                }
+            File myFile = new File("pdfs/Solucion" + solutionNumber + ".pdf");
             if (!myFile.exists()) {
                 Document document = null;
                 PdfWriter writer = null;
                 FileOutputStream fileStream = null;
                 try {
                     document = new Document(PageSize.A4, 20, 20, 20, 20);
-                    fileStream = new FileOutputStream("Solucion" + solutionNumber + ".pdf");
+                    fileStream = new FileOutputStream("pdfs/Solucion" + solutionNumber + ".pdf");
                     writer = PdfWriter.getInstance(document, fileStream);
                     document.open();
                 }
