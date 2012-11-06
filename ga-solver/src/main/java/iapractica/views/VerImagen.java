@@ -5,6 +5,7 @@
 package iapractica.views;
 
 import iapractica.views.myPanels.MyPanelImage;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -18,7 +19,7 @@ public class VerImagen extends javax.swing.JFrame {
     public VerImagen(String path) {
         initComponents();
         MyPanelImage myP = new MyPanelImage(path);
-        jPanel1.setSize(myP.getSize());
+        //jScrollPane1.setViewportView();
         this.jPanel1.add(myP);
         this.setTitle(path);
         this.setSize(myP.getImageSize());

@@ -21,7 +21,6 @@ import iapractica.controllers.MainPanelController;
 import iapractica.views.popups.PopUpFactory;
 import java.awt.Color;
 import java.awt.Component;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -151,6 +150,7 @@ public class MainPanelView extends GenericView {
         cruzaPercentage = new javax.swing.JSpinner();
         jLabel22 = new javax.swing.JLabel();
         simlationProperties = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         velocidad = new javax.swing.JSlider();
         jLabel19 = new javax.swing.JLabel();
@@ -185,6 +185,7 @@ public class MainPanelView extends GenericView {
         useChart = new javax.swing.JCheckBox();
         sortData = new javax.swing.JCheckBox();
         linePlotterCombo = new javax.swing.JComboBox();
+        ballPanel = new javax.swing.JPanel();
         chartPanel = new javax.swing.JPanel();
         chart1 = new javax.swing.JPanel();
         chart2 = new javax.swing.JPanel();
@@ -196,6 +197,7 @@ public class MainPanelView extends GenericView {
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         mainContainer.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        mainContainer.setAutoscrolls(true);
         mainContainer.setName("mainContainer"); // NOI18N
         mainContainer.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -660,11 +662,14 @@ public class MainPanelView extends GenericView {
         tabPanel.addTab("Ajuste de Operadores Geneticos", operadoresGeneticos);
 
         simlationProperties.setName("simlationProperties"); // NOI18N
-        simlationProperties.setLayout(new java.awt.GridBagLayout());
+        simlationProperties.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel9.setName("jPanel9"); // NOI18N
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel5.border.title"))); // NOI18N
         jPanel5.setName("jPanel5"); // NOI18N
-        jPanel5.setLayout(new java.awt.GridBagLayout());
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         velocidad.setPaintLabels(true);
         velocidad.setPaintTicks(true);
@@ -681,44 +686,17 @@ public class MainPanelView extends GenericView {
                 velocidadPropertyChange(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 522;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 2);
-        jPanel5.add(velocidad, gridBagConstraints);
+        jPanel5.add(velocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 558, 30));
 
         jLabel19.setForeground(resourceMap.getColor("jLabel19.foreground")); // NOI18N
         jLabel19.setText(resourceMap.getString("jLabel19.text")); // NOI18N
         jLabel19.setName("jLabel19"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel5.add(jLabel19, gridBagConstraints);
+        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 47, -1, -1));
 
         jLabel20.setForeground(resourceMap.getColor("jLabel20.foreground")); // NOI18N
         jLabel20.setText(resourceMap.getString("jLabel20.text")); // NOI18N
         jLabel20.setName("jLabel20"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 466, 0, 0);
-        jPanel5.add(jLabel20, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 0);
-        simlationProperties.add(jPanel5, gridBagConstraints);
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 47, -1, -1));
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.setName("jPanel4"); // NOI18N
@@ -781,15 +759,6 @@ public class MainPanelView extends GenericView {
             }
         });
         jPanel4.add(jButton3);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 112;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 14, 0, 8);
-        simlationProperties.add(jPanel4, gridBagConstraints);
 
         stadistic.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("stadistic.border.title"))); // NOI18N
         stadistic.setName("stadistic"); // NOI18N
@@ -879,34 +848,12 @@ public class MainPanelView extends GenericView {
 
         stadistic.add(jPanel8);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 31;
-        gridBagConstraints.insets = new java.awt.Insets(1, 0, 4, 0);
-        simlationProperties.add(stadistic, gridBagConstraints);
-
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel7.border.title"))); // NOI18N
         jPanel7.setName("jPanel7"); // NOI18N
         jPanel7.setLayout(new java.awt.GridLayout(1, 0));
 
         jProgressBar1.setName("jProgressBar1"); // NOI18N
         jPanel7.add(jProgressBar1);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 768;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        simlationProperties.add(jPanel7, gridBagConstraints);
 
         selectChartsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("selectChartsPanel.border.title"))); // NOI18N
         selectChartsPanel.setName("selectChartsPanel"); // NOI18N
@@ -963,16 +910,48 @@ public class MainPanelView extends GenericView {
         });
         selectChartsPanel.add(linePlotterCombo);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.ipadx = 385;
-        gridBagConstraints.ipady = 21;
-        gridBagConstraints.weightx = 2.2;
-        gridBagConstraints.weighty = 1.6;
-        gridBagConstraints.insets = new java.awt.Insets(0, 13, 0, 8);
-        simlationProperties.add(selectChartsPanel, gridBagConstraints);
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectChartsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addComponent(stadistic, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(selectChartsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(stadistic, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
+
+        simlationProperties.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 220));
+
+        ballPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ballPanel.setName("ballPanel"); // NOI18N
+        simlationProperties.add(ballPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 800, 60));
 
         tabPanel.addTab("Propiedades Simulacion", simlationProperties);
 
@@ -1031,24 +1010,28 @@ public class MainPanelView extends GenericView {
                 return;
             }
         }
-        
-        if (sumatoriaMatPrima == 0){
+
+        if (sumatoriaMatPrima == 0) {
             PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 de materia prima en todos lados");
             return;
         }
-        
+
         int individuosMaximos = Integer.parseInt(indivMax1.getValue().toString());
-        if (individuosMaximos == 0){
+        if (individuosMaximos == 0) {
+            PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 individuos");
+            return;
+        } else if (individuosMaximos <= 50) {
             PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 individuos");
             return;
         }
-        
+
+
         iteracionesMaxima = Integer.parseInt(iteracionesMax1.getValue().toString());
-        if (iteracionesMaxima == 0){
+        if (iteracionesMaxima == 0) {
             PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 iteraciones");
             return;
         }
-        
+
         MainPanelController main = (MainPanelController) this.getController();
         main.addMateriaPrima(valores);
         main.setMaximumPopulation(individuosMaximos);
@@ -1364,7 +1347,7 @@ public class MainPanelView extends GenericView {
         if (inPauseStatus) {
             backBtn.setEnabled(false);
             MainPanelController main = (MainPanelController) this.getController();
-
+            
             for (XYSeries series : seriesProfit) {
                 if (series.getItemCount() > 0) {
                     series.remove(series.getItemCount() - 1);
@@ -1389,6 +1372,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JLabel age;
     private javax.swing.JLabel averageAptitud;
     private javax.swing.JButton backBtn;
+    private javax.swing.JPanel ballPanel;
     private javax.swing.JLabel bestAptitud;
     private javax.swing.JCheckBox binomial;
     private javax.swing.JPanel cargaDatos;
@@ -1436,6 +1420,7 @@ public class MainPanelView extends GenericView {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
@@ -1624,6 +1609,7 @@ public class MainPanelView extends GenericView {
         this.playBtn.setEnabled(value);
         inPauseStatus = !value;
         this.pauseBtn.setEnabled(!value);
+
     }
 
     private void enableStadistics() {
@@ -1770,7 +1756,11 @@ public class MainPanelView extends GenericView {
 
                 }
                 catch (Exception e) {
-                    logguer.logError(this, e.getMessage());
+                    logguer.logError(e.getMessage());
+                }
+                
+                if (inPauseStatus){
+                    backBtn.setEnabled(true);
                 }
             }
 
@@ -1781,13 +1771,13 @@ public class MainPanelView extends GenericView {
                 container.addSeries(series);
             }
         });
-        backBtn.setEnabled(true);
+
     }
 
     public void saveImages() {
-            Utils.saveToFile(myChartPanelS.get(POPULATION_PROFIT).getChart(), "poblacionGanancias");
-            Utils.saveToFile(myChartPanelS.get(POPULATION_FITNESS).getChart(), "poblacionAptitud");
-            Utils.saveToFile(myChartPanelS.get(AVERAGE_FITNESS).getChart(), "promedioAptitud");
-            Utils.saveToFile(myChartPanelS.get(AVERAGE_PROFIT).getChart(), "promedioGanancias");
+        Utils.saveToFile(myChartPanelS.get(POPULATION_PROFIT).getChart(), "poblacionGanancias");
+        Utils.saveToFile(myChartPanelS.get(POPULATION_FITNESS).getChart(), "poblacionAptitud");
+        Utils.saveToFile(myChartPanelS.get(AVERAGE_FITNESS).getChart(), "promedioAptitud");
+        Utils.saveToFile(myChartPanelS.get(AVERAGE_PROFIT).getChart(), "promedioGanancias");
     }
 }
