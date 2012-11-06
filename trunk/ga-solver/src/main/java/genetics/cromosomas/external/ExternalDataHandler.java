@@ -11,6 +11,7 @@ import genetics.individuos.Individuo;
 import genetics.individuos.IndividuosFactory;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import genetics.productos.exceptions.ProductCreationException;
+import iapractica.controllers.PDFDesigner;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -131,15 +132,21 @@ public class ExternalDataHandler {
     }
     
     public void deleteOldElements() {
-        File dir = new File(Constants.EXTERNAL_HISTORY_FOLDER);
+        deleteFolder(Constants.EXTERNAL_HISTORY_FOLDER);
+        deleteFolder("pdfs"+PDFDesigner.PDF_TYPES.A);
+        deleteFolder("pdfs"+PDFDesigner.PDF_TYPES.H);
+    }
+    
+    private void deleteFolder(String path){
+        File myDir = new File(path);
         try {
-            FileUtils.deleteDirectory(dir);
-            if (!dir.exists()) {
-                dir.mkdirs();
+            FileUtils.deleteDirectory(myDir);
+            if (!myDir.exists()) {
+                myDir.mkdirs();
             }
         }
         catch (IOException ex) {
-            logguer.logError("Can not deleteDirectory");
+            logguer.logError("Can not delete "+path+" Directory");
         }
     }
 

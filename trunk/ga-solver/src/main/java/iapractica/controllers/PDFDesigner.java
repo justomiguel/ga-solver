@@ -35,23 +35,28 @@ import java.util.LinkedList;
  * @author developer
  */
 public class PDFDesigner {
+    
+    public static enum PDF_TYPES {
+        H,
+        A
+    }
 
     static DefaultLogguer logguer = DefaultLogguer.getLogger();
 
-    public static void makePDF(int solutionNumber, Individuo solucion, LinkedList<Integer> materiasPrimas) {
+    public static void makePDF(int solutionNumber, Individuo solucion, LinkedList<Integer> materiasPrimas, PDF_TYPES location) {
         try {
-            File myDir = new File("pdfs");
+            File myDir = new File("pdfs"+location.toString());
                 if (!myDir.exists()) {
                     myDir.mkdirs();
                 }
-            File myFile = new File("pdfs/Solucion" + solutionNumber + ".pdf");
+            File myFile = new File("pdfs"+location.toString()+"/Solucion" + solutionNumber + ".pdf");
             if (!myFile.exists()) {
                 Document document = null;
                 PdfWriter writer = null;
                 FileOutputStream fileStream = null;
                 try {
                     document = new Document(PageSize.A4, 20, 20, 20, 20);
-                    fileStream = new FileOutputStream("pdfs/Solucion" + solutionNumber + ".pdf");
+                    fileStream = new FileOutputStream("pdfs"+location.toString()+"/Solucion" + solutionNumber + ".pdf");
                     writer = PdfWriter.getInstance(document, fileStream);
                     document.open();
                 }
