@@ -1041,7 +1041,7 @@ public class MainPanelView extends GenericView {
         if (individuosMaximos == 0) {
             PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 individuos");
             return;
-        } else if (individuosMaximos <= 50) {
+        } else if (individuosMaximos <= 99) {
             PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con menos de 100 individuos");
             return;
         }

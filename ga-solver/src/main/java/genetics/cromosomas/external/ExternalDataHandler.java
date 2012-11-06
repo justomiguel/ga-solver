@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -126,6 +127,19 @@ public class ExternalDataHandler {
             return 0;
         } else {
             return chld.length;
+        }
+    }
+    
+    public void deleteOldElements() {
+        File dir = new File(Constants.EXTERNAL_HISTORY_FOLDER);
+        try {
+            FileUtils.deleteDirectory(dir);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+        }
+        catch (IOException ex) {
+            logguer.logError("Can not deleteDirectory");
         }
     }
 
