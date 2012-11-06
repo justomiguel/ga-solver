@@ -27,13 +27,39 @@ public final class PopulationView extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(PopulationView.class);
         this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
         
+         Object[][] objectToModel = new Object[1][8];
+
+        for (int i = 0; i < 1; i++) {
+            Object[] filas = objectToModel[i];
+            filas[0] = i + 1;
+            filas[1] = 0;
+            filas[2] = 0;
+            filas[3] = 0;
+            filas[4] = 0;
+            filas[5] = 0;
+            filas[6] = 0;
+            filas[7] = 0;
+        }
+
+        populationActual.setModel(new javax.swing.table.DefaultTableModel(
+                objectToModel,
+                new String[]{
+                    "Solucion Nro", "Valor Aptitud", "Ganancia","Materia Prima Sobrante", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
+                }));
         
+        BeforePopulation.setModel(new javax.swing.table.DefaultTableModel(
+                objectToModel,
+                new String[]{
+                    "Solucion Nro", "Valor Aptitud", "Ganancia","Materia Prima Sobrante", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
+                }));
     }
     
     public void setTableContents(LinkedList<Individuo> myFinalPopulation, int age){
         
         this.setTitle("GA-Solver - Poblacion Actual - Iteracion Numero "+age);
         
+        BeforePopulation.setModel(populationActual.getModel());
+
         Object[][] objectToModel = new Object[myFinalPopulation.size()][8];
 
         for (int i = 0; i < myFinalPopulation.size(); i++) {
@@ -49,7 +75,7 @@ public final class PopulationView extends javax.swing.JFrame {
             filas[7] = cromosoma.getProductsSize(4);
         }
 
-        myTable.setModel(new javax.swing.table.DefaultTableModel(
+        populationActual.setModel(new javax.swing.table.DefaultTableModel(
                 objectToModel,
                 new String[]{
                     "Solucion Nro", "Valor Aptitud", "Ganancia","Materia Prima Sobrante", "Productos 1", "Productos 2", "Productos 3", "Productos 4"
@@ -69,8 +95,16 @@ public final class PopulationView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        actualPopulationView = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        BeforePopulation = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
+        beforePopulationPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        myTable = new javax.swing.JTable(){
+        populationActual = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
@@ -88,11 +122,15 @@ public final class PopulationView extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridLayout());
 
         jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(2, 0));
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+        actualPopulationView.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("actualPopulationView.border.title"))); // NOI18N
+        actualPopulationView.setName("actualPopulationView"); // NOI18N
+        actualPopulationView.setLayout(new java.awt.GridLayout());
 
-        myTable.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane2.setName("jScrollPane2"); // NOI18N
+
+        BeforePopulation.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"sr", "fv", null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -104,18 +142,53 @@ public final class PopulationView extends javax.swing.JFrame {
                 "Valor Aptitud", "Profit", "m1", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
             }
         ));
-        myTable.setName("myTable"); // NOI18N
-        myTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        BeforePopulation.setName("BeforePopulation"); // NOI18N
+        BeforePopulation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                myTableMouseClicked(evt);
+                BeforePopulationMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(myTable);
-        myTable.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("myTable.columnModel.title0")); // NOI18N
-        myTable.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("myTable.columnModel.title1")); // NOI18N
-        myTable.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("myTable.columnModel.title2")); // NOI18N
+        jScrollPane2.setViewportView(BeforePopulation);
+        BeforePopulation.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("populationActual.columnModel.title0")); // NOI18N
+        BeforePopulation.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("populationActual.columnModel.title1")); // NOI18N
+        BeforePopulation.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("populationActual.columnModel.title2")); // NOI18N
 
-        jPanel2.add(jScrollPane1);
+        actualPopulationView.add(jScrollPane2);
+
+        jPanel2.add(actualPopulationView);
+
+        beforePopulationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("beforePopulationPanel.border.title"))); // NOI18N
+        beforePopulationPanel.setName("beforePopulationPanel"); // NOI18N
+        beforePopulationPanel.setLayout(new java.awt.GridLayout());
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        populationActual.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"sr", "fv", null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Valor Aptitud", "Profit", "m1", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
+            }
+        ));
+        populationActual.setName("populationActual"); // NOI18N
+        populationActual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                populationActualMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(populationActual);
+        populationActual.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("populationActual.columnModel.title0")); // NOI18N
+        populationActual.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("populationActual.columnModel.title1")); // NOI18N
+        populationActual.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("populationActual.columnModel.title2")); // NOI18N
+
+        beforePopulationPanel.add(jScrollPane1);
+
+        jPanel2.add(beforePopulationPanel);
 
         jPanel1.add(jPanel2);
 
@@ -124,18 +197,26 @@ public final class PopulationView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void myTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myTableMouseClicked
+    private void populationActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_populationActualMouseClicked
        
-    }//GEN-LAST:event_myTableMouseClicked
+    }//GEN-LAST:event_populationActualMouseClicked
+
+    private void BeforePopulationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BeforePopulationMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BeforePopulationMouseClicked
 
     
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable BeforePopulation;
+    private javax.swing.JPanel actualPopulationView;
+    private javax.swing.JPanel beforePopulationPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable myTable;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable populationActual;
     // End of variables declaration//GEN-END:variables
 
     private Individuo getIndBySobrante(LinkedList<Individuo> myFinalPopulation, Integer sobrante) {

@@ -33,6 +33,7 @@ public class MainPanelController extends GenericController {
     private int selectionManagerPercentage;
     private int cruzaManagerPercentage;
     private int mutatorManagerPercentage;
+    private FinalResultsView theFinalView;
     
     public MainPanelController() {
         super(new MainPanelView());
@@ -144,9 +145,15 @@ public class MainPanelController extends GenericController {
         MainPanelView panel = (MainPanelView) view;
         if (view != null && view.isVisible()){
             panel.saveImages();
-            FinalResultsView view = new FinalResultsView(currentPopulation, (LinkedList<Integer>)materiasPrimas.clone());
-            view.setVisible(true);
+            panel.enablePlayButton(false);
+            theFinalView = new FinalResultsView(this, currentPopulation, (LinkedList<Integer>)materiasPrimas.clone());
+            theFinalView.setVisible(true);
         }
+    }
+
+    public void notifyClosed() {
+        MainPanelView panel = (MainPanelView) view;
+        panel.enablePlayButton(true);
     }
 
 }
