@@ -6,6 +6,7 @@ package iapractica.views;
 
 import genetics.individuos.Individuo;
 import genetics.individuos.IndividuoSobrComparator;
+import iapractica.controllers.PDFDesigner;
 import iapractica.controllers.ReviewPastController;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -197,7 +198,7 @@ public class ReviewPastTestsView extends GenericView{
         //if (rowNumber > 0){
             if (myWindow == null || !myWindow.isVisible()){
                 myWindow = null;
-                myWindow = new IndividualResult(String.valueOf(rowNumber), myFinalPopulation.get(rowNumber), materiasPrimas);
+                myWindow = new IndividualResult(String.valueOf(rowNumber), myFinalPopulation.get(rowNumber), materiasPrimas, PDFDesigner.PDF_TYPES.H);
             }
             myWindow.setVisible(true);
             myWindow.setFocusable(true);

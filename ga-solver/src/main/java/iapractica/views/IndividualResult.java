@@ -5,9 +5,10 @@
 package iapractica.views;
 
 import com.frre.cemami.utils.Utils;
-import iapractica.views.myPanels.MyResultsPanel;
 import genetics.individuos.Individuo;
 import iapractica.controllers.PDFDesigner;
+import iapractica.controllers.PDFDesigner.PDF_TYPES;
+import iapractica.views.myPanels.MyResultsPanel;
 import java.util.LinkedList;
 import javax.swing.JScrollPane;
 import org.jfree.chart.ChartFactory;
@@ -29,13 +30,16 @@ public class IndividualResult extends javax.swing.JFrame {
     
     private String resultadoNro;
     private Individuo solucion;
+    private final PDF_TYPES locationN;
 
     /**
      * Creates new form IndividualResult
      */
-    public IndividualResult(String resultadoNro, Individuo solucion, LinkedList<Integer> materiasPrimas) {
+    public IndividualResult(String resultadoNro, Individuo solucion, LinkedList<Integer> materiasPrimas, PDFDesigner.PDF_TYPES location) {
         initComponents();
 
+        this.locationN = location;
+        
         this.setTitle("GA-Solver - Resultado N° " + resultadoNro);
 
         this.materiasPrimas = materiasPrimas;
@@ -238,7 +242,7 @@ public class IndividualResult extends javax.swing.JFrame {
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // TODO add your handling code here:
-    PDFDesigner.makePDF(Integer.parseInt(resultadoNro), solucion, materiasPrimas);
+    PDFDesigner.makePDF(Integer.parseInt(resultadoNro), solucion, materiasPrimas, this.locationN);
 }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
