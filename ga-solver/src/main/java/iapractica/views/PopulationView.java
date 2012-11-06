@@ -96,15 +96,15 @@ public final class PopulationView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         actualPopulationView = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        BeforePopulation = new javax.swing.JTable(){
+        jScrollPane1 = new javax.swing.JScrollPane();
+        populationActual = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
         beforePopulationPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        populationActual = new javax.swing.JTable(){
+        jScrollPane2 = new javax.swing.JScrollPane();
+        BeforePopulation = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
@@ -116,50 +116,17 @@ public final class PopulationView extends javax.swing.JFrame {
         setName("Form"); // NOI18N
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel1.border.title"))); // NOI18N
         jPanel1.setAutoscrolls(true);
         jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel2.setName("jPanel2"); // NOI18N
         jPanel2.setLayout(new java.awt.GridLayout(2, 0));
 
         actualPopulationView.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("actualPopulationView.border.title"))); // NOI18N
         actualPopulationView.setName("actualPopulationView"); // NOI18N
-        actualPopulationView.setLayout(new java.awt.GridLayout());
-
-        jScrollPane2.setName("jScrollPane2"); // NOI18N
-
-        BeforePopulation.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"sr", "fv", null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Valor Aptitud", "Profit", "m1", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
-            }
-        ));
-        BeforePopulation.setName("BeforePopulation"); // NOI18N
-        BeforePopulation.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BeforePopulationMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(BeforePopulation);
-        BeforePopulation.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("populationActual.columnModel.title0")); // NOI18N
-        BeforePopulation.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("populationActual.columnModel.title1")); // NOI18N
-        BeforePopulation.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("populationActual.columnModel.title2")); // NOI18N
-
-        actualPopulationView.add(jScrollPane2);
-
-        jPanel2.add(actualPopulationView);
-
-        beforePopulationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("beforePopulationPanel.border.title"))); // NOI18N
-        beforePopulationPanel.setName("beforePopulationPanel"); // NOI18N
-        beforePopulationPanel.setLayout(new java.awt.GridLayout());
+        actualPopulationView.setLayout(new java.awt.GridLayout(1, 0));
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -182,11 +149,38 @@ public final class PopulationView extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(populationActual);
-        populationActual.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("populationActual.columnModel.title0")); // NOI18N
-        populationActual.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("populationActual.columnModel.title1")); // NOI18N
-        populationActual.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("populationActual.columnModel.title2")); // NOI18N
 
-        beforePopulationPanel.add(jScrollPane1);
+        actualPopulationView.add(jScrollPane1);
+
+        jPanel2.add(actualPopulationView);
+
+        beforePopulationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("beforePopulationPanel.border.title"))); // NOI18N
+        beforePopulationPanel.setName("beforePopulationPanel"); // NOI18N
+        beforePopulationPanel.setLayout(new java.awt.GridLayout(1, 0));
+
+        jScrollPane2.setName("jScrollPane2"); // NOI18N
+
+        BeforePopulation.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"sr", "fv", null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Valor Aptitud", "Profit", "m1", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
+            }
+        ));
+        BeforePopulation.setName("BeforePopulation"); // NOI18N
+        BeforePopulation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BeforePopulationMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(BeforePopulation);
+
+        beforePopulationPanel.add(jScrollPane2);
 
         jPanel2.add(beforePopulationPanel);
 
