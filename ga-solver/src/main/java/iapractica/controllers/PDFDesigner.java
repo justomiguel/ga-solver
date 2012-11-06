@@ -76,7 +76,7 @@ public class PDFDesigner {
 
                 Paragraph someSectionText = new Paragraph("\n Detalles de la Solucion: \n\n");
                 section1.add(someSectionText);
-                someSectionText = new Paragraph("    Ganancia: " + solucion.getProfit());
+                someSectionText = new Paragraph("    Ganancia: $ " + solucion.getProfit());
                 section1.add(someSectionText);
                 someSectionText = new Paragraph("    Materia Sobrante: " + solucion.getMateriaPrimaSobrante());
                 section1.add(someSectionText);
@@ -160,6 +160,11 @@ public class PDFDesigner {
     }
 
     private static void makeTableProductsUsed(Individuo solucion, Section section1) {
+       
+        //configuration
+        Paragraph someSectionText = new Paragraph("\n Cantidades de producto a realizar para obtener la mayor ganancia: ");
+        section1.add(someSectionText);
+        
         //table
         PdfPTable t = new PdfPTable(4);
         t.setSpacingBefore(25);
@@ -188,15 +193,20 @@ public class PDFDesigner {
                     ganancia = solucion.getProductAt(i + 1).getProfitValue() * sizeProductos;
                     gananciaXunidad = solucion.getProductAt(i + 1).getProfitValue();
                 }
-                t.addCell(String.valueOf(gananciaXunidad));
-                t.addCell(String.valueOf(ganancia));
+                t.addCell("$ "+String.valueOf(gananciaXunidad));
+                t.addCell("$ "+String.valueOf(ganancia));
             } else {
-                t.addCell("0");
-                t.addCell("0");
+                t.addCell("$ 0");
+                t.addCell("$ 0");
             }
 
         }
 
+        t.addCell(" ");
+        t.addCell("");
+        t.addCell("Totales");
+        t.addCell("$ "+solucion.getProfit());
+        
         section1.add(t);
     }
 
