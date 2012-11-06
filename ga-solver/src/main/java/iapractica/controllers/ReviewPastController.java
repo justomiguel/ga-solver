@@ -47,6 +47,15 @@ public class ReviewPastController extends GenericController {
                 } else {
                     ReviewPastTestsView panel = (ReviewPastTestsView) view;
                     panel.setData(getTotalElements);
+                    
+                    //set The first Data to show
+                    this.materiasPrimas = dataManager.getFromMateriasPrimasExternalFile();
+                    IndividuosFactory.getInstance().setMateriasPrimas(materiasPrimas);
+                    currentAge = 1;
+                    currentPopulation = dataManager.getFromExternalFile(currentAge);
+                    
+                    panel.populateDataModel(currentPopulation, materiasPrimas);
+                    
                     this.view.setVisible(true);
                 }
             } else {
@@ -71,10 +80,8 @@ public class ReviewPastController extends GenericController {
 
     public void notifySelection(int currentSelection) {
         this.currentAge = currentSelection;
-        currentPopulation = dataManager.getFromExternalFile(currentAge);
-        this.materiasPrimas = dataManager.getFromMateriasPrimasExternalFile();
-        IndividuosFactory.getInstance().setMateriasPrimas(materiasPrimas);
         ReviewPastTestsView panel = (ReviewPastTestsView) view;
+        currentPopulation = dataManager.getFromExternalFile(currentAge);
         panel.populateDataModel(currentPopulation, materiasPrimas);
     }
 }
