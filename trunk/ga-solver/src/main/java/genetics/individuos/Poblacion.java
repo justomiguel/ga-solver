@@ -117,6 +117,7 @@ public final class Poblacion extends Thread {
 
         this.updateUIProgress(50);
 
+        dataManager.deleteOldElements();
         dataManager.saveToMateriasPrimasExternalFile(materiasPrimas);
         
         while (running && age < maximumAge) {
@@ -265,14 +266,6 @@ public final class Poblacion extends Thread {
     private void showLastScreen() {
         //first 5
         Collections.sort(currentPopulation);
-        int five = 5;
-        for (Individuo individuo : currentPopulation) {
-            if (five != 0) {
-                logguer.logInfo(individuo.toString());
-                five--;
-            }
-        }
-
         this.controller.showLastScreen(currentPopulation);
     }
 }
