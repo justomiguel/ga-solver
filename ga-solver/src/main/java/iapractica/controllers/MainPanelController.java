@@ -55,7 +55,7 @@ public class MainPanelController extends GenericController {
         if (materiasPrimas.isEmpty()) {
             throw new NoMateriaPrimaAddedException("No Materia was added");
         }
-        population = new Poblacion(this, materiasPrimas, maximumAge,maximumPopulation, historialActive);
+        //population = new Poblacion(this, materiasPrimas, maximumAge,maximumPopulation, historialActive);
         population.setGAOperators(selectionManagerPercentage, mutatorManagerPercentage, cruzaManagerPercentage, mutationsCoverageMethods, selectionCoverageMethods, cruzaCoverageMethods);
         population.start();
     }
@@ -104,6 +104,7 @@ public class MainPanelController extends GenericController {
     
     public void setSimulationVelocity(final int value) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 population.setSimulationVelocity(value);
             }
