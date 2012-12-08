@@ -33,15 +33,17 @@ public class CopyControlSelector implements ISelector {
             individuosAverage[i] = poblacion.get(i).getFitnessValue() / average;
         }
 
-        double numberOfCopies = (selectionMethodCoverage*survivors/100) * size / 100;
+        Double numberOfCopies = (selectionMethodCoverage*survivors/100) * size / 100;
+        int numeroDecopias = numberOfCopies.intValue();
+        
         for (int i = 0; i < size; i++) {
             Double number = individuosAverage[i];
             int numberOfIndToBeCopied = number.intValue();
             while (numberOfIndToBeCopied > 0) {
                 newPopulation.add(poblacion.get(i));
                 numberOfIndToBeCopied--;
-                numberOfCopies--;
-                if (numberOfCopies == 0){
+                numeroDecopias--;
+                if (numeroDecopias == 0){
                     return newPopulation;
                 }
             }

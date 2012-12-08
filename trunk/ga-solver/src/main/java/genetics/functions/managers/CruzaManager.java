@@ -65,10 +65,13 @@ public class CruzaManager {
                 double percentageOfCopiesToBeGeneratedByThisMethod = getCoverageOfMethod * DEFAULT_SURVIVORS_BY_CRUZATOR_METHODS / 100;
 
                 // total de copias de acuerdo al porcentaje anterior
-                double numberOfCopiesForThisMethod = percentageOfCopiesToBeGeneratedByThisMethod * numberOfPopulation / 100;
+                Double numberOfCopiesForThisMethod = percentageOfCopiesToBeGeneratedByThisMethod * numberOfPopulation / 100;
 
+                int individuosToGenerate = numberOfCopiesForThisMethod.intValue();
                 // genero las individuos que necesito
-                while (numberOfCopiesForThisMethod > 0) {
+                int intentosToGenerate = 3;
+                
+                while (individuosToGenerate > 0) {
                     father = MathUtils.getRandomNumber(0, numberOfPopulation-1);
                     mother = MathUtils.getRandomNumberExcludeOne(0, numberOfPopulation-1, father);
                     try {
@@ -80,9 +83,12 @@ public class CruzaManager {
                                 break;
                             }
                         }
-                        if (!alreadyThere){
-                            numberOfCopiesForThisMethod--;
+                        if (!alreadyThere || intentosToGenerate == 0){
+                            individuosToGenerate--;
+                            intentosToGenerate = 3;
                             newPopulation.add(son);
+                        } else {
+                            intentosToGenerate--;
                         }
                     } catch (NoMateriaPrimaAddedException ex) {
                        logguer.logError(this, ex.getMessage(), ex);
