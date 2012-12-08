@@ -85,10 +85,11 @@ public class MutatorManager {
                 double percentageOfCopiesToBeGeneratedByThisMethod = getCoverageOfMethod * DEFAULT_SURVIVORS_BY_MUTATORS_METHODS / 100;
 
                 // total de copias de acuerdo al porcentaje anterior
-                double numberOfCopiesForThisMethod = percentageOfCopiesToBeGeneratedByThisMethod * numberOfPopulation / 100;
+                Double numberOfCopiesForThisMethod = percentageOfCopiesToBeGeneratedByThisMethod * numberOfPopulation / 100;
 
+                int individuosToGenerate = numberOfCopiesForThisMethod.intValue();
                 // genero las individuos que necesito
-                while (numberOfCopiesForThisMethod > 0) {
+                while (individuosToGenerate > 0) {
                     int chosenOne = MathUtils.getRandomNumber(0, numberOfPopulation-1);
                     try {
                         Individuo son = mutator.doMutation(poblacionOriginal.get(chosenOne), productosBase);
@@ -100,7 +101,7 @@ public class MutatorManager {
                             }
                         }
                         if (!alreadyThere){
-                            numberOfCopiesForThisMethod--;
+                            individuosToGenerate--;
                             newPopulation.add(son);
                         }
                     }  catch (NoMateriaPrimaAddedException ex) {

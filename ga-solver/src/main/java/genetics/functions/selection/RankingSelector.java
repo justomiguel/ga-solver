@@ -4,7 +4,6 @@
  */
 package genetics.functions.selection;
 
-import genetics.functions.managers.SelectionManager;
 import genetics.individuos.Individuo;
 import java.util.LinkedList;
 import java.util.Random;
@@ -34,15 +33,17 @@ public class RankingSelector implements ISelector {
                 copiesNumber[i] = indCopiesToBeSelected;
             }
 
-            double localSurvivors = ((selectionMethodCoverage*survivors/100) * populationSize) / 100;
+            Double localSurvivors = ((selectionMethodCoverage*survivors/100) * populationSize) / 100;
 
+            int sobrevivientes = localSurvivors.intValue();
+            
             for (int i = 0; i < copiesNumber.length; i++) {
                 Double copiesNumberOfInd = copiesNumber[i];
                 int z = copiesNumberOfInd.intValue();
                 if (z == 1) {
                     newPopulation.add(poblacion.get(i));
-                    localSurvivors--;
-                    if (localSurvivors == 0) {
+                    sobrevivientes--;
+                    if (sobrevivientes == 0) {
                         haveAllSurvivors = true;
                         break;
                     }
