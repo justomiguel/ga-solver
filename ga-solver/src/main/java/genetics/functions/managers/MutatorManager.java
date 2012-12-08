@@ -88,6 +88,10 @@ public class MutatorManager {
                 Double numberOfCopiesForThisMethod = percentageOfCopiesToBeGeneratedByThisMethod * numberOfPopulation / 100;
 
                 int individuosToGenerate = numberOfCopiesForThisMethod.intValue();
+                
+                 // genero las individuos que necesito
+                int intentosToGenerate = 3;
+                
                 // genero las individuos que necesito
                 while (individuosToGenerate > 0) {
                     int chosenOne = MathUtils.getRandomNumber(0, numberOfPopulation-1);
@@ -100,10 +104,15 @@ public class MutatorManager {
                                 break;
                             }
                         }
-                        if (!alreadyThere){
+                        
+                        if (!alreadyThere || intentosToGenerate == 0){
                             individuosToGenerate--;
+                            intentosToGenerate = 3;
                             newPopulation.add(son);
+                        } else {
+                            intentosToGenerate--;
                         }
+                        
                     }  catch (NoMateriaPrimaAddedException ex) {
                        logguer.logError(this, ex.getMessage(), ex);
                     } catch (ProductCreationException ex) {
