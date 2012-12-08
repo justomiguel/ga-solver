@@ -22,11 +22,12 @@ public final class FitnessFunction {
     public static DefaultLogguer logguer = DefaultLogguer.getLogger();
     public static final int MIN_DISTANCE_BETWEEN_MAX = 50;
 
-    public static double getMaxFitnessValue(LinkedList<Integer> materiasPrimas) throws NoMateriaPrimaAddedException {
+    public static double getMaxFitnessValue() throws NoMateriaPrimaAddedException {
         double fitnessValue = 0.0;
 
+        
         int products = 4;
-        for (int i = 1; i < products; i++) {
+        for (int i = 1; i < products+1; i++) {
             Producto producto = null;
             try {
                 producto = ProductosFactory.getProducto(i);

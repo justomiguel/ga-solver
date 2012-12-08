@@ -16,6 +16,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class Poblacion extends Thread {
 
@@ -283,11 +285,23 @@ public final class Poblacion extends Thread {
     }
 
     private boolean isTheBestAround() {
-       /* for (Individuo individuo : currentPopulation) {
-            if (individuo.getFitnessValue() <= FitnessFunction.MIN_DISTANCE_BETWEEN_MAX){
+        Double gananciaMaximaTeorica = 0.0;
+        try {
+            gananciaMaximaTeorica = FitnessFunction.getMaxFitnessValue();
+        }
+        catch (NoMateriaPrimaAddedException ex) {
+            logguer.logError(this, ex.getMessage(), ex);
+        }
+        
+        Double valorDeParada = 53.36 * gananciaMaximaTeorica /100;
+        
+        int gananciaIdeal = valorDeParada.intValue();
+        
+        for (Individuo individuo : currentPopulation) {
+            if (individuo.getProfit() >= gananciaIdeal){
                 return false;
             }
-        }*/
+        }
         return false;
     }
 }
