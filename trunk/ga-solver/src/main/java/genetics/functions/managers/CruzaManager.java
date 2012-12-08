@@ -99,4 +99,8 @@ public class CruzaManager {
     public void setPercentage(int percentage){
         this.DEFAULT_SURVIVORS_BY_CRUZATOR_METHODS = percentage;
     }
+     public double getPercentage(){
+        return this.DEFAULT_SURVIVORS_BY_CRUZATOR_METHODS;
+    }
+    
 }

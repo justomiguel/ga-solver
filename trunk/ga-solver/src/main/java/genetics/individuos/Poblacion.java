@@ -2,6 +2,7 @@ package genetics.individuos;
 
 import com.frre.cemami.utils.DefaultLogguer;
 import genetics.cromosomas.external.ExternalDataHandler;
+import genetics.cromosomas.fitnessfunctions.FitnessFunction;
 import genetics.functions.managers.CruzaManager;
 import genetics.functions.managers.CruzaManager.Cruzators;
 import genetics.functions.managers.MutatorManager;
@@ -11,6 +12,7 @@ import genetics.functions.managers.SelectionManager.Selectors;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
 import iapractica.controllers.GenericController;
 import iapractica.controllers.MainPanelController;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -79,10 +81,19 @@ public final class Poblacion extends Thread {
     }
 
     public void evolve() {
+        Collection<Individuo> newPopulationAfterSelection = Collections.EMPTY_LIST;
         //do stuff
-        LinkedList<Individuo> newPopulationAfterSelection = selectionManager.doSelection(currentPopulation, selectionCoverageMethods);
-        LinkedList<Individuo> newPopulationAfterCruzas = cruzaManager.doCruzas(currentPopulation, cruzaCoverageMethods);
-        LinkedList<Individuo> newPopulationAfterMutations = mutatorManager.doMutation(currentPopulation, mutationsCoverageMethods);
+        if (selectionManager.getPercentage() > 0){
+            newPopulationAfterSelection = selectionManager.doSelection(currentPopulation, selectionCoverageMethods);
+        }
+        Collection<Individuo> newPopulationAfterCruzas = Collections.EMPTY_LIST;
+        if (cruzaManager.getPercentage() > 0){
+            newPopulationAfterCruzas = cruzaManager.doCruzas(currentPopulation, cruzaCoverageMethods);
+        }
+        Collection<Individuo> newPopulationAfterMutations = Collections.EMPTY_LIST;
+        if(mutatorManager.getPercentage()>0){
+            newPopulationAfterMutations = mutatorManager.doMutation(currentPopulation, mutationsCoverageMethods);
+        }
         //destroy the preivous population
         currentPopulation.clear();
         currentPopulation.addAll(newPopulationAfterCruzas);
@@ -113,11 +124,12 @@ public final class Poblacion extends Thread {
         this.updateUIProgress(50);
 
         dataManager.deleteOldElements();
+        
         if (activeHistorial){
             dataManager.saveToMateriasPrimasExternalFile(materiasPrimas);
         }
         
-        while (running && age < maximumAge) {
+        while ((running) && (age < maximumAge) && (!isTheBestAround())) {
             if (!inPause) {
                 processAge();
                 if (sleepTime > 0) {
@@ -268,5 +280,14 @@ public final class Poblacion extends Thread {
         //first 5
         Collections.sort(currentPopulation);
         this.controller.showLastScreen(currentPopulation);
+    }
+
+    private boolean isTheBestAround() {
+       /* for (Individuo individuo : currentPopulation) {
+            if (individuo.getFitnessValue() <= FitnessFunction.MIN_DISTANCE_BETWEEN_MAX){
+                return false;
+            }
+        }*/
+        return false;
     }
 }

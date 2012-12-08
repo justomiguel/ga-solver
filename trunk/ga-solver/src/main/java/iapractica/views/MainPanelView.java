@@ -1019,6 +1019,19 @@ public class MainPanelView extends GenericView {
             Integer number = (int) MathUtils.getRandomNumber(0, 1000);
             jSpinner.setValue(1000);
         }
+        
+        jSpinner1.setValue(0);
+        jSpinner2.setValue(840);
+        jSpinner3.setValue(0);
+        jSpinner4.setValue(340);
+        jSpinner5.setValue(620);
+        jSpinner6.setValue(620);
+        jSpinner7.setValue(430);
+        jSpinner8.setValue(0);
+        
+        iteracionesMax1.setValue(100);
+        indivMax1.setValue(100);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

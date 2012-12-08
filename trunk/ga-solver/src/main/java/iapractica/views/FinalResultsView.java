@@ -38,7 +38,7 @@ public final class FinalResultsView extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(iapractica.IAPracticaApp.class).getContext().getResourceMap(FinalResultsView.class);
         this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
         
-        Collections.sort(myFinalPopulation, new IndividuoSobrComparator(true));
+       // Collections.sort(myFinalPopulation, new IndividuoSobrComparator(true));
 
         this.myFinalPopulation = myFinalPopulation;
         

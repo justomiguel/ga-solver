@@ -10,7 +10,6 @@ import genetics.functions.managers.SelectionManager.Selectors;
 import genetics.individuos.Individuo;
 import genetics.individuos.Poblacion;
 import genetics.productos.exceptions.NoMateriaPrimaAddedException;
-import iapractica.drawers.DataDrawer;
 import iapractica.views.MainPanelView;
 import iapractica.views.FinalResultsView;
 import java.util.HashMap;
@@ -55,7 +54,7 @@ public class MainPanelController extends GenericController {
         if (materiasPrimas.isEmpty()) {
             throw new NoMateriaPrimaAddedException("No Materia was added");
         }
-        //population = new Poblacion(this, materiasPrimas, maximumAge,maximumPopulation, historialActive);
+        population = new Poblacion(this, materiasPrimas, maximumAge,maximumPopulation, historialActive);
         population.setGAOperators(selectionManagerPercentage, mutatorManagerPercentage, cruzaManagerPercentage, mutationsCoverageMethods, selectionCoverageMethods, cruzaCoverageMethods);
         population.start();
     }
