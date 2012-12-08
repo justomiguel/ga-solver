@@ -26,6 +26,10 @@ import java.util.Set;
  */
 public class MutatorManager {
 
+    public double getPercentage() {
+        return DEFAULT_SURVIVORS_BY_MUTATORS_METHODS;
+    }
+
     public static enum Mutators {
 
         ZERO, 

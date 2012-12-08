@@ -22,6 +22,10 @@ import java.util.Set;
  */
 public class SelectionManager {
 
+    public double getPercentage() {
+        return DEFAULT_SURVIVORS_BY_SELECTIONS_METHODS;
+    }
+
     public static enum Selectors {
 
         RANKING_SELECTOR, COPY_CONTROL_SELECTOR, BEST_SELECTOR
