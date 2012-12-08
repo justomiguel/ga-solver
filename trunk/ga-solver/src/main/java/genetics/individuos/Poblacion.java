@@ -285,6 +285,7 @@ public final class Poblacion extends Thread {
     }
 
     private boolean isTheBestAround() {
+        
         Double gananciaMaximaTeorica = 0.0;
         try {
             gananciaMaximaTeorica = FitnessFunction.getMaxFitnessValue();
@@ -298,8 +299,8 @@ public final class Poblacion extends Thread {
         int gananciaIdeal = valorDeParada.intValue();
         
         for (Individuo individuo : currentPopulation) {
-            if (individuo.getProfit() >= gananciaIdeal){
-                return false;
+            if (individuo.getFitnessValue() == 0 ){
+                return true;
             }
         }
         return false;
