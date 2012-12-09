@@ -87,6 +87,9 @@ public class MainPanelView extends GenericView {
         this.setIconImage(resourceMap.getImageIcon("image.icon").getImage());
 
         historial.setSelected(true);
+        
+        iteracionesMax1.setValue(1000);
+        indivMax1.setValue(1000);
     }
 
     /**
@@ -1017,20 +1020,11 @@ public class MainPanelView extends GenericView {
         // TODO add your handling code here:
         for (JSpinner jSpinner : spinnersCargaDatos) {
             Integer number = (int) MathUtils.getRandomNumber(0, 1000);
-            jSpinner.setValue(1000);
+            jSpinner.setValue(number);
         }
         
-        jSpinner1.setValue(0);
-        jSpinner2.setValue(840);
-        jSpinner3.setValue(0);
-        jSpinner4.setValue(340);
-        jSpinner5.setValue(620);
-        jSpinner6.setValue(620);
-        jSpinner7.setValue(430);
-        jSpinner8.setValue(0);
-        
-        iteracionesMax1.setValue(100);
-        indivMax1.setValue(100);
+         iteracionesMax1.setValue(1000);
+        indivMax1.setValue(1000);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1067,14 +1061,29 @@ public class MainPanelView extends GenericView {
             PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con menos de 100 individuos");
             return;
         }
+        
+        // comienzan las combinaciones de casos erroneos
+        int matPrima = Integer.parseInt(jSpinner6.getValue().toString());
+        if (matPrima == 0){
+            PopUpFactory.showErrorPopUP(this, "Esta materia prima no puede ser cero debido a que todos los productos la usan");
+            return;
+        }
 
-
-        iteracionesMaxima = Integer.parseInt(iteracionesMax1.getValue().toString());
+        int matPrima1 = Integer.parseInt(jSpinner1.getValue().toString());
+        int matPrima2 = Integer.parseInt(jSpinner2.getValue().toString());
+        if (matPrima1 == 0 && matPrima2 == 0){
+            PopUpFactory.showErrorPopUP(this, "Esta materias prima no puede ser cero debido a que todos los productos la usan");
+            return;
+        }
+        
+        //finalizan las combinaciones de casos erroneos
+        
+         iteracionesMaxima = Integer.parseInt(iteracionesMax1.getValue().toString());
         if (iteracionesMaxima == 0) {
             PopUpFactory.showErrorPopUP(this, "No podes comenzar una simulacion con 0 iteraciones");
             return;
         }
-
+        
         MainPanelController main = (MainPanelController) this.getController();
         main.addMateriaPrima(valores);
         main.setMaximumPopulation(individuosMaximos);
@@ -1167,7 +1176,7 @@ public class MainPanelView extends GenericView {
             PopUpFactory.showErrorPopUP(this, "La sumatoria de los Campos en la seleccion de valores para operadores \n debe de ser igual 100");
             return false;
         }
-
+        
         boolean rankin = ranking.isSelected();
         boolean copias = controlCopias.isSelected();
         boolean elitista2 = elitista.isSelected();
